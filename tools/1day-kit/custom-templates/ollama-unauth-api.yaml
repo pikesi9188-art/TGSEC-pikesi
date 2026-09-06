@@ -1,0 +1,49 @@
+id: ollama-unauth-api
+
+info:
+  name: Ollama Unauth API Surface (/api/version /api/tags)
+  author: survey-engine
+  severity: high
+  description: |
+    Ollama HTTP API 未授权暴露面（HITCON ZD-2026-00572 同类）。
+    本模板只 GET /api/version 与 /api/tags，不发送 generate/pull/push/delete。
+  tags: ollama,unauth,fingerprint,hitcon
+  reference:
+    - https://zeroday.hitcon.org/vulnerability/ZD-2026-00572
+    - https://github.com/ollama/ollama/blob/main/docs/api.md
+  metadata:
+    max-request: 4
+    shodan-query: 'http.title:"Ollama" port:11434'
+    fofa-query: 'app="Ollama" || title="Ollama"'
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/version"
+      - "{{BaseURL}}/ollama/api/version"
+      - "{{BaseURL}}/api/tags"
+      - "{{BaseURL}}/ollama/api/tags"
+
+    stop-at-first-match: false
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"version"'
+        name: ollama-version
+      - type: word
+        part: body
+        words:
+          - '"models"'
+        name: ollama-tags
+
+    extractors:
+      - type: json
+        name: version
+        json:
+          - ".version"
+      - type: json
+        name: model0
+        json:
+          - ".models[0].name"

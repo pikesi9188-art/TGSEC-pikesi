@@ -1,0 +1,62 @@
+id: jenkins-unauth-surface
+
+info:
+  name: Jenkins Unauth / Anonymous Read Surface
+  author: survey-engine
+  severity: high
+  description: |
+    Jenkins 指纹（X-Jenkins）+ 匿名 /api/json / whoAmI。
+    不调用 Script Console、不建 Job；L3 走 Playbook 且须先问。
+  tags: jenkins,unauth,ci,fingerprint
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/login"
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/json"
+
+    stop-at-first-match: false
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "X-Jenkins"
+          - "x-jenkins"
+        name: x-jenkins
+
+      - type: word
+        part: body
+        words:
+          - "Jenkins"
+          - "hudson.model"
+        condition: or
+        name: jenkins-body
+
+    extractors:
+      - type: kval
+        part: header
+        name: jenkins-version
+        kval:
+          - X-Jenkins
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/json"
+      - "{{BaseURL}}/whoAmI/api/json"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - '"jobs"'
+          - '"mode"'
+          - '"anonymous"'
+          - '"authenticated"'
+        condition: or
+        name: anon-api

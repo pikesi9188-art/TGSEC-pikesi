@@ -1,0 +1,30 @@
+id: openai-v1-models-unauth
+
+info:
+  name: OpenAI-compatible /v1/models Unauthenticated
+  author: survey-engine
+  severity: medium
+  description: |
+    未鉴权即可列出模型（LiteLLM / 自建网关常见）。
+    不做越狱对话；命中后切 LLM与Agent安全手法.md / LiteLLM 专卡。
+  tags: llm,openai,misconfig,fingerprint
+  reference:
+    - docs/playbooks/LLM与Agent安全手法.md
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v1/models"
+      - "{{BaseURL}}/models"
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - '"data"'
+          - "object"
+        condition: or

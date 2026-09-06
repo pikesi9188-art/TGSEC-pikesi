@@ -1,0 +1,1773 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "owner": "大爱仙尊",
+    "description": "逆向/协议/样本任务路由的单一真源。改规则只改本文件。families 把重复卡收成一族：PRIMARY 只开一张，next 是交接不是并行。aliases 是已并入的旧卡名。专链 SE* 优先于通用 RE。",
+    "fallbackId": "R0",
+    "upstream": "https://github.com/zhaoxuya520/reverse-skill",
+    "scoring": "先匹配 aliases；再按 priority 第一条为 PRIMARY。同族成员不进 also（走 next）。未命中回退 fallbackId。"
+  },
+  "routes": {
+    "SE01": {
+      "label": "PHP Zend 堆",
+      "skill": "器胚破核",
+      "note": "PHP Zend 堆卡，禁止先堆喷",
+      "playbook": "传承/幻页·堆隙.md",
+      "keywords": [
+        {
+          "any": [
+            "zend_mm",
+            "x-alloc-bins",
+            "custom_auth.so",
+            "input_len"
+          ]
+        }
+      ]
+    },
+    "SE02": {
+      "label": "Doris / StarRocks",
+      "skill": "仓算无门",
+      "note": "AGENTS 专链，禁止停在 database-security",
+      "keywords": [
+        {
+          "any": [
+            "9030",
+            "8030",
+            "doris",
+            "starrocks"
+          ]
+        }
+      ],
+      "suppress": [
+        "库府"
+      ]
+    },
+    "SE03": {
+      "label": "云元数据 IMDS",
+      "skill": "盗天·云骨",
+      "note": "AGENTS 专链，禁止停在 cloud-k8s",
+      "keywords": [
+        {
+          "any": [
+            "169.254.169.254",
+            "imds",
+            "metadata.google"
+          ]
+        }
+      ],
+      "suppress": [
+        "群瓮"
+      ]
+    },
+    "SE04": {
+      "label": "OAuth 密码授权",
+      "skill": "托印·口令",
+      "note": "密码授权专卡，不走联邦总入口",
+      "keywords": [
+        {
+          "any": [
+            "grant_type=password"
+          ]
+        }
+      ],
+      "suppress": [
+        "面目联宗"
+      ]
+    },
+    "SE05": {
+      "label": "Redis 未授权",
+      "skill": "中门无门",
+      "note": "Redis 走中间件卡，写文件见 契柜·无门",
+      "keywords": [
+        {
+          "any": [
+            "redis未授权",
+            "redis 无密码",
+            "redis无密码"
+          ]
+        }
+      ]
+    },
+    "SE06": {
+      "label": "芋道代付 Mock+文件",
+      "skill": "秦百胜·芋府假面",
+      "note": "Bearer test1 → basePath=/；勿与 TMA 卡混",
+      "keywords": [
+        {
+          "any": [
+            "芋道代付",
+            "mock-enable",
+            "df-user",
+            "yudao-daifu"
+          ]
+        }
+      ]
+    },
+    "SE07": {
+      "label": "FastAdmin Shop 租户",
+      "skill": "快府·横夺",
+      "note": "EQ 改 shop_id 阴性不算隔离，必须打 GT/IN",
+      "keywords": [
+        {
+          "any": [
+            "shop_hq",
+            "shop_keeplogin",
+            "fastadmin shop"
+          ]
+        }
+      ]
+    },
+    "SE08": {
+      "label": "Spring Gateway / Actuator",
+      "skill": "春府·开棺",
+      "note": "禁止只扫 health；gateway/routes 走全链",
+      "playbook": "传承/春府·关窍.md",
+      "family": "heap",
+      "next": "开棺·蓝鸟",
+      "keywords": [
+        {
+          "any": [
+            "/actuator",
+            "gateway/routes",
+            "heapdump",
+            "spring gateway"
+          ]
+        }
+      ]
+    },
+    "SE09": {
+      "label": "Nacos 3.x 未授权",
+      "skill": "纳言无门",
+      "note": "先 --check-only；禁止跳过直接 Jasypt",
+      "keywords": [
+        {
+          "any": [
+            "nacos v3",
+            "/v3/auth/user",
+            "nacos-authscope"
+          ]
+        }
+      ]
+    },
+    "SE24": {
+      "label": "PHP 独角 / 发卡查单",
+      "skill": "秦百胜·牌铺",
+      "note": "dujiaoka 查单 IDOR + 日志泄钥交假支付；勿并 acg-faka / Next",
+      "playbook": "传承/秦百胜·拍卖.md",
+      "keywords": [
+        {
+          "any": [
+            "dujiaoka",
+            "独角数卡",
+            "detail-order-sn",
+            "search-order-by-sn"
+          ]
+        }
+      ]
+    },
+    "SE23": {
+      "label": "独角 Next 混合支付 1 元购",
+      "skill": "独角",
+      "note": "Go+Vue；会员字段 order_id；勿并 acg-faka / PHP 独角",
+      "playbook": "传承/独角·一元.md",
+      "keywords": [
+        {
+          "any": [
+            "dujiao-next",
+            "use_balance",
+            "1元购",
+            "auth-defaults",
+            "/dj.svg",
+            "独角 next",
+            "独角next"
+          ]
+        }
+      ]
+    },
+    "SE10": {
+      "label": "支付回调 / 假支付",
+      "skill": "秦百胜·回响",
+      "note": "家族站先读假支付 Playbook，禁止爆破 key",
+      "playbook": "传承/秦百胜·假契.md",
+      "keywords": [
+        {
+          "any": [
+            "假支付",
+            "支付回调伪造",
+            "验签绕过",
+            "callback 伪造",
+            "merchant_pem",
+            "日志泄钥",
+            "laravel.log"
+          ]
+        }
+      ]
+    },
+    "SE25": {
+      "label": "微信小程序静态审计",
+      "skill": "微域",
+      "note": "wxapkg/unveilr 目录；不是 TG TMA",
+      "playbook": "传承/微域·静审.md",
+      "keywords": [
+        {
+          "any": [
+            "微信小程序",
+            "wxapkg",
+            "unveilr",
+            "wx.request",
+            "wxmini",
+            "__APPID__",
+            "miniprogram",
+            "wxml",
+            "wx.cloud"
+          ]
+        }
+      ]
+    },
+    "SE26": {
+      "label": "WebView Deeplink 桥",
+      "skill": "内窗",
+      "note": "桥面静态；情报仍先 apk-recon",
+      "playbook": "传承/内窗·深链.md",
+      "keywords": [
+        {
+          "any": [
+            "deeplink",
+            "jsbridge",
+            "javascriptinterface",
+            "nanohttpd",
+            "allowuniversalaccessfromfileurls",
+            "webviewjavascriptbridge",
+            "webview",
+            "wkwebview"
+          ]
+        }
+      ],
+      "family": "apk",
+      "next": "铁血冷·拆骨"
+    },
+    "SE27": {
+      "label": "蓝鸟猎手拆堆",
+      "skill": "开棺·蓝鸟",
+      "note": "本地 hprof / JDumpSpider 立刻拆；下堆仍走 Actuator 分桶",
+      "playbook": "传承/开棺·蓝鸟.md",
+      "family": "heap",
+      "next": "春府·开棺",
+      "keywords": [
+        {
+          "any": [
+            "蓝鸟猎手",
+            "jdumpspider",
+            "jdump spider",
+            ".hprof",
+            "heapdump.bin",
+            "heapdump.hprof",
+            "encryptioncipherkey",
+            "processenvironment",
+            "cookieremembermemanager"
+          ]
+        }
+      ]
+    },
+    "SE28": {
+      "label": "现代认证 Passkey/0-RTT",
+      "skill": "面目联宗",
+      "note": "配置项≠洞；password grant 仍切 oauth2 卡",
+      "playbook": "智道藏书/智道推演/techniques/新印.md",
+      "keywords": [
+        {
+          "any": [
+            "passkey",
+            "webauthn",
+            "fido2",
+            "0-rtt",
+            "early data",
+            "rfc9700"
+          ]
+        }
+      ]
+    },
+    "SE29": {
+      "label": "国产 OA / 框架速查",
+      "skill": "一日针匣",
+      "note": "java_web --stack cnoa + 用友致远 yaml；若依走 ruoyi 专卡",
+      "playbook": "智道藏书/智道推演/techniques/中原骨架.md",
+      "keywords": [
+        {
+          "any": [
+            "通达oa",
+            "泛微",
+            "用友",
+            "致远",
+            "seeyon",
+            "nccloud",
+            "蓝凌",
+            "万户"
+          ]
+        }
+      ]
+    },
+    "SE30": {
+      "label": "Harbor/ArgoCD/RabbitMQ",
+      "skill": "一日针匣",
+      "note": "产品接管长文 器物谱.md；默认口令先问改密",
+      "playbook": "智道藏书/智道推演/techniques/器物谱.md",
+      "keywords": [
+        {
+          "any": [
+            "harbor",
+            "goharbor",
+            "argocd",
+            "portainer",
+            "rabbitmq",
+            "erlang cookie"
+          ]
+        }
+      ]
+    },
+    "SE31": {
+      "label": "TG云控 Go-WASM 掩码票",
+      "skill": "太白云生·云台",
+      "note": "第四族：浏览器 goEncrypt oracle，禁止先拆 WASM；掩码票当 session",
+      "playbook": "传承/飞鸽·掩票.md",
+      "keywords": [
+        {
+          "any": [
+            "goEncrypt",
+            "goDecrypt",
+            "main.wasm",
+            "掩码票",
+            "taskProtocolRecovery",
+            "clienter/pageList"
+          ]
+        }
+      ]
+    },
+    "SE33": {
+      "label": "浏览器窃密包/Firefox cookies.sqlite",
+      "skill": "偷生",
+      "note": "offline triage only；授权域才 session_import；不打印值",
+      "playbook": "传承/窗·余烬.md",
+      "keywords": [
+        {
+          "any": [
+            "cookies.sqlite",
+            "moz_cookies",
+            "passwords.json",
+            "fingerprint.json",
+            "Chrome.rar",
+            "窃密包"
+          ]
+        }
+      ]
+    },
+    "SE32": {
+      "label": "任意验证码重置/无旧密提现密",
+      "skill": "秦百胜·夺舍",
+      "note": "只打自己的号；真提现先问；IDOR阴勿结案",
+      "playbook": "传承/夺舍·重置.md",
+      "keywords": [
+        {
+          "any": [
+            "任意验证码",
+            "dummy-code",
+            "updateWithdrawPassword",
+            "resetPassword 任意"
+          ]
+        }
+      ]
+    },
+    "SE11": {
+      "label": "APK 完整反编译",
+      "skill": "铁血冷·拆骨",
+      "note": "完整反编译 / 重打包；情报仍先 apk-recon",
+      "keywords": [
+        {
+          "any": [
+            "完整反编译",
+            "重打包",
+            "apk加固",
+            "铁血冷·拆骨"
+          ]
+        }
+      ],
+      "family": "apk",
+      "next": "铁血冷·探路"
+    },
+    "SE12": {
+      "label": "APK 情报",
+      "skill": "铁血冷·探路",
+      "note": "先情报抽密钥/域名；完整反编译再 apk-reverse",
+      "keywords": [
+        {
+          "any": [
+            "apk",
+            "jadx",
+            "apktool",
+            "smali",
+            "jni",
+            "安卓"
+          ],
+          "exclude": [
+            "wxapkg",
+            "微信小程序",
+            "wxmini",
+            "unveilr"
+          ]
+        }
+      ],
+      "family": "apk",
+      "next": "铁血冷·拆骨"
+    },
+    "SE13": {
+      "label": "盘口国密 / SPA 协议",
+      "skill": "单页·约",
+      "note": "本库 SPA 协议卡，不要先开通用 protocol-reverse",
+      "keywords": [
+        {
+          "any": [
+            "js-websocket",
+            "国密",
+            "sm2",
+            "sm4",
+            "spa协议"
+          ]
+        }
+      ],
+      "suppress": [
+        "约",
+        "星丝"
+      ],
+      "family": "js"
+    },
+    "SE14": {
+      "label": "加密 API 网关",
+      "skill": "星宿·密文",
+      "note": "Blob 加密请求体；盘口国密已在前面切走",
+      "keywords": [
+        {
+          "any": [
+            "加密api",
+            "加密 api",
+            "blob加密",
+            "encrypted-api"
+          ]
+        }
+      ],
+      "family": "js",
+      "next": "星宿·盘口秘语"
+    },
+    "SE15": {
+      "label": "SRC / 众测",
+      "skill": "七十二层防",
+      "note": "intake→recon→enum→hunt；不要走通用 pentest-tools",
+      "keywords": [
+        {
+          "any": [
+            "众测",
+            "bug bounty",
+            "hackerone",
+            "src挖洞",
+            "赏金"
+          ]
+        }
+      ]
+    },
+    "SE16": {
+      "label": "补丁差分 / N-day 反推",
+      "skill": "补丁对照",
+      "note": "补丁反推洞；符号迁移走 binary-diff；打站再 nday_route",
+      "playbook": "传承/补丁对照.md",
+      "keywords": [
+        {
+          "any": [
+            "ghidriff",
+            "diaphora",
+            "补丁差分",
+            "patch tuesday",
+            "patch-diff"
+          ]
+        }
+      ],
+      "family": "diff",
+      "next": "一日针匣"
+    },
+    "SE17": {
+      "label": "N-day / Nuclei",
+      "skill": "一日针匣",
+      "note": "先 nday_route.py 钉专卡，再 od_kit nuclei",
+      "keywords": [
+        {
+          "any": [
+            "nuclei",
+            "1day",
+            "n-day",
+            "cve复现",
+            "nday_route"
+          ]
+        }
+      ],
+      "family": "diff"
+    },
+    "SE18": {
+      "label": "AD / 域渗透",
+      "skill": "武庸·宗门",
+      "note": "域渗透完整场景速查，不要走通用 attack-chain",
+      "playbook": "传承/宗门·认族.md",
+      "keywords": [
+        {
+          "any": [
+            "kerberoast",
+            "bloodhound",
+            "adcs",
+            "dcsync",
+            "域渗透",
+            "impacket"
+          ]
+        }
+      ]
+    },
+    "SE19": {
+      "label": "白盒 / SAST",
+      "skill": "文审",
+      "note": "有源码走 DeepAudit；密钥命中立即假支付",
+      "keywords": [
+        {
+          "any": [
+            "白盒",
+            "semgrep",
+            "codeql",
+            "代码审计",
+            "deepaudit"
+          ]
+        }
+      ]
+    },
+    "SE20": {
+      "label": "LLM / Agent",
+      "skill": "大灵",
+      "note": "客服 AI/Bot 走 大灵 §5",
+      "keywords": [
+        {
+          "any": [
+            "提示词注入",
+            "prompt inject",
+            "模型越狱",
+            "owasp llm",
+            "garak"
+          ]
+        },
+        {
+          "any": [
+            "jailbreak"
+          ],
+          "exclude": [
+            "ios",
+            "ipa",
+            "iphone",
+            "objection",
+            "越狱"
+          ]
+        }
+      ]
+    },
+    "SE21": {
+      "label": "授权主机排后门",
+      "skill": "宿主验",
+      "note": "Linux 排后门；取证百科走 digital-forensics",
+      "keywords": [
+        {
+          "any": [
+            "排后门",
+            "ld.so.preload",
+            "应急响应"
+          ]
+        }
+      ],
+      "family": "sample"
+    },
+    "R4": {
+      "label": "DSL / 自定义 VM",
+      "skill": "秘语",
+      "note": "自定义 opcode VM，不是通用反编译",
+      "keywords": [
+        {
+          "any": [
+            "dsl vm",
+            "dsl-vm",
+            "fireye",
+            "opcode vm",
+            "自定义虚拟机"
+          ]
+        }
+      ],
+      "family": "vm",
+      "next": "虚壳"
+    },
+    "R2": {
+      "label": "iOS / 移动端",
+      "skill": "铁若男·拆骨",
+      "note": "本库 iOS 弱，网站案降权",
+      "keywords": [
+        {
+          "any": [
+            "ipa",
+            "ios",
+            "objection",
+            "ios逆向"
+          ]
+        },
+        {
+          "any": [
+            "越狱"
+          ],
+          "exclude": [
+            "提示词",
+            "llm",
+            "模型"
+          ]
+        }
+      ],
+      "family": "apk"
+    },
+    "R3": {
+      "label": "前端 JS",
+      "skill": "星丝",
+      "note": "网页 JS / webpack；盘口加密已切 spa-protocol",
+      "keywords": [
+        {
+          "any": [
+            "webpack",
+            "sourcemap",
+            "前端签名",
+            "js逆向",
+            "cryptojs",
+            "jsvmp",
+            "js vmp",
+            "source map",
+            "sourcemap"
+          ]
+        }
+      ],
+      "family": "js",
+      "next": "单页·约"
+    },
+    "R30": {
+      "label": "浏览器扩展",
+      "skill": "窗拆骨",
+      "note": "扩展包，不是网页 JS",
+      "keywords": [
+        {
+          "any": [
+            "crx",
+            "xpi",
+            "chrome扩展",
+            "firefox扩展",
+            "browser extension",
+            "mv3"
+          ]
+        }
+      ]
+    },
+    "R31": {
+      "label": "macOS / Mach-O",
+      "skill": "白凝冰·拆骨",
+      "note": "macOS / Mach-O；IPA 不走这里",
+      "keywords": [
+        {
+          "any": [
+            "mach-o",
+            "macho",
+            ".app",
+            "launchagent",
+            "codesign"
+          ]
+        }
+      ]
+    },
+    "R33": {
+      "label": "Go / Rust 运行时",
+      "skill": "行器",
+      "note": "剥离符号的 Go/Rust，不要当普通 C",
+      "keywords": [
+        {
+          "any": [
+            "pclntab",
+            "go.buildid",
+            "stripped go",
+            "rust_begin_unwind",
+            "goresym",
+            "剥离符号"
+          ]
+        }
+      ]
+    },
+    "R5": {
+      "label": ".NET",
+      "skill": "残网·拆骨",
+      "note": ".NET / C#",
+      "keywords": [
+        {
+          "any": [
+            "dotnet",
+            "dnspy",
+            "confuserex",
+            "de4dot"
+          ]
+        }
+      ]
+    },
+    "R21": {
+      "label": "二进制协议 / PCAP",
+      "skill": "约",
+      "note": "帧/序列化；HTTP 签名走 js-reverse；国密已切走",
+      "keywords": [
+        {
+          "any": [
+            "pcap",
+            "protobuf",
+            "grpc",
+            "自定义协议",
+            "binary protocol",
+            "mqtt"
+          ]
+        }
+      ]
+    },
+    "R22": {
+      "label": "Ghidra",
+      "skill": "拆器",
+      "note": "无 IDA / 开源反编译",
+      "keywords": [
+        {
+          "any": [
+            "ghidra",
+            "analyzeheadless"
+          ]
+        }
+      ],
+      "suppress": [
+        "拆骨"
+      ],
+      "family": "re-tools"
+    },
+    "R6": {
+      "label": "IDA",
+      "skill": "拆骨",
+      "note": "IDA MCP 深挖",
+      "keywords": [
+        {
+          "any": [
+            "idalib"
+          ]
+        },
+        {
+          "any": [
+            "ida"
+          ],
+          "exclude": [
+            "没有ida",
+            "无ida",
+            "不用ida",
+            "没有 ida",
+            "无 ida"
+          ]
+        }
+      ],
+      "family": "re-tools"
+    },
+    "R7": {
+      "label": "拆脉",
+      "skill": "拆脉",
+      "note": "CLI 快侦",
+      "keywords": [
+        {
+          "any": [
+            "radare",
+            "r2 ",
+            "rabin2",
+            "r2pm"
+          ]
+        }
+      ],
+      "family": "re-tools"
+    },
+    "R8": {
+      "label": "固件",
+      "skill": "固胚",
+      "note": "固件全链；UART/JTAG 先 hardware-security",
+      "keywords": [
+        {
+          "any": [
+            "firmware",
+            "固件",
+            "binwalk",
+            "squashfs"
+          ]
+        }
+      ]
+    },
+    "R34": {
+      "label": "硬件调试口",
+      "skill": "器审",
+      "note": "硬件接口，再回 firmware；物联网无线不是 Wi-Fi",
+      "keywords": [
+        {
+          "any": [
+            "uart",
+            "jtag",
+            "spi flash",
+            "zigbee",
+            "z-wave",
+            "bluetooth",
+            "蓝牙"
+          ]
+        },
+        {
+          "any": [
+            "ble"
+          ],
+          "word": true
+        }
+      ],
+      "suppress": [
+        "无线",
+        "听波"
+      ]
+    },
+    "R28": {
+      "label": "工控 / OT",
+      "skill": "工控",
+      "note": "CSS 19，网站案降权",
+      "keywords": [
+        {
+          "any": [
+            "scada",
+            "plc",
+            "工控",
+            "iec 62443",
+            "modbus"
+          ]
+        }
+      ]
+    },
+    "R17": {
+      "label": "通用 pwn",
+      "skill": "器胚破核",
+      "note": "看懂后利用编排再 pwn-chain",
+      "keywords": [
+        {
+          "any": [
+            "pwn",
+            "rop",
+            "checksec",
+            "栈溢",
+            "堆溢出",
+            "ret2libc"
+          ]
+        }
+      ],
+      "family": "pwn",
+      "next": "破核链"
+    },
+    "R18": {
+      "label": "EDR / AMSI 原理",
+      "skill": "鬼不觉",
+      "note": "先认 EDR + CSS 08；可验证结论交接 host-c2-verify。补丁不进仓",
+      "keywords": [
+        {
+          "any": [
+            "amsi",
+            "edr逆向",
+            "etw provider",
+            "免杀",
+            "edr/av"
+          ]
+        }
+      ],
+      "family": "c2-edr",
+      "next": "鬼不觉·回连",
+      "playbook": "传承/鬼不觉.md"
+    },
+    "R37": {
+      "label": "联邦身份",
+      "skill": "面目联宗",
+      "note": "SAML/OIDC；password grant 已切走",
+      "keywords": [
+        {
+          "any": [
+            "saml",
+            "oidc",
+            "联邦认证",
+            "sso",
+            "passkey",
+            "webauthn"
+          ]
+        }
+      ]
+    },
+    "R23": {
+      "label": "云 / K8s",
+      "skill": "群瓮",
+      "note": "容器/K8s 总路由；IMDS 已切走",
+      "keywords": [
+        {
+          "any": [
+            "kubernetes",
+            "k8s",
+            "特权pod",
+            "容器逃逸",
+            "etcd"
+          ]
+        }
+      ]
+    },
+    "R35": {
+      "label": "数据库暴露面",
+      "skill": "库府",
+      "note": "库暴露面总入口；9030 已切 doris",
+      "keywords": [
+        {
+          "any": [
+            "mysql未授权",
+            "mongodb",
+            "数据库未授权"
+          ]
+        }
+      ]
+    },
+    "R25": {
+      "label": "取证百科",
+      "skill": "残忆",
+      "note": "取证；Linux 排后门走 host-ir-check",
+      "keywords": [
+        {
+          "any": [
+            "volatility",
+            "内存取证",
+            "磁盘镜像",
+            "pcap取证"
+          ]
+        }
+      ],
+      "family": "sample"
+    },
+    "R36": {
+      "label": "邮件安全",
+      "skill": "飞书",
+      "note": "邮件头/钓鱼分析",
+      "keywords": [
+        {
+          "any": [
+            "spf",
+            "dkim",
+            "dmarc",
+            "钓鱼邮件",
+            "bec"
+          ]
+        }
+      ]
+    },
+    "R29": {
+      "label": "Wi-Fi",
+      "skill": "无线",
+      "note": "CSS 11，网站案降权",
+      "keywords": [
+        {
+          "any": [
+            "wifi",
+            "wpa",
+            "握手包",
+            "无线"
+          ]
+        }
+      ]
+    },
+    "R38": {
+      "label": "SDR / RF",
+      "skill": "听波",
+      "note": "RF，网站案降权；BLE 已切 hardware-security",
+      "keywords": [
+        {
+          "any": [
+            "sdr",
+            "hackrf",
+            "rtl-sdr"
+          ]
+        }
+      ]
+    },
+    "R42": {
+      "label": "客户端破解与外挂",
+      "skill": "客器破禁",
+      "note": "授权样本/授权站。验证码破解、哈希离线破解不走这里",
+      "playbook": "传承/客器破禁.md",
+      "family": "game-client",
+      "next": "客器",
+      "keywords": [
+        {
+          "any": [
+            "外挂",
+            "游戏破解",
+            "客户端破解",
+            "反作弊",
+            "il2cpp",
+            "dump.cs",
+            "cheat engine",
+            "ce修改器",
+            "内存挂",
+            "封包挂",
+            "unity3d",
+            "gameassembly",
+            "global-metadata",
+            "easyanticheat",
+            "battleye"
+          ],
+          "exclude": [
+            "验证码",
+            "captcha",
+            "hashcat",
+            "离线破解"
+          ]
+        }
+      ]
+    },
+    "R32": {
+      "label": "厚客户端",
+      "skill": "厚器",
+      "note": "桌面 C/S",
+      "keywords": [
+        {
+          "any": [
+            "electron",
+            "厚客户端",
+            "thick client",
+            "winforms",
+            "wpf",
+            "qt客户端"
+          ]
+        }
+      ]
+    },
+    "R9": {
+      "label": "恶意样本分诊",
+      "skill": "疫审",
+      "note": "授权样本静态分诊；禁止写免杀/C2；落地马走高熵狩猎",
+      "keywords": [
+        {
+          "any": [
+            "yara",
+            "恶意样本",
+            "木马分析",
+            "ransomware"
+          ]
+        }
+      ],
+      "family": "sample"
+    },
+    "R40": {
+      "label": "案卷复核",
+      "skill": "案复审",
+      "note": "只读复核",
+      "keywords": [
+        {
+          "any": [
+            "案卷复核",
+            "证据链",
+            "案复审",
+            "交差"
+          ]
+        }
+      ]
+    },
+    "R41": {
+      "label": "CTF / 靶场",
+      "skill": "试炼沙场",
+      "note": "再分 web-pentesting-ctf / binary-pwn；不并 GPL Orchestrator",
+      "keywords": [
+        {
+          "any": [
+            "ctf",
+            "awd",
+            "靶场",
+            "比赛题"
+          ],
+          "exclude": [
+            "pwn",
+            "rop",
+            "栈溢",
+            "堆溢出",
+            "ret2"
+          ]
+        }
+      ]
+    },
+    "R0": {
+      "label": "通用逆向",
+      "skill": "逆骨",
+      "note": "总路由 / 未命中专词时的分诊入口",
+      "keywords": [
+        {
+          "any": [
+            "逆向",
+            "反编译",
+            "反汇编",
+            "反调试"
+          ]
+        }
+      ]
+    },
+    "SE13b": {
+      "label": "webpackChunk / SPA 前端（并入协议卡）",
+      "skill": "单页·约",
+      "family": "js",
+      "note": "webpackChunk/umi 作业面已并入 spa-protocol；不要再开 spa-frontend-reversing",
+      "keywords": [
+        {
+          "any": [
+            "webpackchunk",
+            "umi打包",
+            "spa前端逆向"
+          ]
+        }
+      ],
+      "suppress": [
+        "星丝",
+        "约"
+      ]
+    },
+    "SE14b": {
+      "label": "盘口 MD5 / VITE 密钥",
+      "skill": "星宿·盘口秘语",
+      "family": "js",
+      "note": "仅 MD5/HMAC 签名 + bundle 密钥；国密已切 spa-protocol，网关 Blob 已切 encrypted-api",
+      "keywords": [
+        {
+          "any": [
+            "vite_http_sing",
+            "盘口签名",
+            "gambling-api-crypto",
+            "vue_app_ka"
+          ]
+        }
+      ]
+    },
+    "SE16b": {
+      "label": "符号迁移 / 版本对比",
+      "skill": "器胚对照",
+      "family": "diff",
+      "next": "补丁对照",
+      "note": "跨版本搬符号；要反推 CVE 再 patch-diff",
+      "keywords": [
+        {
+          "any": [
+            "bindiff",
+            "符号迁移",
+            "版本对比",
+            "pdb缺失"
+          ]
+        }
+      ]
+    },
+    "R4b": {
+      "label": "VMProtect / 字节码 VM",
+      "skill": "虚壳",
+      "family": "vm",
+      "next": "文乱纹",
+      "note": "商业壳/自定义 ISA；JS 风控 opcode 仍走 dsl-vm",
+      "keywords": [
+        {
+          "any": [
+            "vmprotect",
+            "themida",
+            "自定义字节码",
+            "dispatcher"
+          ]
+        }
+      ]
+    },
+    "R0b": {
+      "label": "OLLVM / 反混淆",
+      "skill": "文乱纹",
+      "family": "vm",
+      "note": "控制流平坦/反混淆；看不懂样本仍走 reverse-engineering",
+      "keywords": [
+        {
+          "any": [
+            "ollvm",
+            "控制流平坦",
+            "反混淆"
+          ]
+        }
+      ]
+    },
+    "R17b": {
+      "label": "写出稳定 exploit",
+      "skill": "破核链",
+      "family": "pwn",
+      "note": "已知炸点/远程打不通；初筛仍走 binary-pwn",
+      "keywords": [
+        {
+          "any": [
+            "working exploit",
+            "远程打不通",
+            "写出exploit",
+            "破核链"
+          ]
+        }
+      ]
+    },
+    "SE22": {
+      "label": "授权主机 C2 落地",
+      "skill": "鬼不觉·回连",
+      "family": "c2-edr",
+      "playbook": "传承/鬼不觉.md",
+      "note": "官方 Sliver 在 scope 主机验回连；二进制不进 git",
+      "keywords": [
+        {
+          "any": [
+            "sliver",
+            "implant",
+            "c2落地",
+            "回连验证",
+            "host-c2",
+            "杀软隔离",
+            "havoc",
+            "授权主机c2"
+          ]
+        }
+      ]
+    }
+  },
+  "priority": [
+    "SE01",
+    "SE02",
+    "SE03",
+    "SE04",
+    "SE05",
+    "SE06",
+    "SE07",
+    "SE27",
+    "SE08",
+    "SE09",
+    "SE23",
+    "SE24",
+    "SE10",
+    "SE28",
+    "SE29",
+    "SE30",
+    "SE31",
+    "SE32",
+    "SE33",
+    "SE25",
+    "SE26",
+    "SE11",
+    "SE12",
+    "SE13",
+    "SE13b",
+    "SE14",
+    "SE14b",
+    "SE15",
+    "SE16b",
+    "SE16",
+    "SE17",
+    "SE18",
+    "SE19",
+    "SE20",
+    "SE21",
+    "SE22",
+    "R4",
+    "R4b",
+    "R0b",
+    "R2",
+    "R3",
+    "R30",
+    "R31",
+    "R33",
+    "R5",
+    "R21",
+    "R22",
+    "R6",
+    "R7",
+    "R8",
+    "R34",
+    "R28",
+    "R17b",
+    "R17",
+    "R18",
+    "R37",
+    "R23",
+    "R35",
+    "R25",
+    "R36",
+    "R29",
+    "R38",
+    "R42",
+    "R32",
+    "R9",
+    "R40",
+    "R41",
+    "R0"
+  ],
+  "cases": [
+    {
+      "hint": "Ghidra 没有 IDA",
+      "primary": "拆器",
+      "forbid": [
+        "拆骨"
+      ]
+    },
+    {
+      "hint": "Doris 9030",
+      "primary": "仓算无门"
+    },
+    {
+      "hint": "IMDS 169.254.169.254",
+      "primary": "盗天·云骨",
+      "forbid": [
+        "群瓮"
+      ]
+    },
+    {
+      "hint": "grant_type=password",
+      "primary": "托印·口令",
+      "forbid": [
+        "面目联宗"
+      ]
+    },
+    {
+      "hint": "盘口 js-websocket 国密",
+      "primary": "单页·约",
+      "forbid": [
+        "约"
+      ]
+    },
+    {
+      "hint": "微信小程序 wxapkg unveilr",
+      "primary": "微域",
+      "forbid": [
+        "铁血冷·探路",
+        "星丝"
+      ]
+    },
+    {
+      "hint": "JsBridge deeplink addJavascriptInterface",
+      "primary": "内窗",
+      "forbid": [
+        "逆骨"
+      ]
+    },
+    {
+      "hint": "WebView 渗透 NanoHTTPD",
+      "primary": "内窗"
+    },
+    {
+      "hint": "JSVMP wasm worker 前端",
+      "primary": "星丝"
+    },
+    {
+      "hint": "APK 逆向 jadx",
+      "primary": "铁血冷·探路",
+      "forbid": [
+        "逆骨"
+      ]
+    },
+    {
+      "hint": "APK 完整反编译 重打包",
+      "primary": "铁血冷·拆骨"
+    },
+    {
+      "hint": "iOS IPA",
+      "primary": "铁若男·拆骨"
+    },
+    {
+      "hint": "Zigbee 无线",
+      "primary": "器审",
+      "forbid": [
+        "无线"
+      ]
+    },
+    {
+      "hint": "芋道 mock-enable df-user",
+      "primary": "秦百胜·芋府假面",
+      "forbid": [
+        "器审"
+      ]
+    },
+    {
+      "hint": "shop_hq filter GT",
+      "primary": "快府·横夺"
+    },
+    {
+      "hint": "/actuator/gateway/routes",
+      "primary": "春府·开棺"
+    },
+    {
+      "hint": "蓝鸟猎手 hprof",
+      "primary": "开棺·蓝鸟"
+    },
+    {
+      "hint": "JDumpSpider heapdump.hprof",
+      "primary": "开棺·蓝鸟"
+    },
+    {
+      "hint": "heapdump /actuator",
+      "primary": "春府·开棺"
+    },
+    {
+      "hint": "Nacos v3 /v3/auth/user",
+      "primary": "纳言无门"
+    },
+    {
+      "hint": "WebAuthn passkey",
+      "primary": "面目联宗"
+    },
+    {
+      "hint": "致远 seeyon",
+      "primary": "一日针匣"
+    },
+    {
+      "hint": "Harbor goharbor",
+      "primary": "一日针匣"
+    },
+    {
+      "hint": "goEncrypt main.wasm 掩码票",
+      "primary": "太白云生·云台"
+    },
+    {
+      "hint": "resetPassword 任意验证码",
+      "primary": "秦百胜·夺舍"
+    },
+    {
+      "hint": "cookies.sqlite fingerprint.json 窃密包",
+      "primary": "偷生"
+    },
+    {
+      "hint": "假支付 回调 验签绕过",
+      "primary": "秦百胜·回响"
+    },
+    {
+      "hint": "独角 Next use_balance 1元购",
+      "primary": "独角"
+    },
+    {
+      "hint": "merchant_pem laravel.log 合法签",
+      "primary": "秦百胜·回响"
+    },
+    {
+      "hint": "dujiaoka 假支付",
+      "primary": "秦百胜·牌铺"
+    },
+    {
+      "hint": "众测 bug bounty WAF",
+      "primary": "七十二层防"
+    },
+    {
+      "hint": "CVE复现 nuclei 1day",
+      "primary": "一日针匣"
+    },
+    {
+      "hint": "Kerberoasting BloodHound",
+      "primary": "武庸·宗门"
+    },
+    {
+      "hint": "白盒 semgrep 代码审计",
+      "primary": "文审"
+    },
+    {
+      "hint": "提示词注入 LLM jailbreak",
+      "primary": "大灵",
+      "forbid": [
+        "铁若男·拆骨"
+      ]
+    },
+    {
+      "hint": "iOS 越狱 objection",
+      "primary": "铁若男·拆骨",
+      "forbid": [
+        "大灵"
+      ]
+    },
+    {
+      "hint": "fireye opcode VM 自定义虚拟机",
+      "primary": "秘语"
+    },
+    {
+      "hint": "chrome 扩展 crx",
+      "primary": "窗拆骨"
+    },
+    {
+      "hint": "剥离符号的 Go 面板",
+      "primary": "行器"
+    },
+    {
+      "hint": "Unity IL2CPP 外挂 dump.cs",
+      "primary": "客器破禁"
+    },
+    {
+      "hint": "厚客户端 Electron",
+      "primary": "厚器"
+    },
+    {
+      "hint": "pcap protobuf",
+      "primary": "约"
+    },
+    {
+      "hint": "CTF 比赛题",
+      "primary": "试炼沙场"
+    },
+    {
+      "hint": "CTF 栈溢出 ROP",
+      "primary": "器胚破核",
+      "forbid": [
+        "试炼沙场"
+      ]
+    },
+    {
+      "hint": "AMSI EDR逆向",
+      "primary": "鬼不觉"
+    },
+    {
+      "hint": "SAML OIDC",
+      "primary": "面目联宗"
+    },
+    {
+      "hint": "排后门 ld.so.preload",
+      "primary": "宿主验"
+    },
+    {
+      "hint": "webpack 前端签名",
+      "primary": "星丝"
+    },
+    {
+      "hint": "Mach-O .app LaunchAgent",
+      "primary": "白凝冰·拆骨"
+    },
+    {
+      "hint": "Redis 未授权",
+      "primary": "中门无门"
+    },
+    {
+      "hint": "案卷复核 证据链",
+      "primary": "案复审"
+    },
+    {
+      "hint": "加密API Blob",
+      "primary": "星宿·密文"
+    },
+    {
+      "hint": "zend_mm X-Alloc-Bins",
+      "primary": "器胚破核"
+    },
+    {
+      "hint": "固件 binwalk squashfs",
+      "primary": "固胚"
+    },
+    {
+      "hint": "看不懂这段样本",
+      "primary": "逆骨"
+    },
+    {
+      "hint": "webpackChunk 注入 umi",
+      "primary": "单页·约",
+      "forbid": [
+        "星丝"
+      ]
+    },
+    {
+      "hint": "spa-frontend-reversing",
+      "primary": "单页·约"
+    },
+    {
+      "hint": "符号迁移 bindiff",
+      "primary": "器胚对照",
+      "forbid": [
+        "补丁对照"
+      ]
+    },
+    {
+      "hint": "ghidriff 补丁差分",
+      "primary": "补丁对照",
+      "forbid": [
+        "器胚对照"
+      ]
+    },
+    {
+      "hint": "VMProtect Themida",
+      "primary": "虚壳"
+    },
+    {
+      "hint": "OLLVM 控制流平坦",
+      "primary": "文乱纹"
+    },
+    {
+      "hint": "VITE_HTTP_SING 盘口签名",
+      "primary": "星宿·盘口秘语"
+    },
+    {
+      "hint": "远程打不通 写出exploit",
+      "primary": "破核链"
+    },
+    {
+      "hint": "heap-exploitation",
+      "primary": "器胚破核"
+    },
+    {
+      "hint": "Sliver implant 回连验证",
+      "primary": "鬼不觉·回连",
+      "forbid": [
+        "鬼不觉"
+      ]
+    },
+    {
+      "hint": "授权主机c2 杀软隔离",
+      "primary": "鬼不觉·回连"
+    }
+  ],
+  "families": {
+    "heap": {
+      "members": [
+        "开棺·蓝鸟",
+        "春府·开棺"
+      ],
+      "rule": "本地 hprof/蓝鸟立刻拆；下堆与 gateway 杀伤链走 Actuator。next 是交接不是并行"
+    },
+    "apk": {
+      "members": [
+        "铁血冷·探路",
+        "铁血冷·拆骨",
+        "铁若男·拆骨",
+        "内窗"
+      ],
+      "rule": "默认 apk-recon 抽密钥；Deeplink/JsBridge 走 webview-deeplink-bridge；完整反编译/重打包才 apk-reverse；IPA 才 mobile-reverse"
+    },
+    "js": {
+      "members": [
+        "单页·约",
+        "星宿·密文",
+        "星宿·盘口秘语",
+        "星丝"
+      ],
+      "rule": "国密/WS/webpackChunk→spa-protocol；sk_encrypt 网关→encrypted-api；盘口 MD5/VITE 密钥→gambling-api；其余前端签名→js-reverse。spa-frontend-reversing 已并入 spa-protocol"
+    },
+    "pwn": {
+      "members": [
+        "器胚破核",
+        "破核链"
+      ],
+      "rule": "初筛/checksec→binary-pwn；已知炸点写 exploit / 远程打不通→pwn-chain"
+    },
+    "vm": {
+      "members": [
+        "秘语",
+        "虚壳",
+        "文乱纹"
+      ],
+      "rule": "JS/风控 opcode→dsl-vm；VMProtect/Themida→vm-and-bytecode；OLLVM/控制流平坦→code-obfuscation"
+    },
+    "diff": {
+      "members": [
+        "器胚对照",
+        "补丁对照",
+        "一日针匣"
+      ],
+      "rule": "符号迁移/版本对比→binary-diff；补丁反推洞→patch-diff；已知 CVE 打站→1day-nuclei + nday_route"
+    },
+    "game-client": {
+      "members": [
+        "客器破禁",
+        "客器"
+      ],
+      "rule": "Unity/IL2CPP/反作弊/外挂→client-crack-cheat；H5 isPaid 旗标并行 client-state-skip。盘口加密 API 不进本族"
+    },
+    "sample": {
+      "members": [
+        "宿主验",
+        "疫审",
+        "残忆"
+      ],
+      "rule": "已拿 shell 排后门→host-ir；授权样本 YARA→malware；内存/磁盘百科→digital-forensics"
+    },
+    "re-tools": {
+      "members": [
+        "拆器",
+        "拆骨",
+        "拆脉"
+      ],
+      "rule": "点了工具名用该工具；没点先 reverse-engineering 分诊，不要三张一起开"
+    },
+    "c2-edr": {
+      "members": [
+        "鬼不觉·回连",
+        "鬼不觉"
+      ],
+      "rule": "认产品/原理→edr-bypass-re；授权机落地回连→host-c2-verify。补丁/syscall/植入源码不进仓"
+    }
+  },
+  "aliases": [
+    {
+      "from": "spa-frontend-reversing",
+      "to": "单页·约",
+      "any": [
+        "spa-frontend-reversing",
+        "spa前端逆向",
+        "webpackchunk"
+      ]
+    },
+    {
+      "from": "encrypted-api-gateway-reversal",
+      "to": "星宿·密文",
+      "any": [
+        "encrypted-api-gateway-reversal",
+        "encrypted-api-gateway-reversing"
+      ]
+    },
+    {
+      "from": "heap-exploitation",
+      "to": "器胚破核",
+      "any": [
+        "heap-exploitation",
+        "echoes-of-heap-exploit"
+      ]
+    },
+    {
+      "from": "payment-gateway-callback",
+      "to": "秦百胜·回响",
+      "any": [
+        "payment-gateway-callback"
+      ]
+    },
+    {
+      "from": "dujiao-next-pentest",
+      "to": "独角",
+      "any": [
+        "dujiao-next-pentest"
+      ]
+    },
+    {
+      "from": "dujiaoka-pay-forgery",
+      "to": "秦百胜·牌铺",
+      "any": [
+        "dujiaoka-pay-forgery",
+        "dujiaoka",
+        "独角数卡",
+        "detail-order-sn"
+      ]
+    },
+    {
+      "from": "wxmini-security-audit",
+      "to": "微域",
+      "any": [
+        "wxmini-security-audit",
+        "猎小程序"
+      ]
+    },
+    {
+      "from": "webview-deeplink-pentest",
+      "to": "内窗",
+      "any": [
+        "webview-deeplink-pentest"
+      ]
+    }
+  ]
+}

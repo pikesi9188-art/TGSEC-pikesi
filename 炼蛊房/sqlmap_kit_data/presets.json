@@ -1,0 +1,90 @@
+{
+  "generic_waf": {
+    "tampers": [
+      "space2comment",
+      "randomcase",
+      "between",
+      "charencode"
+    ],
+    "extra_flags": [
+      "--random-agent",
+      "--hpp",
+      "--delay=1"
+    ],
+    "note": "通用 WAF：注释替空格 + 随机大小写 + between + 编码"
+  },
+  "modsecurity": {
+    "tampers": [
+      "modsecurityversioned",
+      "modsecurityzeroversioned",
+      "space2comment",
+      "randomcase"
+    ],
+    "extra_flags": [
+      "--random-agent"
+    ],
+    "note": "ModSecurity：版本化注释关键字"
+  },
+  "cloudflare": {
+    "tampers": [
+      "charunicodeencode",
+      "space2comment",
+      "randomcase",
+      "between"
+    ],
+    "extra_flags": [
+      "--random-agent",
+      "--delay=2",
+      "--hpp"
+    ],
+    "note": "CF 类：优先 Unicode/注释；引擎内另有 waf_sqli_bypass Unicode/%0a"
+  },
+  "asp_iis": {
+    "tampers": [
+      "percentage",
+      "space2comment",
+      "charencode",
+      "randomcase"
+    ],
+    "extra_flags": [
+      "--random-agent"
+    ],
+    "note": "ASP/IIS 常见 percentage 编码绕过"
+  },
+  "mysql": {
+    "tampers": [
+      "space2mysqldash",
+      "equaltolike",
+      "greatest",
+      "ifnull2ifisnull",
+      "versionedkeywords"
+    ],
+    "extra_flags": [
+      "--dbms=mysql"
+    ],
+    "note": "已知 MySQL"
+  },
+  "mssql": {
+    "tampers": [
+      "space2mssqlblank",
+      "space2mssqlhash",
+      "sp_password",
+      "between"
+    ],
+    "extra_flags": [
+      "--dbms=mssql"
+    ],
+    "note": "已知 MSSQL"
+  },
+  "unicode_newline": {
+    "tampers": [
+      "charunicodeencode",
+      "charunicodeescape",
+      "space2comment"
+    ],
+    "extra_flags": [
+      "--random-agent"
+    ],
+    "note": "与 炼蛊房/waf_sqli_bypass.py 联用：先 Unicode/%0a 探针，再挂 unicode 系 tamper"
+  }
+}

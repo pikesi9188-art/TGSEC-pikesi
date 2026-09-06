@@ -1,0 +1,34 @@
+id: redis-unauth-surface
+
+info:
+  name: Redis HTTP Reverse-Proxy Surface
+  author: survey-engine
+  severity: high
+  description: |
+    仅探测 HTTP 反代误把 Redis 协议露到 Web 的情况（-ERR / NOAUTH / redis_version）。
+    TCP 6379 走 redis_unauth_probe.py；不做 CONFIG SET / 写盘。
+  tags: redis,unauth,fingerprint,misconfig
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/redis"
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "-NOAUTH"
+          - "-ERR operation not permitted"
+          - "-ERR unknown command"
+          - "redis_version:"
+        condition: or
+        name: redis-protocol-http
+
+      - type: word
+        part: body
+        words:
+          - "+PONG"
+        name: redis-pong-http

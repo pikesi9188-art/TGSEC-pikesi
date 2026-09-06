@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-06",
+  "source": "daaixianzun",
+  "brand": "TGSEC-pikesi / 大爱仙尊",
+  "skills": 410,
+  "playbooks": 243,
+  "knowledge": 591,
+  "ops": 196,
+  "skipped_n": 16,
+  "skipped": [
+    "report case-2026-08-27-three-sites.md",
+    "report irat-craxs-3site-case.md",
+    "report response-discipline-0821.md",
+    "report thinkadmin-bypass-0821.md",
+    "report wadsax-thinkadmin-0821.md",
+    "report darksword-1199-recon.md",
+    "report irat-craxs-rat-panel-repro.md",
+    "report tgapis-black-market-tma.md",
+    "report 49.212.65.223-case.md",
+    "report vida-finalvnc-panel-deploy.md",
+    "report vida-finalvnc-panel-deploy.md",
+    "report 外门技能对照手法.md",
+    "report 大爱仙尊空壳族落地手法.md",
+    "report 四海报告参考.md",
+    "report 近期成功接管手法总册.md",
+    "report 大爱仙尊助手注入器手法.md"
+  ],
+  "kits": 154,
+  "kit_dirs": 13
+}

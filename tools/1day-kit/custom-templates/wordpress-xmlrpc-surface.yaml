@@ -1,0 +1,52 @@
+id: wordpress-xmlrpc-surface
+
+info:
+  name: WordPress xmlrpc.php Surface (listMethods fingerprint)
+  author: survey-engine
+  severity: medium
+  description: |
+    WordPress xmlrpc.php 暴露面。HITCON 多次通报 xmlrpc / wp2shell。
+    本模板只 GET 说明页 + 一次 system.listMethods，不发 multicall 撞密、不 pingback。
+  tags: wordpress,xmlrpc,fingerprint,hitcon
+  reference:
+    - https://zeroday.hitcon.org/vulnerability/ZD-2026-00858
+  metadata:
+    max-request: 6
+    fofa-query: 'app="WordPress" && body="xmlrpc.php"'
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/xmlrpc.php"
+      - "{{BaseURL}}/wp/xmlrpc.php"
+      - "{{BaseURL}}/blog/xmlrpc.php"
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "XML-RPC server accepts POST requests only"
+          - "XML-RPC"
+        condition: or
+        case-insensitive: true
+        name: xmlrpc-get
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/xmlrpc.php"
+      - "{{BaseURL}}/wp/xmlrpc.php"
+    headers:
+      Content-Type: text/xml
+    body: '<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>'
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "system.listMethods"
+          - "system.multicall"
+          - "pingback.ping"
+        condition: or
+        name: xmlrpc-methods

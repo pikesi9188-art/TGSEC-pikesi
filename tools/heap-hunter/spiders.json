@@ -1,0 +1,161 @@
+{
+  "tool": "蓝鸟猎手",
+  "upstream": "cn.wanghw/JDumpSpider 1.1-SNAPSHOT",
+  "jar": "tools/heap-hunter/lanniao-hunter.jar",
+  "main": "cn.wanghw.Main",
+  "batch": "cn.wanghw.HunterLauncher",
+  "cli_single": "java -jar lanniao-hunter.jar <hprof> -out report.txt",
+  "cli_batch": "java -cp lanniao-hunter.jar cn.wanghw.HunterLauncher -batch <dir>",
+  "heap_ext": [".hprof", ".phd", ".heap", ".bin"],
+  "note": "对象图行走依赖 VisualVM/NetBeans heap 解析；无 Java 时本库只做字节正则+类名指纹。不要默认 --export-strings（全堆 String 会爆）。",
+  "spiders": [
+    {
+      "id": "DataSource01",
+      "title": "SpringDataSourceProperties",
+      "target": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "fields": ["driverClassName", "username", "password", "url"],
+      "why": "Spring Boot 自动配置数据源，堆里常是明文 JDBC"
+    },
+    {
+      "id": "DataSource02",
+      "title": "WeblogicDataSourceConnectionPoolConfig",
+      "target": "weblogic.jdbc.common.internal.DataSourceConnectionPoolConfig",
+      "fields": ["url", "driver", "name", "username", "defaultConnectionInfo.username", "password", "defaultConnectionInfo.p"],
+      "why": "WebLogic 连接池；口令在 defaultConnectionInfo"
+    },
+    {
+      "id": "DataSource03",
+      "title": "MongoClient",
+      "target": "com.mongodb.MongoClient",
+      "fields": [
+        "host",
+        "cluster.settings.hosts.list.elementData.host",
+        "port",
+        "cluster.settings.hosts.list.elementData.port",
+        "username",
+        "credentialsList.list.elementData.userName",
+        "password",
+        "credentialsList.list.elementData.password",
+        "database",
+        "credentialsList.list.elementData.source"
+      ],
+      "why": "旧 Mongo 驱动凭据在 cluster/credentialsList 嵌套字段"
+    },
+    {
+      "id": "DataSource04",
+      "title": "AliDruidDataSourceWrapper",
+      "target": "com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceWrapper",
+      "fields": ["username", "password", "jdbcUrl"],
+      "why": "芋道/若依常见 Druid 包装类"
+    },
+    {
+      "id": "DataSource05",
+      "title": "HikariDataSource",
+      "target": "com.zaxxer.hikari.util.DriverDataSource",
+      "fields": ["jdbcUrl", "tableId", "driverProperties.table.@ID"],
+      "why": "Hikari 属性表；tableId 再 findThing 解 Properties"
+    },
+    {
+      "id": "Redis01",
+      "title": "RedisStandaloneConfiguration",
+      "target": "org.springframework.data.redis.connection.RedisStandaloneConfiguration",
+      "fields": ["hostName", "port", "password", "password.thePassword", "database"],
+      "why": "Spring Data Redis；口令在 RedisPassword.thePassword"
+    },
+    {
+      "id": "Redis02",
+      "title": "JedisClient",
+      "target": "redis.clients.jedis.Client",
+      "fields": ["hostname", "port", "password", "database", "db"],
+      "why": "直连 Jedis 客户端实例"
+    },
+    {
+      "id": "ShiroKey01",
+      "title": "CookieRememberMeManager(ShiroKey)",
+      "target": "org.apache.shiro.web.mgt.CookieRememberMeManager",
+      "fields": ["encryptionCipherKey", "cipherService.algorithmName", "cipherService.modeName"],
+      "why": "把 rememberMe AES 密钥 Base64 出来，回灌 Shiro 弱钥卡"
+    },
+    {
+      "id": "PropertySource01",
+      "title": "OriginTrackedMapPropertySource",
+      "target": "org.springframework.boot.env.OriginTrackedMapPropertySource",
+      "fields": ["source"],
+      "why": "application.yml/properties 进堆后的 Map"
+    },
+    {
+      "id": "PropertySource02",
+      "title": "MutablePropertySources",
+      "target": "org.springframework.core.env.MutablePropertySources",
+      "fields": ["propertySourceList.array"],
+      "why": "整份 Environment 列表，常含 bootstrap/nacos"
+    },
+    {
+      "id": "PropertySource03",
+      "title": "MapPropertySources",
+      "target": "org.springframework.core.env.MapPropertySource",
+      "fields": ["source"],
+      "why": "通用 Map 配置源"
+    },
+    {
+      "id": "PropertySource04",
+      "title": "ConsulPropertySources",
+      "target": "org.springframework.cloud.consul.config.ConsulPropertySource",
+      "fields": ["properties"],
+      "why": "Consul KV 进堆"
+    },
+    {
+      "id": "PropertySource05",
+      "title": "JavaProperties",
+      "target": "java.util.Properties",
+      "fields": [],
+      "why": "全堆 Properties；噪声大但能捞遗漏键"
+    },
+    {
+      "id": "EnvProperty01",
+      "title": "ProcessEnvironment",
+      "target": "java.lang.ProcessEnvironment",
+      "fields": [],
+      "why": "进程环境变量：AK、JDBC、Nacos 明文"
+    },
+    {
+      "id": "OSS01",
+      "title": "OSS",
+      "target": "*Map.entry",
+      "keywords": ["id", "secret", "access", "bucket", "endpoint", "sk", "oss.", "s3.", "cos.", "lbs.", "file", "upload"],
+      "why": "扫所有 Map，键名像对象存储就留下"
+    },
+    {
+      "id": "UserPassSearcher01",
+      "title": "UserPassSearcher",
+      "target": "*fields",
+      "keywords": [
+        "username", "pass", "host", "user", "access", "key", "jdbc", "url", "uri",
+        "token", "database", "db", "secret", "phone", "email", "enterprise",
+        "login", "server", "addr", "iv", "salt"
+      ],
+      "why": "字段名启发式；补专类蜘蛛漏掉的 POJO"
+    },
+    {
+      "id": "CookieThief",
+      "title": "CookieThief",
+      "target": "java.lang.String",
+      "needles": ["Cookie:"],
+      "why": "堆里残留的 HTTP Cookie 头（含 wt=/rememberMe=）"
+    },
+    {
+      "id": "AuthThief",
+      "title": "AuthThief",
+      "target": "*Map.entry",
+      "keywords": ["authorization", "auth", "cookie"],
+      "why": "Map 键含 authorization/auth/cookie 的请求头"
+    },
+    {
+      "id": "ExportAllString",
+      "title": "ExportAllString",
+      "target": "java.lang.String",
+      "optional": true,
+      "why": "Main 加 export-strings 才跑；默认禁止"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+id: js-sourcemap-exposed
+
+info:
+  name: JavaScript SourceMap Exposed
+  author: survey-engine
+  severity: info
+  description: |
+    生产环境暴露 .map（sourcesContent / mappings）。
+    密钥提取走 js_secret_hunter hunt（会跟 map）；本模板只做指纹。
+  tags: js,sourcemap,fingerprint
+  reference:
+    - docs/playbooks/JS逆向与前端签名手法.md
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/static/js/app.js.map"
+      - "{{BaseURL}}/js/app.js.map"
+      - "{{BaseURL}}/assets/index.js.map"
+      - "{{BaseURL}}/dist/app.js.map"
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - '"mappings"'
+          - '"sourcesContent"'
+        condition: or

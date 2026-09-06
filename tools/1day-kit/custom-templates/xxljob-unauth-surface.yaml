@@ -1,0 +1,59 @@
+id: xxljob-unauth-surface
+
+info:
+  name: XXL-JOB Admin Unauth / Default Cred Surface
+  author: survey-engine
+  severity: critical
+  description: |
+    XXL-JOB 调度中心指纹 + 历史默认 admin/123456 登录探测。
+    不对执行器发送 /run 命令 payload；执行器 RCE 走 Playbook L3 且先问。
+  tags: xxl-job,xxljob,unauth,default-login,fingerprint,java
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/xxl-job-admin/toLogin"
+      - "{{BaseURL}}/xxl-job-admin/"
+      - "{{BaseURL}}/toLogin"
+      - "{{BaseURL}}/"
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "XXL-JOB"
+          - "xxl-job-admin"
+          - "xxl.job"
+        condition: or
+        name: xxljob-ui
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/xxl-job-admin/login"
+      - "{{BaseURL}}/login"
+
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "userName=admin&password=123456"
+    disable-redirects: true
+    matchers-condition: or
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"code":200'
+          - '"code": 200'
+        condition: or
+        name: default-admin
+      - type: word
+        part: header
+        words:
+          - "XXL_JOB_LOGIN_IDENTITY"
+        name: default-admin-cookie
+      - type: dsl
+        dsl:
+          - "status_code == 302 && contains(tolower(header), 'index') && !contains(tolower(header), 'tologin')"
+        name: default-admin-302

@@ -1,0 +1,33 @@
+id: graphql-introspection-surface
+
+info:
+  name: GraphQL Introspection Enabled
+  author: survey-engine
+  severity: medium
+  description: |
+    GraphQL introspection 未关闭（只读字段名）。
+    不 dump 全 schema；L2/L3 走 JWT与GraphQL手法.md。
+  tags: graphql,misconfig,fingerprint
+  reference:
+    - docs/playbooks/JWT与GraphQL手法.md
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/graphql"
+      - "{{BaseURL}}/api/graphql"
+      - "{{BaseURL}}/graphql/v1"
+      - "{{BaseURL}}/v1/graphql"
+    headers:
+      Content-Type: application/json
+    body: '{"query":"{__schema{queryType{name}}}"}'
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "queryType"
+          - "__schema"
+        condition: or
+        name: introspection

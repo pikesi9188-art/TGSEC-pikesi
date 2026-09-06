@@ -1,0 +1,743 @@
+[
+  {
+    "script": "__init__",
+    "file": "__init__.py",
+    "db": "适合所有数据库",
+    "summary": "在 sqlmap 脚本中，__init__.py 文件的作用与它在任何其他 Python 项目中的作用类似。",
+    "detail": "在 sqlmap 脚本中，__init__.py 文件的作用与它在任何其他 Python 项目中的作用类似。\n它标志着包含它的目录为一个 Python 包，使得目录中的模块可以被导入和使用。\n此外，它还可以包含包的初始化代码，为包提供一些初始设置或导入子模块的功能。\n标记包：__init__.py 文件标记目录为一个 Python 包，使得目录下的模块可以被导入。\n包初始化：可以包含包初始化代码，如设置包路径、初始化变量、配置日志等。\n导入子模块：可以在 __init__.py 文件中导入子模块，以便于用户在使用时可以直接导入包中的模块或函数。\n有了这些 __init__.py 文件后，可以在其他脚本中导入这些模块。例如：\nfrom sqlmap.core import start_scan, setup_logging",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "0eunion",
+    "file": "0eunion.py",
+    "db": "适合哪些数据库类型",
+    "summary": "0eunion.py 是 sqlmap 工具中的一个脚本，用于将 UNION 操作符与特定字符组合在一起，以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。具体而言，它利用了带有 0e 前缀的特殊字符串，这些字符串在某些情况下可以被解释为数字零，从而绕过某些安全机制。",
+    "detail": "0eunion.py 是 sqlmap 工具中的一个脚本，用于将 UNION 操作符与特定字符组合在一起，以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。具体而言，它利用了带有 0e 前缀的特殊字符串，这些字符串在某些情况下可以被解释为数字零，从而绕过某些安全机制。\n利用 0e 前缀：在 SQL 查询中的 UNION 操作符前添加 0e 前缀。例如，将 UNION SELECT ... 转换为 0eUNION SELECT ...。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对带有 0e 前缀的字符串过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 0e 前缀技术可以显著提高注入成功率，获取更多的数据库信息。\n0eunion.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 0eunion.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 UNION 操作符进行严格验证和过滤时，0eunion.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定操作符限制：当使用的 Web 应用程序对 UNION 操作符有特殊处理或限制时，0eunion.py 特别有用。",
+    "example": "",
+    "tags": [
+      "union"
+    ]
+  },
+  {
+    "script": "apostrophemask",
+    "file": "apostrophemask.py",
+    "db": "MySQL：常见的关系型数据库，适合处理掩盖单引号字符的输入。",
+    "summary": "apostrophemask.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中处理单引号（'）字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "apostrophemask.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中处理单引号（'）字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n掩盖单引号：将 SQL 查询中的单引号字符进行掩盖或替换，使其绕过输入验证和过滤机制。例如，使用特殊字符或编码替换单引号，以改变 SQL 查询的外观。\n绕过安全过滤器：某些 Web 应用程序可能对常见的单引号字符进行过滤，但对掩盖后的字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用单引号掩盖技术可以显著提高注入成功率，获取更多的数据库信息。\napostrophemask.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 apostrophemask.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的单引号字符进行严格验证和过滤时，apostrophemask.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对单引号字符有特殊处理或限制时，apostrophemask.py 特别有用。",
+    "example": "",
+    "tags": [
+      "quote"
+    ]
+  },
+  {
+    "script": "apostrophenullencode",
+    "file": "apostrophenullencode.py",
+    "db": "MySQL：常见的关系型数据库，适合处理替换单引号字符的输入。",
+    "summary": "apostrophenullencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用 NULL 字符替换单引号（'）字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "apostrophenullencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用 NULL 字符替换单引号（'）字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n替换单引号为 NULL 字符：将 SQL 查询中的单引号字符替换为 NULL 字符。这可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的单引号字符进行过滤，但对 NULL 字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 NULL 字符技术可以显著提高注入成功率，获取更多的数据库信息。\napostrophenullencode.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 apostrophenullencode.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的单引号字符进行严格验证和过滤时，apostrophenullencode.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对单引号字符有特殊处理或限制时，apostrophenullencode.py 特别有用。",
+    "example": "",
+    "tags": [
+      "quote"
+    ]
+  },
+  {
+    "script": "appendnullbyte",
+    "file": "appendnullbyte.py",
+    "db": "MySQL：常见的关系型数据库，适合处理包含空字节的输入。",
+    "summary": "appendnullbyte.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中添加一个空字节（NULL byte）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "appendnullbyte.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中添加一个空字节（NULL byte）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n添加空字节：在 SQL 查询中插入一个空字节（NULL byte，通常表示为 \\x00），以截断字符串或改变查询的语义。许多编程语言和数据库在遇到空字节时会认为字符串已经结束，从而忽略后续的内容。\n绕过安全过滤器：某些 Web 应用程序可能会对 SQL 注入模式进行过滤，但对空字节处理较少。通过在输入中添加空字节，可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用空字节技术可以显著提高注入成功率，获取更多的数据库信息。\nappendnullbyte.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 appendnullbyte.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的内容进行严格验证和过滤时，appendnullbyte.py 会被自动调用，以尝试绕过这些防护。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用空字节可以帮助绕过这些限制。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。",
+    "example": "",
+    "tags": [
+      "nullbyte"
+    ]
+  },
+  {
+    "script": "base64encode",
+    "file": "base64encode.py",
+    "db": "MySQL：常见的关系型数据库，适合处理 Base64 编码的输入。",
+    "summary": "base64encode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对数据进行 Base64 编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "base64encode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对数据进行 Base64 编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\nBase64 编码：将 SQL 查询中的数据转换为 Base64 编码。Base64 编码是一种常见的二进制到文本编码方法，它将二进制数据表示为 ASCII 字符串。通过这种转换，可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的字符输入进行过滤，但对 Base64 编码的字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 Base64 编码技术可以显著提高注入成功率，获取更多的数据库信息。\nbase64encode.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 base64encode.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规字符进行严格验证和过滤时，base64encode.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规字符输入进行严格过滤时，使用 Base64 编码可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "base64"
+    ]
+  },
+  {
+    "script": "between",
+    "file": "between.py",
+    "db": "适合哪些数据库类型",
+    "summary": "between.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用 BETWEEN 语句。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "between.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用 BETWEEN 语句。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n使用 BETWEEN 语句：将 SQL 查询中的常规条件语句替换为 BETWEEN 语句。例如，将 WHERE age > 18 替换为 WHERE age BETWEEN 18 AND 100。通过这种转换，可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的条件语句进行过滤，但对 BETWEEN 语句过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 BETWEEN 语句技术可以显著提高注入成功率，获取更多的数据库信息。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规条件语句进行严格验证和过滤时，between.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定条件过滤：当使用的 Web 应用程序对常规条件语句进行严格过滤时，使用 BETWEEN 语句可以帮助绕过这些限制。\nbetween.py 脚本适用于以下各种关系型数据库管理系统（RDBMS），因为这些数据库都支持 BETWEEN 语句：",
+    "example": "",
+    "tags": [
+      "operator"
+    ]
+  },
+  {
+    "script": "binary",
+    "file": "binary.py",
+    "db": "MySQL：常见的关系型数据库，适合处理二进制数据的输入。",
+    "summary": "binary.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中处理二进制数据。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "binary.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中处理二进制数据。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n处理二进制数据：将 SQL 查询中的数据转换为二进制格式。这可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的文本输入进行过滤，但对二进制数据过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用二进制数据技术可以显著提高注入成功率，获取更多的数据库信息。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规字符进行严格验证和过滤时，binary.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规字符输入进行严格过滤时，使用二进制数据可以帮助绕过这些限制。\nbinary.py 脚本适用于以下各种关系型数据库管理系统（RDBMS），因为这些数据库在处理输入时，都可能遇到字符处理问题：",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "bluecoat",
+    "file": "bluecoat.py",
+    "db": "MySQL：常见的关系型数据库，适合处理通过代理系统进行的输入。",
+    "summary": "bluecoat.py 是 sqlmap 工具中的一个脚本，主要用于针对使用 Blue Coat 安全代理的 Web 应用程序进行 SQL 注入攻击。Blue Coat 代理可能会修改 HTTP 请求，导致常规 SQL 注入技术失效，因此需要特定的绕过技术。",
+    "detail": "bluecoat.py 是 sqlmap 工具中的一个脚本，主要用于针对使用 Blue Coat 安全代理的 Web 应用程序进行 SQL 注入攻击。Blue Coat 代理可能会修改 HTTP 请求，导致常规 SQL 注入技术失效，因此需要特定的绕过技术。\n针对 Blue Coat 代理：Blue Coat 代理是一种网络安全设备，用于过滤和监控 Web 流量。它可能会修改 HTTP 请求，从而影响 SQL 注入攻击的有效性。bluecoat.py 脚本旨在通过特定的绕过技术来处理这种情况。\n绕过安全过滤器：通过修改请求或使用特定的编码和技术，绕过 Blue Coat 代理的安全过滤机制，使 SQL 注入攻击仍然有效。\n提高注入成功率：在使用 Blue Coat 代理进行流量过滤和监控的环境中，使用 bluecoat.py 脚本可以显著提高注入攻击的成功率，获取更多的数据库信息。\n使用 Blue Coat 代理的环境：当目标 Web 应用程序使用 Blue Coat 代理进行请求处理和防护时，bluecoat.py 会被自动调用，以尝试绕过这些防护。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，bluecoat.py 可以通过绕过代理机制来尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\nbluecoat.py 脚本适用于以下各种关系型数据库管理系统（RDBMS），因为这些数据库在处理输入时，都可能遇到通过代理系统进行防护的问题：",
+    "example": "",
+    "tags": [
+      "proxy"
+    ]
+  },
+  {
+    "script": "chardoubleencode",
+    "file": "chardoubleencode.py",
+    "db": "MySQL：常见的关系型数据库，适合处理双重编码的输入。",
+    "summary": "chardoubleencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对字符进行双重编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "chardoubleencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对字符进行双重编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n双重编码字符：将 SQL 查询中的字符进行双重编码。例如，将字符 A 先编码为 %41，再将 % 编码为 %25，结果为 %2541。这种双重编码可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的字符输入进行过滤，但对双重编码后的字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用双重编码技术可以显著提高注入成功率，获取更多的数据库信息。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规字符进行严格验证和过滤时，chardoubleencode.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规字符输入进行严格过滤时，使用双重编码可以帮助绕过这些限制。\nchardoubleencode.py 脚本适用于以下各种关系型数据库管理系统（RDBMS），因为这些数据库在处理输入时，都可能遇到字符处理问题：",
+    "example": "",
+    "tags": [
+      "encoding"
+    ]
+  },
+  {
+    "script": "charencode",
+    "file": "charencode.py",
+    "db": "MySQL：常见的关系型数据库，适合处理编码后的输入。",
+    "summary": "charencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对字符进行编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "charencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对字符进行编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n字符编码：将 SQL 查询中的字符转换为编码形式，例如 URL 编码或十六进制编码。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的字符输入进行过滤，但对编码后的字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用字符编码技术可以显著提高注入成功率，获取更多的数据库信息。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规字符进行严格验证和过滤时，charencode.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规字符输入进行严格过滤时，使用字符编码可以帮助绕过这些限制。\ncharencode.py 脚本适用于以下各种关系型数据库管理系统（RDBMS），因为这些数据库在处理输入时，都可能遇到字符处理问题：",
+    "example": "",
+    "tags": [
+      "encoding"
+    ]
+  },
+  {
+    "script": "charunicodeencode",
+    "file": "charunicodeencode.py",
+    "db": "MySQL：常见的关系型数据库，适合处理 Unicode 编码的输入。",
+    "summary": "charunicodeencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将字符编码为 Unicode。通过这种技术，可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "charunicodeencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将字符编码为 Unicode。通过这种技术，可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n将字符编码为 Unicode：将 SQL 查询中的字符转换为 Unicode 编码。例如，将字符 A 编码为 \\u0041。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的字符输入进行过滤，但对 Unicode 编码的字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 Unicode 编码技术可以显著提高注入成功率，获取更多的数据库信息。\ncharunicodeencode.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 charunicodeencode.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规字符进行严格验证和过滤时，charunicodeencode.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规字符输入进行严格过滤时，使用 Unicode 编码可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "encoding",
+      "unicode"
+    ]
+  },
+  {
+    "script": "charunicodeescape",
+    "file": "charunicodeescape.py",
+    "db": "MySQL：常见的关系型数据库，适合处理 Unicode 转义序列的输入。",
+    "summary": "charunicodeescape.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将字符转换为 Unicode 转义序列。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "charunicodeescape.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将字符转换为 Unicode 转义序列。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换字符为 Unicode 转义序列：将 SQL 查询中的字符转换为 Unicode 转义序列。例如，将字符 A 转换为 \\u0041。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的字符输入进行过滤，但对 Unicode 转义序列过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 Unicode 转义序列技术可以显著提高注入成功率，获取更多的数据库信息。\ncharunicodeescape.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 charunicodeescape.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规字符进行严格验证和过滤时，charunicodeescape.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规字符输入进行严格过滤时，使用 Unicode 转义序列可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "encoding",
+      "unicode"
+    ]
+  },
+  {
+    "script": "commalesslimit",
+    "file": "commalesslimit.py",
+    "db": "MySQL：常见的关系型数据库，适合使用不带逗号的 LIMIT 子句来绕过输入验证。",
+    "summary": "commalesslimit.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的 LIMIT 子句，并在不使用逗号的情况下实现相同功能。该脚本主要针对某些数据库的特殊语法需求，以确保在特定环境下的注入攻击能够成功。",
+    "detail": "commalesslimit.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的 LIMIT 子句，并在不使用逗号的情况下实现相同功能。该脚本主要针对某些数据库的特殊语法需求，以确保在特定环境下的注入攻击能够成功。\n处理 LIMIT 子句：在 SQL 注入攻击中，LIMIT 子句常用于分页或限制查询结果的数量。某些数据库或应用程序可能对逗号字符有严格的过滤，commalesslimit.py 通过不使用逗号来实现相同的功能。\n绕过安全过滤器：通过调整 LIMIT 子句的语法，可以绕过某些 Web 应用程序的安全过滤器和防护机制。\n提高注入成功率：在复杂的安全防护环境中，不使用逗号的 LIMIT 子句可以显著提高注入成功率。\ncommalesslimit.py 脚本是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 commalesslimit.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的逗号进行严格验证和过滤时，commalesslimit.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定数据库：当使用的数据库对 LIMIT 子句中的逗号字符有特殊处理或限制时，commalesslimit.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "commalessmid",
+    "file": "commalessmid.py",
+    "db": "MySQL：常见的关系型数据库，适合使用不带逗号的 MID 函数来绕过输入验证。",
+    "summary": "commalessmid.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入攻击中的 MID 函数，并在不使用逗号的情况下实现相同功能。这对于绕过某些数据库或 Web 应用程序的安全过滤器和防护机制特别有用。",
+    "detail": "commalessmid.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入攻击中的 MID 函数，并在不使用逗号的情况下实现相同功能。这对于绕过某些数据库或 Web 应用程序的安全过滤器和防护机制特别有用。\n处理 MID 函数：在 SQL 注入攻击中，MID 函数常用于提取字符串的一部分。某些数据库或应用程序可能对逗号字符有严格的过滤，commalessmid.py 通过不使用逗号来实现相同的功能。\n绕过安全过滤器：通过调整 MID 函数的语法，可以绕过某些 Web 应用程序的安全过滤器和防护机制。\n提高注入成功率：在复杂的安全防护环境中，不使用逗号的 MID 函数可以显著提高注入成功率。\ncommalessmid.py 脚本是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 commalessmid.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的逗号进行严格验证和过滤时，commalessmid.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定数据库：当使用的数据库对 MID 函数中的逗号字符有特殊处理或限制时，commalessmid.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "commentbeforeparentheses",
+    "file": "commentbeforeparentheses.py",
+    "db": "MySQL：常见的关系型数据库，适合使用在括号前添加注释来绕过输入验证。",
+    "summary": "commentbeforeparentheses.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中在括号前添加注释。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "commentbeforeparentheses.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中在括号前添加注释。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n添加注释：在 SQL 语句中的括号前添加注释字符（如 /**/），以改变语句的结构，使其绕过某些安全过滤器。\n绕过安全过滤器：通过在括号前添加注释，可以隐藏实际的 SQL 结构，绕过一些简单的输入验证和过滤机制。\n提高注入成功率：在复杂的安全防护环境中，这种技术可以显著提高注入成功率。\ncommentbeforeparentheses.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 commentbeforeparentheses.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的括号进行严格验证和过滤时，commentbeforeparentheses.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定数据库：当使用的数据库对 SQL 语句中的括号有特殊处理或限制时，commentbeforeparentheses.py 特别有用。",
+    "example": "",
+    "tags": [
+      "comment"
+    ]
+  },
+  {
+    "script": "concat2concatws",
+    "file": "concat2concatws.py",
+    "db": "适合哪些数据库类型",
+    "summary": "concat2concatws.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 注入 payload 中的 CONCAT 函数转换为 CONCAT_WS 函数。这个转换有助于绕过某些 Web 应用程序的输入验证和过滤机制。",
+    "detail": "concat2concatws.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 注入 payload 中的 CONCAT 函数转换为 CONCAT_WS 函数。这个转换有助于绕过某些 Web 应用程序的输入验证和过滤机制。\n函数转换：将 SQL 查询中的 CONCAT 函数替换为 CONCAT_WS 函数。这两个函数的作用类似，但 CONCAT_WS 函数允许指定分隔符，可以在某些情况下绕过安全过滤器。\n绕过输入验证：某些 Web 应用程序可能对 CONCAT 函数进行严格的输入验证和过滤，而对 CONCAT_WS 函数的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：通过改变函数的使用方式，可以增加 SQL 注入攻击的成功率，特别是在存在复杂安全防护的环境中。\nconcat2concatws.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 concat2concatws.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 CONCAT 函数进行严格验证和过滤时，concat2concatws.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定数据库：当使用的数据库支持 CONCAT_WS 函数时，且对 CONCAT 函数有特殊处理或限制时，concat2concatws.py 特别有用。",
+    "example": "",
+    "tags": [
+      "concat"
+    ]
+  },
+  {
+    "script": "decentities",
+    "file": "decentities.py",
+    "db": "适合哪些数据库类型",
+    "summary": "decentities.py 是 sqlmap 工具中的一个脚本，用于处理和解码 HTML 实体。在 SQL 注入攻击中，某些 Web 应用程序可能会将输入中的特定字符编码为 HTML 实体，以防止注入攻击。decentities.py 通过解码这些实体，可以恢复原始字符，从而成功执行注入攻击。",
+    "detail": "decentities.py 是 sqlmap 工具中的一个脚本，用于处理和解码 HTML 实体。在 SQL 注入攻击中，某些 Web 应用程序可能会将输入中的特定字符编码为 HTML 实体，以防止注入攻击。decentities.py 通过解码这些实体，可以恢复原始字符，从而成功执行注入攻击。\n解码 HTML 实体：将编码为 HTML 实体的字符恢复为原始字符。例如，将 &lt; 解码为 <，&gt; 解码为 >，从而使注入 payload 有效。\n绕过输入验证：通过解码 HTML 实体，可以绕过某些 Web 应用程序的输入验证和过滤机制。\n提高注入成功率：在复杂的安全防护环境中，解码 HTML 实体可以显著提高注入攻击的成功率。\ndecentities.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 decentities.py 来处理和解码 HTML 实体。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行 HTML 实体编码进行严格验证和过滤时，decentities.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符编码：当使用的 Web 应用程序将特定字符编码为 HTML 实体时，decentities.py 特别有用。",
+    "example": "",
+    "tags": [
+      "html"
+    ]
+  },
+  {
+    "script": "dunion",
+    "file": "dunion.py",
+    "db": "适合哪些数据库类型",
+    "summary": "dunion.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的 UNION 查询。这种技术可以通过将多个 SELECT 查询结果合并为一个结果集，从而从数据库中提取信息。",
+    "detail": "dunion.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的 UNION 查询。这种技术可以通过将多个 SELECT 查询结果合并为一个结果集，从而从数据库中提取信息。\n处理 UNION 查询：通过生成和执行 UNION 查询，将注入的 SELECT 查询结果与原始查询结果合并，以提取数据库中的信息。\n绕过安全过滤器：某些 Web 应用程序可能对常规注入模式进行过滤，但对 UNION 查询的过滤较少，通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 UNION 查询技术可以显著提高注入成功率，获取更多的数据库信息。\ndunion.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 dunion.py 来生成和执行 UNION 查询。\n提取数据库信息：当需要提取大量数据库信息时，UNION 查询可以将多个查询结果合并为一个结果集，从而获取更多信息。\n绕过输入验证：当目标 Web 应用程序对常规注入模式进行严格验证和过滤时，dunion.py 会被自动调用，以尝试通过 UNION 查询绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。",
+    "example": "",
+    "tags": [
+      "union"
+    ]
+  },
+  {
+    "script": "equaltolike",
+    "file": "equaltolike.py",
+    "db": "适合哪些数据库类型",
+    "summary": "equaltolike.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 查询中的等于（=）操作符转换为 LIKE 操作符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "equaltolike.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 查询中的等于（=）操作符转换为 LIKE 操作符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换等于操作符：将 SQL 查询中的 = 操作符转换为 LIKE 操作符，以改变查询的语法，使其绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对 = 操作符进行严格的输入验证和过滤，而对 LIKE 操作符的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 LIKE 操作符技术可以显著提高注入成功率，获取更多的数据库信息。\nequaltolike.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 equaltolike.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 = 操作符进行严格验证和过滤时，equaltolike.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定数据库：当使用的数据库对 = 操作符有特殊处理或限制时，equaltolike.py 特别有用。",
+    "example": "",
+    "tags": [
+      "operator"
+    ]
+  },
+  {
+    "script": "equaltorlike",
+    "file": "equaltorlike.py",
+    "db": "适合哪些数据库类型",
+    "summary": "equaltorlike.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 查询中的等于（=）操作符转换为 LIKE 操作符。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "equaltorlike.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 查询中的等于（=）操作符转换为 LIKE 操作符。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换等于操作符：将 SQL 查询中的 = 操作符转换为 LIKE 操作符，以改变查询的语法，使其绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对 = 操作符进行严格的输入验证和过滤，而对 LIKE 操作符的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 LIKE 操作符技术可以显著提高注入成功率，获取更多的数据库信息。\nequaltorlike.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 equaltorlike.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 = 操作符进行严格验证和过滤时，equaltorlike.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定数据库：当使用的数据库对 = 操作符有特殊处理或限制时，equaltorlike.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "escapequotes",
+    "file": "escapequotes.py",
+    "db": "MySQL：常见的关系型数据库，适合使用引号转义来绕过输入验证。",
+    "summary": "escapequotes.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中处理引号转义。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "escapequotes.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中处理引号转义。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n引号转义：在 SQL 注入中，引号（单引号和双引号）是常见的字符，很多 Web 应用程序会对引号进行过滤或转义，以防止注入攻击。escapequotes.py 脚本通过对引号进行适当的转义，绕过这些防护机制。\n绕过安全过滤器：通过转义引号，可以改变 SQL 查询的结构，使其绕过某些输入验证和过滤机制。\n提高注入成功率：在复杂的安全防护环境中，适当的引号转义技术可以显著提高注入成功率，获取更多的数据库信息。\nescapequotes.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 escapequotes.py 来处理和转义引号。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的引号进行严格验证和过滤时，escapequotes.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对引号字符有特殊处理或限制时，escapequotes.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "greatest",
+    "file": "greatest.py",
+    "db": "适合哪些数据库类型",
+    "summary": "greatest.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的 GREATEST 函数。这个函数在 SQL 查询中用于返回一组值中的最大值。在 SQL 注入攻击中，利用 GREATEST 函数可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行注入。",
+    "detail": "greatest.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的 GREATEST 函数。这个函数在 SQL 查询中用于返回一组值中的最大值。在 SQL 注入攻击中，利用 GREATEST 函数可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行注入。\n利用 GREATEST 函数：在 SQL 查询中，GREATEST 函数返回一组值中的最大值。这在 SQL 注入中可以用来绕过某些输入验证和过滤机制。\n绕过安全过滤器：通过在注入中使用 GREATEST 函数，可以改变 SQL 查询的结构，使其绕过某些安全过滤器。\n提高注入成功率：在复杂的安全防护环境中，利用 GREATEST 函数可以显著提高注入成功率，获取更多的数据库信息。\ngreatest.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 greatest.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的特定模式进行严格验证和过滤时，greatest.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定函数限制：当使用的 Web 应用程序对常用函数有特殊处理或限制时，greatest.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "halfversionedmorekeywords",
+    "file": "halfversionedmorekeywords.py",
+    "db": "SQLite：轻量级嵌入式数据库，适合处理半版本信息和关键词注入。",
+    "summary": "halfversionedmorekeywords.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的半版本和其他相关的关键词。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行注入攻击。",
+    "detail": "halfversionedmorekeywords.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的半版本和其他相关的关键词。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行注入攻击。\n半版本处理：在某些 SQL 注入场景中，数据库可能返回部分版本信息。该脚本可以处理这些半版本信息，进一步推断出数据库的详细版本。\n关键词注入：通过识别和利用更多的 SQL 关键词，该脚本可以帮助构造更复杂和有效的注入 payload，从而绕过某些输入验证和过滤机制。\n提高注入成功率：在复杂的安全防护环境中，利用这些技术可以显著提高注入成功率，获取更多的数据库信息。\nhalfversionedmorekeywords.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 halfversionedmorekeywords.py 来处理和编码 payload。\n半版本信息存在时：当目标数据库返回部分版本信息时，halfversionedmorekeywords.py 会被自动调用，以进一步推断出详细的数据库版本。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n关键词注入需要时：当需要构造更复杂和有效的注入 payload 时，利用更多的 SQL 关键词可以帮助实现这一目标。",
+    "example": "",
+    "tags": [
+      "mysql-versioned"
+    ]
+  },
+  {
+    "script": "hex2char",
+    "file": "hex2char.py",
+    "db": "MySQL：常见的关系型数据库，适合处理十六进制编码的输入。",
+    "summary": "hex2char.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的十六进制编码字符串。通过将十六进制编码的字符串转换为字符，该脚本可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "hex2char.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的十六进制编码字符串。通过将十六进制编码的字符串转换为字符，该脚本可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换十六进制编码：将 SQL 注入 payload 中的十六进制编码字符串转换为字符。这可以帮助绕过某些 Web 应用程序的安全过滤器和输入验证机制。\n隐藏注入内容：通过使用十六进制编码，可以隐藏注入攻击的实际内容，从而绕过简单的输入验证和过滤机制。\n提高注入成功率：在复杂的安全防护环境中，十六进制编码技术可以显著提高注入成功率，获取更多的数据库信息。\nhex2char.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 hex2char.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的特定字符进行严格验证和过滤时，hex2char.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对某些字符有特殊处理或限制时，hex2char.py 特别有用。",
+    "example": "",
+    "tags": [
+      "encoding",
+      "hex"
+    ]
+  },
+  {
+    "script": "hexentities",
+    "file": "hexentities.py",
+    "db": "MySQL：常见的关系型数据库，适合处理十六进制实体编码的输入。",
+    "summary": "hexentities.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的十六进制实体编码。通过将字符转换为十六进制实体，该脚本可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "hexentities.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的十六进制实体编码。通过将字符转换为十六进制实体，该脚本可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n十六进制实体编码：将 SQL 注入 payload 中的字符转换为十六进制实体编码。这样可以避免被 Web 应用程序的安全过滤器检测到。\n绕过安全过滤器：通过使用十六进制实体编码，可以隐藏注入攻击的实际内容，从而绕过简单的输入验证和过滤机制。\n提高注入成功率：在复杂的安全防护环境中，使用十六进制实体编码技术可以显著提高注入成功率，获取更多的数据库信息。\nhexentities.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 hexentities.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的特定字符进行严格验证和过滤时，hexentities.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对某些字符有特殊处理或限制时，hexentities.py 特别有用。",
+    "example": "",
+    "tags": [
+      "hex"
+    ]
+  },
+  {
+    "script": "htmlencode",
+    "file": "htmlencode.py",
+    "db": "MySQL：常见的关系型数据库，适合处理 HTML 实体编码的输入。",
+    "summary": "htmlencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对特殊字符进行 HTML 实体编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "htmlencode.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中对特殊字符进行 HTML 实体编码。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\nHTML 实体编码：将 SQL 注入 payload 中的特殊字符（如 <, >, &, ', \" 等）转换为 HTML 实体编码。例如，将 < 转换为 &lt;，> 转换为 &gt;。这种编码可以使注入字符串看起来不像 SQL 代码，从而绕过某些输入验证和过滤机制。\n绕过安全过滤器：通过将特殊字符进行 HTML 实体编码，可以隐藏注入攻击的实际内容，从而绕过简单的输入验证和过滤机制。\n提高注入成功率：在复杂的安全防护环境中，使用 HTML 实体编码技术可以显著提高注入成功率，获取更多的数据库信息。\nhtmlencode.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 htmlencode.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的特定字符进行严格验证和过滤时，htmlencode.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对某些字符有特殊处理或限制时，htmlencode.py 特别有用。",
+    "example": "",
+    "tags": [
+      "html"
+    ]
+  },
+  {
+    "script": "if2case",
+    "file": "if2case.py",
+    "db": "适合哪些数据库类型",
+    "summary": "if2case.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 注入 payload 中的 IF 条件语句转换为 CASE 语句。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "if2case.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 注入 payload 中的 IF 条件语句转换为 CASE 语句。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换 IF 条件语句：将 SQL 查询中的 IF 条件语句转换为 CASE 语句，以改变查询的语法，使其绕过某些安全过滤器。CASE 语句在某些数据库中可以提供与 IF 条件类似的功能，但在语法上有所不同。\n绕过安全过滤器：某些 Web 应用程序可能对 IF 条件进行严格的输入验证和过滤，而对 CASE 语句的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 CASE 语句技术可以显著提高注入成功率，获取更多的数据库信息。\nif2case.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 if2case.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 IF 条件进行严格验证和过滤时，if2case.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定条件处理：当使用的 Web 应用程序对 IF 条件有特殊处理或限制时，if2case.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "ifnull2casewhenisnull",
+    "file": "ifnull2casewhenisnull.py",
+    "db": "适合哪些数据库类型",
+    "summary": "ifnull2casewhenisnull.py 是 sqlmap 工具中的一个脚本，用于将 SQL 注入 payload 中的 IFNULL 函数转换为 CASE WHEN ISNULL 语句。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "ifnull2casewhenisnull.py 是 sqlmap 工具中的一个脚本，用于将 SQL 注入 payload 中的 IFNULL 函数转换为 CASE WHEN ISNULL 语句。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换 IFNULL 函数：将 SQL 查询中的 IFNULL 函数转换为 CASE WHEN ISNULL 语句。这两个函数的功能类似，但语法不同，通过这种转换可以绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对 IFNULL 函数进行严格的输入验证和过滤，而对 CASE WHEN ISNULL 语句的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 CASE WHEN ISNULL 语句技术可以显著提高注入成功率，获取更多的数据库信息。\nifnull2casewhenisnull.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 ifnull2casewhenisnull.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 IFNULL 函数进行严格验证和过滤时，ifnull2casewhenisnull.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定函数限制：当使用的 Web 应用程序对 IFNULL 函数有特殊处理或限制时，ifnull2casewhenisnull.py 特别有用。",
+    "example": "",
+    "tags": [
+      "mysql"
+    ]
+  },
+  {
+    "script": "ifnull2ifisnull",
+    "file": "ifnull2ifisnull.py",
+    "db": "适合哪些数据库类型",
+    "summary": "ifnull2ifisnull.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 注入 payload 中的 IFNULL 函数转换为 IF(ISNULL(...)) 语句。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "ifnull2ifisnull.py 是 sqlmap 工具中的一个脚本，主要用于将 SQL 注入 payload 中的 IFNULL 函数转换为 IF(ISNULL(...)) 语句。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换 IFNULL 函数：将 SQL 查询中的 IFNULL 函数转换为 IF(ISNULL(...)) 语句。两者的功能类似，但语法不同，通过这种转换可以绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对 IFNULL 函数进行严格的输入验证和过滤，而对 IF(ISNULL(...)) 语句的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 IF(ISNULL(...)) 语句技术可以显著提高注入成功率，获取更多的数据库信息。\nifnull2ifisnull.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 ifnull2ifisnull.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 IFNULL 函数进行严格验证和过滤时，ifnull2ifisnull.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定函数限制：当使用的 Web 应用程序对 IFNULL 函数有特殊处理或限制时，ifnull2ifisnull.py 特别有用。",
+    "example": "",
+    "tags": [
+      "mysql"
+    ]
+  },
+  {
+    "script": "informationschemacomment",
+    "file": "informationschemacomment.py",
+    "db": "适合哪些数据库类型",
+    "summary": "informationschemacomment.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入攻击中利用注释符号来绕过某些安全过滤器和防护机制。具体来说，该脚本可能会在与信息架构相关的查询中使用注释，以隐藏或分割 SQL 注入 payload，从而使其更难被检测到。",
+    "detail": "informationschemacomment.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入攻击中利用注释符号来绕过某些安全过滤器和防护机制。具体来说，该脚本可能会在与信息架构相关的查询中使用注释，以隐藏或分割 SQL 注入 payload，从而使其更难被检测到。\n利用注释绕过过滤器：通过在 SQL 查询中插入注释符号（例如 /* ... */ 或 --），可以隐藏或分割注入的 SQL 代码，从而绕过某些输入验证和安全过滤器。\n获取数据库架构信息：信息架构是指数据库的结构和元数据，如表、列、索引等。该脚本通过注入相关查询，可以帮助攻击者获取目标数据库的架构信息。\n增强注入攻击的隐蔽性：使用注释符号可以使注入代码看起来更像合法的 SQL 查询，从而增加绕过安全机制的可能性。\ninformationschemacomment.py 是 sqlmap 工具的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 informationschemacomment.py 来处理和编码 payload\n输入验证存在时：当目标 Web 应用程序对输入字符串中的特定模式进行严格验证和过滤时，informationschemacomment.py 会被自动调用，以尝试绕过这些防护。\n获取数据库架构信息：当需要了解目标数据库的结构和元数据时，该脚本可以通过注入查询获取相关信息。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增强注入攻击的隐蔽性和成功率。",
+    "example": "",
+    "tags": [
+      "comment"
+    ]
+  },
+  {
+    "script": "least",
+    "file": "least.py",
+    "db": "适合哪些数据库类型",
+    "summary": "least.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的 LEAST 函数。LEAST 函数返回一组值中的最小值。在 SQL 注入攻击中，利用 LEAST 函数可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行注入攻击。",
+    "detail": "least.py 是 sqlmap 工具中的一个脚本，主要用于处理 SQL 注入中的 LEAST 函数。LEAST 函数返回一组值中的最小值。在 SQL 注入攻击中，利用 LEAST 函数可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行注入攻击。\n利用 LEAST 函数：在 SQL 查询中，LEAST 函数返回一组值中的最小值。这在 SQL 注入中可以用来绕过某些输入验证和过滤机制。\n绕过安全过滤器：通过在注入中使用 LEAST 函数，可以改变 SQL 查询的结构，使其绕过某些安全过滤器。\n提高注入成功率：在复杂的安全防护环境中，利用 LEAST 函数可以显著提高注入成功率，获取更多的数据库信息。\nleast.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 least.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的特定模式进行严格验证和过滤时，least.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定函数限制：当使用的 Web 应用程序对常用函数有特殊处理或限制时，least.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "lowercase",
+    "file": "lowercase.py",
+    "db": "MySQL：常见的关系型数据库，适合处理小写字符的输入。",
+    "summary": "lowercase.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中将字符串转换为小写字母。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "lowercase.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中将字符串转换为小写字母。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换为小写：将 SQL 注入 payload 中的字符全部转换为小写字母。这可以帮助绕过一些仅对大写或特定格式进行过滤的安全机制。\n绕过安全过滤器：某些 Web 应用程序可能对特定大小写的字符进行严格的输入验证和过滤，而对小写字符的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用小写字母技术可以显著提高注入成功率，获取更多的数据库信息。\nlowercase.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 lowercase.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的大小写字母进行严格验证和过滤时，lowercase.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对大写字符有特殊处理或限制时，lowercase.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "luanginx",
+    "file": "luanginx.py",
+    "db": "MySQL：常见的关系型数据库，适合处理通过 Lua 脚本进行的 SQL 注入。",
+    "summary": "luanginx.py 是 sqlmap 工具中的一个脚本，主要用于处理通过 Lua 语言进行的 SQL 注入。Lua 是一种轻量级的脚本语言，经常用于配置高性能的 Web 服务器，如 Nginx。在某些情况下，SQL 注入攻击可以通过 Lua 脚本实现，以绕过 Web 应用程序的安全机制。",
+    "detail": "luanginx.py 是 sqlmap 工具中的一个脚本，主要用于处理通过 Lua 语言进行的 SQL 注入。Lua 是一种轻量级的脚本语言，经常用于配置高性能的 Web 服务器，如 Nginx。在某些情况下，SQL 注入攻击可以通过 Lua 脚本实现，以绕过 Web 应用程序的安全机制。\n处理 Lua 脚本中的 SQL 注入：luanginx.py 脚本专门用于识别和利用嵌入在 Lua 脚本中的 SQL 注入漏洞。\n绕过安全过滤器：通过在 Lua 脚本中嵌入 SQL 注入代码，可以绕过某些 Web 应用程序和 Web 服务器的安全过滤器和防护机制。\n提高注入成功率：在复杂的安全防护环境中，通过 Lua 脚本进行 SQL 注入可以显著提高注入成功率，获取更多的数据库信息。\nluanginx.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 luanginx.py 来处理和编码 payload。\nLua 脚本存在时：当目标 Web 应用程序使用 Lua 脚本进行请求处理或数据库操作时，luanginx.py 会被自动调用，以尝试识别和利用 SQL 注入漏洞。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，通过 Lua 脚本嵌入 SQL 注入代码可以绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "misunion",
+    "file": "misunion.py",
+    "db": "适合哪些数据库类型",
+    "summary": "misunion.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的 UNION 查询，但通过故意引入一些错误或修改来绕过某些安全过滤器和防护机制。这种技术有助于在复杂的安全环境中成功进行注入攻击。",
+    "detail": "misunion.py 是 sqlmap 工具中的一个脚本，用于处理 SQL 注入中的 UNION 查询，但通过故意引入一些错误或修改来绕过某些安全过滤器和防护机制。这种技术有助于在复杂的安全环境中成功进行注入攻击。\n变形 UNION 查询：通过在 UNION 查询中引入一些故意的错误或修改，可以绕过某些 Web 应用程序的输入验证和过滤机制。\n绕过安全过滤器：某些 Web 应用程序可能对标准的 UNION 查询进行严格的输入验证和过滤，而对变形后的 UNION 查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用变形的 UNION 查询技术可以显著提高注入成功率，获取更多的数据库信息。\nmisunion.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 misunion.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对标准的 UNION 查询进行严格验证和过滤时，misunion.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定查询限制：当使用的 Web 应用程序对标准的 UNION 查询有特殊处理或限制时，misunion.py 特别有用。",
+    "example": "",
+    "tags": [
+      "union"
+    ]
+  },
+  {
+    "script": "modsecurityversioned",
+    "file": "modsecurityversioned.py",
+    "db": "MySQL：常见的关系型数据库，适合处理绕过 ModSecurity 的输入。",
+    "summary": "modsecurityversioned.py 是 sqlmap 工具中的一个脚本，专门用于处理绕过 ModSecurity 的 SQL 注入攻击。ModSecurity 是一个开源的 Web 应用防火墙 (WAF)，用于检测和阻止各种网络攻击，包括 SQL 注入。该脚本通过特定的方法和策略，绕过 ModSecurity 的防护机制，从而成功进行 SQL 注入攻击。",
+    "detail": "modsecurityversioned.py 是 sqlmap 工具中的一个脚本，专门用于处理绕过 ModSecurity 的 SQL 注入攻击。ModSecurity 是一个开源的 Web 应用防火墙 (WAF)，用于检测和阻止各种网络攻击，包括 SQL 注入。该脚本通过特定的方法和策略，绕过 ModSecurity 的防护机制，从而成功进行 SQL 注入攻击。\n绕过 ModSecurity：ModSecurity 会检查 HTTP 请求中的内容以防止恶意输入。modsecurityversioned.py 通过特定的编码和混淆技术，绕过这些检查。\n版本特定的策略：不同版本的 ModSecurity 可能有不同的规则和防护机制。该脚本可能包含针对特定版本 ModSecurity 的绕过策略，以提高攻击的成功率。\n提高注入成功率：通过绕过 WAF，可以直接攻击 Web 应用程序的数据库，提高 SQL 注入的成功率。\nmodsecurityversioned.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 modsecurityversioned.py 来处理和编码 payload。\nModSecurity 防护存在时：当目标 Web 应用程序使用 ModSecurity WAF 进行防护时，modsecurityversioned.py 会被自动调用，以尝试绕过这些防护。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，通过该脚本可以绕过这些防护机制。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。",
+    "example": "",
+    "tags": [
+      "modsecurity",
+      "mysql-versioned"
+    ]
+  },
+  {
+    "script": "modsecurityzeroversioned",
+    "file": "modsecurityzeroversioned.py",
+    "db": "MySQL：常见的关系型数据库，适合处理绕过 ModSecurity 的输入。",
+    "summary": "modsecurityzeroversioned.py 是 sqlmap 工具中的一个脚本，主要用于绕过 ModSecurity Web 应用防火墙 (WAF) 的 SQL 注入攻击。该脚本针对特定版本的 ModSecurity 进行绕过策略调整，以提高攻击的成功率。",
+    "detail": "modsecurityzeroversioned.py 是 sqlmap 工具中的一个脚本，主要用于绕过 ModSecurity Web 应用防火墙 (WAF) 的 SQL 注入攻击。该脚本针对特定版本的 ModSecurity 进行绕过策略调整，以提高攻击的成功率。\n绕过 ModSecurity 防护：ModSecurity 是一个广泛使用的开源 Web 应用防火墙，用于检测和阻止各种网络攻击，包括 SQL 注入。modsecurityzeroversioned.py 通过特定的绕过技术，避免被 ModSecurity 检测到恶意输入。\n版本特定的绕过策略：不同版本的 ModSecurity 可能有不同的规则和防护机制。该脚本包含针对零版本 (可能指代一个特定的基础或默认配置) 的 ModSecurity 的绕过策略，以确保 SQL 注入 payload 能够成功执行。\n提高注入成功率：通过绕过 WAF，可以直接攻击 Web 应用程序的数据库，从而提高 SQL 注入攻击的成功率。\nmodsecurityzeroversioned.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 modsecurityzeroversioned.py 来处理和编码 payload。\nModSecurity 防护存在时：当目标 Web 应用程序使用 ModSecurity WAF 进行防护时，modsecurityzeroversioned.py 会被自动调用，以尝试绕过这些防护。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，通过该脚本可以绕过这些防护机制。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。",
+    "example": "",
+    "tags": [
+      "modsecurity",
+      "mysql-versioned"
+    ]
+  },
+  {
+    "script": "multiplespaces",
+    "file": "multiplespaces.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入多个空格的输入。",
+    "summary": "multiplespaces.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中插入多个空格。此技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "multiplespaces.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中插入多个空格。此技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n插入多个空格：在 SQL 注入 payload 中插入多个空格字符，改变查询的外观。这种方法可以帮助绕过某些输入验证和过滤机制，因为过滤器可能只针对标准格式的 SQL 查询进行检测。\n绕过安全过滤器：某些 Web 应用程序和防火墙可能对常见的 SQL 注入模式进行过滤，通过插入多个空格字符，可以改变注入字符串的结构，使其绕过这些过滤器。\n提高注入成功率：在复杂的安全防护环境中，使用多个空格技术可以显著提高注入成功率，获取更多的数据库信息。\nmultiplespaces.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 multiplespaces.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，multiplespaces.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对某些特定字符有特殊处理或限制时，插入多个空格字符可以帮助绕过这些限制。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "ord2ascii",
+    "file": "ord2ascii.py",
+    "db": "适合哪些数据库类型",
+    "summary": "ord2ascii.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中将 ORD 函数转换为 ASCII 函数。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "ord2ascii.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中将 ORD 函数转换为 ASCII 函数。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换 ORD 函数：将 SQL 查询中的 ORD 函数转换为 ASCII 函数。这两个函数的功能类似，都是用于获取字符的 ASCII 码，但语法不同，通过这种转换可以绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对 ORD 函数进行严格的输入验证和过滤，而对 ASCII 函数的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 ASCII 函数技术可以显著提高注入成功率，获取更多的数据库信息。\nord2ascii.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 ord2ascii.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 ORD 函数进行严格验证和过滤时，ord2ascii.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定函数限制：当使用的 Web 应用程序对 ORD 函数有特殊处理或限制时，ord2ascii.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "overlongutf8",
+    "file": "overlongutf8.py",
+    "db": "MySQL：常见的关系型数据库，适合处理过长 UTF-8 编码字符的输入。",
+    "summary": "overlongutf8.py 是 sqlmap 工具中的一个脚本，用于处理和利用过长的 UTF-8 编码字符进行 SQL 注入。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "overlongutf8.py 是 sqlmap 工具中的一个脚本，用于处理和利用过长的 UTF-8 编码字符进行 SQL 注入。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n过长 UTF-8 编码：过长的 UTF-8 编码字符是指那些不符合标准 UTF-8 编码规范的字符。通过使用这些过长的字符，可以使得某些过滤机制失效，因为它们可能只针对标准的 UTF-8 编码字符进行过滤。\n绕过安全过滤器：通过在 SQL 注入 payload 中使用过长的 UTF-8 编码字符，可以绕过某些 Web 应用程序的安全过滤器和输入验证机制。\n提高注入成功率：在复杂的安全防护环境中，利用过长的 UTF-8 编码技术可以显著提高注入成功率，获取更多的数据库信息。\noverlongutf8.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 overlongutf8.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，overlongutf8.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对标准 UTF-8 编码字符有特殊处理或限制时，overlongutf8.py 特别有用。",
+    "example": "",
+    "tags": [
+      "utf8"
+    ]
+  },
+  {
+    "script": "overlongutf8more",
+    "file": "overlongutf8more.py",
+    "db": "MySQL：常见的关系型数据库，适合处理过长 UTF-8 编码字符的输入。",
+    "summary": "overlongutf8more.py 是 sqlmap 工具中的一个脚本，用于处理和利用过长的 UTF-8 编码字符进行 SQL 注入攻击。通过在注入字符串中使用这些过长的 UTF-8 编码字符，可以绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "overlongutf8more.py 是 sqlmap 工具中的一个脚本，用于处理和利用过长的 UTF-8 编码字符进行 SQL 注入攻击。通过在注入字符串中使用这些过长的 UTF-8 编码字符，可以绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n过长 UTF-8 编码：过长的 UTF-8 编码字符是指那些不符合标准 UTF-8 编码规范的字符。通过使用这些过长的字符，可以使得某些过滤机制失效，因为它们可能只针对标准的 UTF-8 编码字符进行过滤。\n绕过安全过滤器：通过在 SQL 注入 payload 中使用过长的 UTF-8 编码字符，可以绕过某些 Web 应用程序的安全过滤器和输入验证机制。\n提高注入成功率：在复杂的安全防护环境中，利用过长的 UTF-8 编码技术可以显著提高注入成功率，获取更多的数据库信息。\noverlongutf8more.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 overlongutf8more.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，overlongutf8more.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对标准 UTF-8 编码字符有特殊处理或限制时，overlongutf8more.py 特别有用。",
+    "example": "",
+    "tags": [
+      "utf8"
+    ]
+  },
+  {
+    "script": "percentage",
+    "file": "percentage.py",
+    "db": "MySQL：常见的关系型数据库，适合处理包含百分号符号的输入。",
+    "summary": "percentage.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用百分号（%）符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "percentage.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用百分号（%）符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n利用百分号：百分号在 SQL 中通常用于模式匹配（如 LIKE 查询），也可能在某些编码和表示中出现。通过在注入 payload 中使用百分号，可以改变 SQL 查询的外观，使其绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对包含百分号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用百分号符号技术可以显著提高注入成功率，获取更多的数据库信息。\npercentage.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 percentage.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，percentage.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对某些特定字符有特殊处理或限制时，使用百分号符号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "percent"
+    ]
+  },
+  {
+    "script": "plus2concat",
+    "file": "plus2concat.py",
+    "db": "适合哪些数据库类型",
+    "summary": "plus2concat.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将加号（+）操作符转换为 CONCAT 函数。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "plus2concat.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将加号（+）操作符转换为 CONCAT 函数。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换加号操作符：将 SQL 查询中的加号（+）操作符转换为 CONCAT 函数。两者都可以用于字符串连接，但语法不同，通过这种转换可以绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对加号操作符进行严格的输入验证和过滤，而对 CONCAT 函数的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 CONCAT 函数技术可以显著提高注入成功率，获取更多的数据库信息。\nplus2concat.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 plus2concat.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的加号操作符进行严格验证和过滤时，plus2concat.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定操作符限制：当使用的 Web 应用程序对加号操作符有特殊处理或限制时，plus2concat.py 特别有用。",
+    "example": "",
+    "tags": [
+      "concat"
+    ]
+  },
+  {
+    "script": "plus2fnconcat",
+    "file": "plus2fnconcat.py",
+    "db": "适合哪些数据库类型",
+    "summary": "plus2fnconcat.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将加号（+）操作符转换为 FN_CONCAT 函数。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "plus2fnconcat.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将加号（+）操作符转换为 FN_CONCAT 函数。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换加号操作符：将 SQL 查询中的加号（+）操作符转换为 FN_CONCAT 函数。两者都可以用于字符串连接，但语法不同，通过这种转换可以绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对加号操作符进行严格的输入验证和过滤，而对 FN_CONCAT 函数的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 FN_CONCAT 函数技术可以显著提高注入成功率，获取更多的数据库信息。\nplus2fnconcat.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 plus2fnconcat.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的加号操作符进行严格验证和过滤时，plus2fnconcat.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定操作符限制：当使用的 Web 应用程序对加号操作符有特殊处理或限制时，plus2fnconcat.py 特别有用。",
+    "example": "",
+    "tags": [
+      "concat"
+    ]
+  },
+  {
+    "script": "randomcase",
+    "file": "randomcase.py",
+    "db": "MySQL：常见的关系型数据库，适合处理大小写混合的输入。",
+    "summary": "randomcase.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中随机改变字符的大小写。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "randomcase.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中随机改变字符的大小写。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n随机改变字符大小写：将 SQL 查询中的字符随机转换为大写或小写。这可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对大小写混合的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用随机大小写技术可以显著提高注入成功率，获取更多的数据库信息。\nrandomcase.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 randomcase.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，randomcase.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用随机大小写可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "case"
+    ]
+  },
+  {
+    "script": "randomcomments",
+    "file": "randomcomments.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入随机注释的输入。",
+    "summary": "randomcomments.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中插入随机注释符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "randomcomments.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中插入随机注释符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n插入随机注释：将 SQL 查询中的某些部分用随机的注释符号分隔。这可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对插入了随机注释的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用随机注释技术可以显著提高注入成功率，获取更多的数据库信息。\nrandomcomments.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 randomcomments.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，randomcomments.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用随机注释可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "comment"
+    ]
+  },
+  {
+    "script": "schemasplit",
+    "file": "schemasplit.py",
+    "db": "MySQL：常见的关系型数据库，适合处理分割架构查询的输入。",
+    "summary": "schemasplit.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中分割数据库架构查询。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "schemasplit.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中分割数据库架构查询。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n分割架构查询：将 SQL 查询中的数据库架构信息分割成多个部分，以改变查询的外观。这可以帮助绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对特定的架构查询模式进行过滤，但对分割后的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用分割架构查询技术可以显著提高注入成功率，获取更多的数据库信息。\nschemasplit.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 schemasplit.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，schemasplit.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定查询过滤：当使用的 Web 应用程序对常规数据库架构查询进行严格过滤时，使用分割技术可以帮助绕过这些限制。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "scientific",
+    "file": "scientific.py",
+    "db": "MySQL：常见的关系型数据库，适合处理科学记数法表示的输入。",
+    "summary": "scientific.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中使用科学记数法（也称为指数记数法）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "scientific.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中使用科学记数法（也称为指数记数法）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n使用科学记数法：将 SQL 查询中的数字转换为科学记数法表示。科学记数法是一种用来表示非常大或非常小的数字的标准形式，例如 1.23e4 表示 12300。通过使用科学记数法，可以改变 SQL 查询的外观，使其绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对常见的数字表示进行过滤，但对科学记数法的表示过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用科学记数法技术可以显著提高注入成功率，获取更多的数据库信息。\nscientific.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 scientific.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常规数字表示进行严格验证和过滤时，scientific.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规数字表示进行严格过滤时，使用科学记数法可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "number"
+    ]
+  },
+  {
+    "script": "sleep2getlock",
+    "file": "sleep2getlock.py",
+    "db": "适合哪些数据库类型",
+    "summary": "sleep2getlock.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入攻击中将 SLEEP 函数转换为 GET_LOCK 函数。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "sleep2getlock.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入攻击中将 SLEEP 函数转换为 GET_LOCK 函数。这种转换可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换 SLEEP 函数：将 SQL 查询中的 SLEEP 函数转换为 GET_LOCK 函数。这两个函数都可以用于延迟数据库操作，但语法和用途有所不同。通过这种转换可以绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对 SLEEP 函数进行严格的输入验证和过滤，而对 GET_LOCK 函数的过滤较少，通过这种转换可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 GET_LOCK 函数技术可以显著提高注入成功率，获取更多的数据库信息。\nsleep2getlock.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 sleep2getlock.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 SLEEP 函数进行严格验证和过滤时，sleep2getlock.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定函数限制：当使用的 Web 应用程序对 SLEEP 函数有特殊处理或限制时，sleep2getlock.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "sp_password",
+    "file": "sp_password.py",
+    "db": "适合哪些数据库类型",
+    "summary": "sp_password.py 是 sqlmap 工具中的一个脚本，主要用于处理和利用 SQL Server 的 sp_password 存储过程进行 SQL 注入攻击。sp_password 是 Microsoft SQL Server 中用于更改用户密码的存储过程。",
+    "detail": "sp_password.py 是 sqlmap 工具中的一个脚本，主要用于处理和利用 SQL Server 的 sp_password 存储过程进行 SQL 注入攻击。sp_password 是 Microsoft SQL Server 中用于更改用户密码的存储过程。\n利用 sp_password 存储过程：sp_password 存储过程用于更改 SQL Server 用户的密码。攻击者可以通过 SQL 注入漏洞调用该存储过程来更改数据库用户的密码，从而获得对数据库的访问权限。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对特定存储过程的调用过滤较少。通过利用 sp_password 存储过程，可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 sp_password 存储过程技术可以显著提高注入成功率，获取对数据库的控制权限。\nsp_password.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 sp_password.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，sp_password.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n需要更改密码时：当攻击者需要通过更改数据库用户密码来获得对数据库的访问权限时，sp_password.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "space2comment",
+    "file": "space2comment.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入注释符号的输入。",
+    "summary": "space2comment.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为注释符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2comment.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为注释符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为注释符号：将 SQL 查询中的空格转换为注释符号（如 /**/）。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对插入注释符号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用注释符号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2comment.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2comment.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2comment.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用注释符号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space",
+      "comment"
+    ]
+  },
+  {
+    "script": "space2dash",
+    "file": "space2dash.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入破折号的输入。",
+    "summary": "space2dash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为破折号（-）或双破折号（--）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2dash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为破折号（-）或双破折号（--）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为破折号：将 SQL 查询中的空格转换为破折号（-）或双破折号（--）。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对插入破折号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用破折号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2dash.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2dash.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2dash.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用破折号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space"
+    ]
+  },
+  {
+    "script": "space2hash",
+    "file": "space2hash.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入哈希符号的输入。",
+    "summary": "space2hash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为哈希符号（#）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2hash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为哈希符号（#）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为哈希符号：将 SQL 查询中的空格转换为哈希符号（#）。哈希符号通常在 SQL 中表示单行注释的开始。通过在注入 payload 中使用这种符号，可以改变 SQL 查询的外观，使其绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对插入哈希符号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用哈希符号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2hash.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2hash.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2hash.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用哈希符号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space"
+    ]
+  },
+  {
+    "script": "space2morecomment",
+    "file": "space2morecomment.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入多种注释符号的输入。",
+    "summary": "space2morecomment.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为多种注释符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2morecomment.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为多种注释符号。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为多种注释符号：将 SQL 查询中的空格转换为多种注释符号（例如 /*...*/、-- 等）。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对插入多种注释符号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用多种注释符号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2morecomment.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2morecomment.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2morecomment.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用多种注释符号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space",
+      "comment"
+    ]
+  },
+  {
+    "script": "space2morehash",
+    "file": "space2morehash.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入多个哈希符号的输入。",
+    "summary": "space2morehash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为多个哈希符号（#）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2morehash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为多个哈希符号（#）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为多个哈希符号：将 SQL 查询中的空格转换为多个哈希符号（#）。哈希符号通常在 SQL 中表示单行注释的开始，通过这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对包含多个哈希符号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用多个哈希符号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2morehash.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2morehash.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2morehash.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用多个哈希符号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space"
+    ]
+  },
+  {
+    "script": "space2mssqlblank",
+    "file": "space2mssqlblank.py",
+    "db": "Microsoft SQL Server：企业级关系型数据库，适合处理插入 MSSQL 特有空白字符的输入。",
+    "summary": "space2mssqlblank.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MSSQL 特有的空白字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2mssqlblank.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MSSQL 特有的空白字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为 MSSQL 特有的空白字符：将 SQL 查询中的空格转换为 MSSQL 数据库中特有的空白字符。这可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对特定的 MSSQL 空白字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 MSSQL 特有的空白字符技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2mssqlblank.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2mssqlblank.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2mssqlblank.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用 MSSQL 特有的空白字符可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space",
+      "mssql"
+    ]
+  },
+  {
+    "script": "space2mssqlhash",
+    "file": "space2mssqlhash.py",
+    "db": "Microsoft SQL Server：企业级关系型数据库，适合处理插入 MSSQL 特有注释符号的输入。",
+    "summary": "space2mssqlhash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MSSQL 特有的注释符号（--）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2mssqlhash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MSSQL 特有的注释符号（--）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为 MSSQL 注释符号：将 SQL 查询中的空格转换为 MSSQL 数据库中特有的注释符号（--）。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对特定的 MSSQL 注释符号过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 MSSQL 特有的注释符号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2mssqlhash.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2mssqlhash.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2mssqlhash.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用 MSSQL 特有的注释符号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space",
+      "mssql"
+    ]
+  },
+  {
+    "script": "space2mysqlblank",
+    "file": "space2mysqlblank.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入 MySQL 特有空白字符的输入。",
+    "summary": "space2mysqlblank.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MySQL 特有的空白字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2mysqlblank.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MySQL 特有的空白字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为 MySQL 特有的空白字符：将 SQL 查询中的空格转换为 MySQL 数据库中特有的空白字符。这可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对特定的 MySQL 空白字符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 MySQL 特有的空白字符技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2mysqlblank.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2mysqlblank.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2mysqlblank.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用 MySQL 特有的空白字符可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space",
+      "mysql"
+    ]
+  },
+  {
+    "script": "space2mysqldash",
+    "file": "space2mysqldash.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入双破折号的输入。",
+    "summary": "space2mysqldash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MySQL 特有的双破折号（--），以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2mysqldash.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为 MySQL 特有的双破折号（--），以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为双破折号：将 SQL 查询中的空格字符转换为 MySQL 数据库中特有的双破折号（--）。双破折号通常在 MySQL 中用于注释，通过这种转换，可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对包含双破折号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用双破折号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2mysqldash.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2mysqldash.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2mysqldash.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用双破折号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space",
+      "mysql"
+    ]
+  },
+  {
+    "script": "space2plus",
+    "file": "space2plus.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入加号的输入。",
+    "summary": "space2plus.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为加号（+）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2plus.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为加号（+）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为加号：将 SQL 查询中的空格字符转换为加号（+）。在 URL 编码中，加号通常代表空格。通过这种转换，可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对包含加号的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用加号技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2plus.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2plus.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2plus.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用加号可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space"
+    ]
+  },
+  {
+    "script": "space2randomblank",
+    "file": "space2randomblank.py",
+    "db": "MySQL：常见的关系型数据库，适合处理插入随机空白字符的输入。",
+    "summary": "space2randomblank.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为随机选择的空白字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "space2randomblank.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将空格转换为随机选择的空白字符。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换空格为随机空白字符：将 SQL 查询中的空格字符随机转换为各种空白字符，例如常见的空格（space）、制表符（tab）、换行符（newline）等。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对包含随机空白字符的查询过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用随机空白字符技术可以显著提高注入成功率，获取更多的数据库信息。\nspace2randomblank.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 space2randomblank.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的空格进行严格验证和过滤时，space2randomblank.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用随机空白字符可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "space"
+    ]
+  },
+  {
+    "script": "substring2leftright",
+    "file": "substring2leftright.py",
+    "db": "适合哪些数据库类型",
+    "summary": "substring2leftright.py 是 sqlmap 工具中的一个脚本，用于将 SQL 注入 payload 中的 SUBSTRING 函数替换为 LEFT 和 RIGHT 函数。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "substring2leftright.py 是 sqlmap 工具中的一个脚本，用于将 SQL 注入 payload 中的 SUBSTRING 函数替换为 LEFT 和 RIGHT 函数。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n替换 SUBSTRING 函数：将 SQL 查询中的 SUBSTRING 函数替换为 LEFT 和 RIGHT 函数。这两个函数可以结合起来实现与 SUBSTRING 类似的功能，通过这种替换可以绕过某些安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对 SUBSTRING 函数进行严格的输入验证和过滤，而对 LEFT 和 RIGHT 函数的过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 LEFT 和 RIGHT 函数技术可以显著提高注入成功率，获取更多的数据库信息。\nsubstring2leftright.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 substring2leftright.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 SUBSTRING 函数进行严格验证和过滤时，substring2leftright.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定函数限制：当使用的 Web 应用程序对 SUBSTRING 函数有特殊处理或限制时，substring2leftright.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "symboliclogical",
+    "file": "symboliclogical.py",
+    "db": "适合哪些数据库类型",
+    "summary": "symboliclogical.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用符号逻辑运算符（如 &&, ||, ! 等）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "symboliclogical.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用符号逻辑运算符（如 &&, ||, ! 等）。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n使用符号逻辑运算符：将 SQL 查询中的逻辑运算符转换为符号表示（例如，将 AND 转换为 &&，将 OR 转换为 ||）。这种转换可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对常见的逻辑运算符（如 AND, OR）进行过滤，但对符号逻辑运算符过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用符号逻辑运算符技术可以显著提高注入成功率，获取更多的数据库信息。\nsymboliclogical.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 symboliclogical.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的常见逻辑运算符进行严格验证和过滤时，symboliclogical.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，使用符号逻辑运算符可以帮助绕过这些限制。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "unionalltounion",
+    "file": "unionalltounion.py",
+    "db": "适合哪些数据库类型",
+    "summary": "unionalltounion.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将 UNION ALL 转换为 UNION。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "unionalltounion.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将 UNION ALL 转换为 UNION。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换 UNION ALL 为 UNION：将 SQL 查询中的 UNION ALL 语句替换为 UNION 语句。虽然这两个操作符功能类似，但它们在处理重复结果方面有所不同。通过这种转换，可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对 UNION ALL 语句进行严格的输入验证和过滤，而对 UNION 语句的过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 UNION 代替 UNION ALL 可以显著提高注入成功率，获取更多的数据库信息。\nunionalltounion.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 unionalltounion.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的 UNION ALL 语句进行严格验证和过滤时，unionalltounion.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定语句限制：当使用的 Web 应用程序对 UNION ALL 语句有特殊处理或限制时，unionalltounion.py 特别有用。",
+    "example": "",
+    "tags": [
+      "union"
+    ]
+  },
+  {
+    "script": "unmagicquotes",
+    "file": "unmagicquotes.py",
+    "db": "MySQL：常见的关系型数据库，适合处理移除转义字符的输入。",
+    "summary": "unmagicquotes.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中移除或绕过 PHP 的 magic_quotes 设置。这种设置旨在自动转义包括引号在内的特殊字符，从而防止 SQL 注入攻击。然而，通过绕过或移除 magic_quotes，攻击者可以继续执行注入攻击。",
+    "detail": "unmagicquotes.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中移除或绕过 PHP 的 magic_quotes 设置。这种设置旨在自动转义包括引号在内的特殊字符，从而防止 SQL 注入攻击。然而，通过绕过或移除 magic_quotes，攻击者可以继续执行注入攻击。\n移除或绕过 magic_quotes：magic_quotes 是一种 PHP 设置，旨在防止 SQL 注入，通过自动转义特殊字符。unmagicquotes.py 脚本可以移除这些转义字符，恢复原始输入，从而绕过该防护机制。\n绕过安全过滤器：某些 Web 应用程序依赖于 magic_quotes 来防止 SQL 注入攻击，但这并不是完全可靠的防护手段。通过移除这些转义字符，攻击者可以绕过这些过滤器。\n提高注入成功率：在复杂的安全防护环境中，使用移除转义字符技术可以显著提高注入成功率，获取更多的数据库信息。\nunmagicquotes.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 unmagicquotes.py 来处理和编码 payload。\nmagic_quotes 启用时：当目标 Web 应用程序启用了 magic_quotes 设置时，unmagicquotes.py 会被自动调用，以移除转义字符。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对输入字符进行转义处理时，unmagicquotes.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "uppercase",
+    "file": "uppercase.py",
+    "db": "MySQL：常见的关系型数据库，适合处理大写字符的输入。",
+    "summary": "uppercase.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将所有字符转换为大写字母。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "uppercase.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中将所有字符转换为大写字母。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n转换为大写：将 SQL 查询中的所有字符转换为大写字母。这可以改变 SQL 查询的外观，使其绕过某些安全过滤器和输入验证机制。\n绕过安全过滤器：某些 Web 应用程序可能对特定大小写的字符进行严格验证和过滤，而对大写字符的过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用大写字符技术可以显著提高注入成功率，获取更多的数据库信息。\nuppercase.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 uppercase.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字符串中的大小写字符进行严格验证和过滤时，uppercase.py 会被自动调用，以尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定字符过滤：当使用的 Web 应用程序对特定大小写字符有特殊处理或限制时，uppercase.py 特别有用。",
+    "example": "",
+    "tags": []
+  },
+  {
+    "script": "varnish",
+    "file": "varnish.py",
+    "db": "MySQL：常见的关系型数据库，适合处理绕过缓存系统的输入。",
+    "summary": "varnish.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用特殊的绕过技术来绕过 Varnish Cache。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "varnish.py 是 sqlmap 工具中的一个脚本，用于在 SQL 注入 payload 中使用特殊的绕过技术来绕过 Varnish Cache。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n绕过 Varnish Cache：Varnish Cache 是一种用于加速 Web 应用程序的 HTTP 加速器。通过使用特定的绕过技术，varnish.py 脚本可以使 SQL 注入 payload 绕过 Varnish Cache 的防护机制。\n利用缓存漏洞：某些 Web 应用程序可能依赖 Varnish Cache 进行请求处理。利用 Varnish Cache 的配置漏洞，攻击者可以注入恶意 SQL 查询。\n提高注入成功率：在复杂的安全防护环境中，使用针对 Varnish Cache 的绕过技术可以显著提高注入成功率，获取更多的数据库信息。\nvarnish.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 varnish.py 来处理和编码 payload。\n假设你在执行 SQL 注入攻击，使用 sqlmap 的基本命令如下：\n在这个过程中，如果 sqlmap 检测到目标系统使用 Varnish Cache 并需要绕过其防护，它将自动使用 varnish.py 脚本进行处理。\nVarnish Cache 防护存在时：当目标 Web 应用程序使用 Varnish Cache 进行请求处理和防护时，varnish.py 会被自动调用，以尝试绕过这些防护。",
+    "example": "sqlmap -u \"http://example.com/vulnerable.php?id=1\" --dbs",
+    "tags": [
+      "cdn"
+    ]
+  },
+  {
+    "script": "versionedkeywords",
+    "file": "versionedkeywords.py",
+    "db": "适合哪些数据库类型",
+    "summary": "versionedkeywords.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中利用不同数据库版本特有的关键词和特性。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "versionedkeywords.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中利用不同数据库版本特有的关键词和特性。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n利用版本特有关键词：不同版本的数据库管理系统（DBMS）可能具有不同的关键词和特性。versionedkeywords.py 脚本可以在 SQL 注入 payload 中利用这些特有关键词，增加注入攻击的灵活性和成功率。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对特定版本的 DBMS 关键词过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用版本特有的关键词技术可以显著提高注入成功率，获取更多的数据库信息。\nversionedkeywords.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 versionedkeywords.py 来处理和编码 payload。\n特定数据库版本存在时：当目标 Web 应用程序使用特定版本的 DBMS 时，versionedkeywords.py 会被自动调用，以利用该版本的特有关键词。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，versionedkeywords.py 可以通过利用版本特有的关键词来尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。",
+    "example": "",
+    "tags": [
+      "mysql-versioned"
+    ]
+  },
+  {
+    "script": "versionedmorekeywords",
+    "file": "versionedmorekeywords.py",
+    "db": "适合哪些数据库类型",
+    "summary": "versionedmorekeywords.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中利用和扩展不同数据库版本特有的关键词和特性。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "versionedmorekeywords.py 是 sqlmap 工具中的一个脚本，主要用于在 SQL 注入 payload 中利用和扩展不同数据库版本特有的关键词和特性。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n利用和扩展版本特有关键词：不同版本的数据库管理系统（DBMS）可能具有不同的关键词和特性。versionedmorekeywords.py 脚本可以在 SQL 注入 payload 中利用和扩展这些特有关键词，增加注入攻击的灵活性和成功率。\n绕过安全过滤器：某些 Web 应用程序可能对常见的 SQL 注入模式进行过滤，但对特定版本的 DBMS 关键词过滤较少。通过这种方式可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用和扩展版本特有的关键词技术可以显著提高注入成功率，获取更多的数据库信息。\nversionedmorekeywords.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 versionedmorekeywords.py 来处理和编码 payload。\n特定数据库版本存在时：当目标 Web 应用程序使用特定版本的 DBMS 时，versionedmorekeywords.py 会被自动调用，以利用和扩展该版本的特有关键词。\n输入验证存在时：当目标 Web 应用程序对输入字符串进行严格验证和过滤时，versionedmorekeywords.py 可以通过利用和扩展版本特有的关键词来尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。",
+    "example": "",
+    "tags": [
+      "mysql-versioned"
+    ]
+  },
+  {
+    "script": "xforwardedfor",
+    "file": "xforwardedfor.py",
+    "db": "MySQL：常见的关系型数据库，适合处理通过 HTTP 头字段进行的输入。",
+    "summary": "xforwardedfor.py 是 sqlmap 工具中的一个脚本，主要用于利用 HTTP 头中的 X-Forwarded-For 字段进行 SQL 注入攻击。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。",
+    "detail": "xforwardedfor.py 是 sqlmap 工具中的一个脚本，主要用于利用 HTTP 头中的 X-Forwarded-For 字段进行 SQL 注入攻击。这种技术可以帮助绕过某些 Web 应用程序的输入验证和过滤机制，从而成功进行 SQL 注入攻击。\n利用 X-Forwarded-For 头：X-Forwarded-For 是一个 HTTP 头字段，通常用于标识客户端的原始 IP 地址。通过在该字段中注入恶意 SQL 代码，可以绕过一些应用程序的安全过滤器。\n绕过安全过滤器：某些 Web 应用程序可能对常见的输入字段（如 URL 参数、POST 数据）进行严格的输入验证和过滤，但对 HTTP 头字段的过滤较少。通过利用 X-Forwarded-For 头，可以绕过这些限制。\n提高注入成功率：在复杂的安全防护环境中，使用 X-Forwarded-For 头进行注入攻击可以显著提高成功率，获取更多的数据库信息。\nxforwardedfor.py 是 sqlmap 内部的一部分，用户通常不会直接调用它。当用户使用 sqlmap 进行 SQL 注入攻击时，sqlmap 会根据需要自动调用和使用 xforwardedfor.py 来处理和编码 payload。\n输入验证存在时：当目标 Web 应用程序对输入字段（如 URL 参数、POST 数据）进行严格验证和过滤时，xforwardedfor.py 可以通过利用 HTTP 头字段来尝试绕过这些防护。\n复杂的安全机制：在面对具有复杂安全过滤和防护机制的目标时，该脚本可以增加注入攻击的成功率。\n特定场景限制：当使用的 Web 应用程序对常规 SQL 注入模式进行严格过滤时，利用 X-Forwarded-For 头可以帮助绕过这些限制。",
+    "example": "",
+    "tags": [
+      "header"
+    ]
+  }
+]

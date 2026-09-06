@@ -1,0 +1,38 @@
+id: acg-faka-admin-path
+
+info:
+  name: ACG-FAKA 发卡站后台路径探测
+  author: survey-engine
+  severity: high
+  description: >
+    检测异次元发卡（ACG-FAKA）后台随机路径特征；暴露后走 acg-faka Skill 完整链。
+    特征：acg.js 引用、Toka 指纹、随机后台路径含 admin/dashboard。
+  tags: acg-faka,faka,admin,discovery
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/admin"
+      - "{{BaseURL}}/dashboard"
+      - "{{BaseURL}}/index.php"
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "acg.js"
+          - "ACG-FAKA"
+          - "Toka"
+          - "card-system"
+          - "发卡系统"
+        condition: or
+
+    extractors:
+      - type: regex
+        part: body
+        name: admin_path
+        regex:
+          - 'href="(/[a-zA-Z0-9_-]{6,}/(?:admin|login|dashboard)[^"]*)"'
+          - 'action="(/[a-zA-Z0-9_-]{6,}/(?:login|auth)[^"]*)"'

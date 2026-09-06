@@ -1,0 +1,44 @@
+id: pocketbase-admin-ui-exposed
+
+info:
+  name: PocketBase Admin UI 暴露
+  author: survey-engine
+  severity: high
+  description: >
+    检测 PocketBase /_/ 管理界面是否暴露；若超管未设置密码则直接可访问。
+    配合 .cursor/skills/pocketbase-horizons-recovery 全链利用。
+  tags: pocketbase,admin,exposure,misconfig
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/_/"
+      - "{{BaseURL}}/api/health"
+      - "{{BaseURL}}/api/collections"
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "PocketBase"
+          - "_superusers"
+          - '"collections"'
+        condition: or
+
+      - type: word
+        part: header
+        words:
+          - "pocketbase"
+        condition: or
+
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: regex
+        part: body
+        name: version
+        regex:
+          - '"version"\s*:\s*"([^"]+)"'

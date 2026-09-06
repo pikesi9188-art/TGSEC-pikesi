@@ -1,0 +1,49 @@
+id: yonyou-seeyon-oa-surface
+
+info:
+  name: Yonyou NC / Seeyon OA Surface
+  author: survey-engine
+  severity: info
+  description: |
+    用友 NC/NC Cloud 与致远 OA 登录页/静态资源指纹。
+    不做上传/反序列化 payload；L2/L3 走 Playbook。
+  tags: yonyou,nc,seeyon,oa,fingerprint
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/nccloud"
+      - "{{BaseURL}}/nccloud/resources/"
+      - "{{BaseURL}}/uapws"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Yonyou"
+          - "用友"
+          - "nccloud"
+          - "uapws"
+        condition: or
+        name: yonyou-nc
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/seeyon/"
+      - "{{BaseURL}}/seeyon/main.do"
+      - "{{BaseURL}}/seeyon/index.jsp"
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Seeyon"
+          - "致远"
+          - "seeyon"
+        condition: or
+        name: seeyon-oa

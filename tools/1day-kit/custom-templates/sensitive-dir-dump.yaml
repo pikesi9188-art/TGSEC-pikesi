@@ -1,0 +1,50 @@
+id: sensitive-dir-dump
+
+info:
+  name: Sensitive Directory / Log / Env Surface
+  author: survey-engine
+  severity: high
+  description: |
+    敏感目录开放与 .env / .git / debug.log 暴露面。HITCON 多次未修。
+    本模板只 GET 常见路径，不拖全量备份。深挖走 sensitive_dir_dump_probe hunt。
+  tags: misconfig,listing,env,git,hitcon,ai-dir
+  metadata:
+    max-request: 12
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/.env"
+      - "{{BaseURL}}/.git/HEAD"
+      - "{{BaseURL}}/wp-content/debug.log"
+      - "{{BaseURL}}/backup/"
+      - "{{BaseURL}}/logs/"
+      - "{{BaseURL}}/phpinfo.php"
+      - "{{BaseURL}}/web.config"
+      - "{{BaseURL}}/error.log"
+      - "{{BaseURL}}/.claude/"
+      - "{{BaseURL}}/.cursor/"
+      - "{{BaseURL}}/.hermes/"
+      - "{{BaseURL}}/.ssh/"
+
+    stop-at-first-match: false
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Index of /"
+          - "Parent Directory"
+          - "APP_KEY="
+          - "DB_PASSWORD="
+          - "ref: refs/"
+          - "phpinfo()"
+          - "sk-ant-"
+          - "BEGIN OPENSSH PRIVATE KEY"
+        condition: or
+        name: secret-or-list
+      - type: word
+        part: header
+        words:
+          - "text/plain"
+        name: plain-log

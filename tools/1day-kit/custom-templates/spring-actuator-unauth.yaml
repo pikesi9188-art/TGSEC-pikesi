@@ -1,0 +1,54 @@
+id: spring-actuator-unauth
+
+info:
+  name: Spring Boot Actuator 未鉴权端点
+  author: survey-engine
+  severity: high
+  description: 检测 /actuator 系列端点未鉴权暴露（heapdump/env/mappings/beans）
+  tags: spring,actuator,unauth,misconfig
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/actuator"
+      - "{{BaseURL}}/actuator/health"
+      - "{{BaseURL}}/actuator/env"
+      - "{{BaseURL}}/actuator/heapdump"
+      - "{{BaseURL}}/actuator/mappings"
+      - "{{BaseURL}}/actuator/beans"
+      - "{{BaseURL}}/actuator/loggers"
+      - "{{BaseURL}}/actuator/httptrace"
+      - "{{BaseURL}}/actuator/gateway/routes"
+
+    stop-at-first-match: false
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"_links"'
+          - '"status":"UP"'
+          - '"activeProfiles"'
+          - '"systemProperties"'
+          - '"routeDefinition"'
+        condition: or
+
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: header
+        words:
+          - "application/json"
+          - "application/vnd.spring-boot.actuator"
+        condition: or
+
+    extractors:
+      - type: regex
+        part: body
+        name: endpoints
+        group: 1
+        regex:
+          - '"href"\s*:\s*"([^"]+actuator[^"]+)"'

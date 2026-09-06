@@ -1,0 +1,6 @@
+{
+  "note": "把你有授权的域名/IP 写进 targets。复制为本目录 态度蛊.json。没立约不准祭。",
+  "targets": [
+    "*.example.com"
+  ]
+}

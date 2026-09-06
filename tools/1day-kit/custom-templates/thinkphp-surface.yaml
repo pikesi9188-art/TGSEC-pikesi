@@ -1,0 +1,38 @@
+id: thinkphp-surface
+
+info:
+  name: ThinkPHP Surface Fingerprint
+  author: survey-engine
+  severity: info
+  description: |
+    ThinkPHP 产品指纹（X-Powered-By / 报错页 / PATHINFO）。
+    不做 invoker/RCE payload；L2/L3 走 Playbook。
+  tags: thinkphp,php,fingerprint
+  reference:
+    - https://github.com/top-think/framework
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/index.php"
+      - "{{BaseURL}}/index.php?s="
+      - "{{BaseURL}}/public/index.php"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "ThinkPHP"
+        name: x-powered-by
+
+      - type: word
+        part: body
+        words:
+          - "ThinkPHP"
+          - "think\\app"
+          - "think\\lang"
+        condition: or
+        name: thinkphp-body

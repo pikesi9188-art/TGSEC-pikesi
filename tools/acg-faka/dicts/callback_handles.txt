@@ -1,0 +1,32 @@
+# /user/api/order/callback.{Handle}
+Epay
+TokenPay
+Tokenpay
+tokenpay
+Alipay
+Wxpay
+Wechat
+Payjs
+Vpay
+VPay
+vmq
+Vmq
+Paypal
+Stripe
+Coinbase
+Usdt
+TRX
+Trc20
+Epusdt
+Okpay
+Mapay
+Mugglepay
+Codepay
+Paysapi
+Hupijiao
+Xunhupay
+Yunpay
+Jihai
+Custom
+Plugin
+# 大小写变体由脚本再展开

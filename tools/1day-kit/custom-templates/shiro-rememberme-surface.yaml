@@ -1,0 +1,43 @@
+id: shiro-rememberme-surface
+
+info:
+  name: Apache Shiro rememberMe Surface
+  author: survey-engine
+  severity: high
+  description: |
+    探测 Set-Cookie rememberMe=deleteMe（Shiro rememberMe 面）。
+    不做弱密钥碰撞与反序列化 RCE；L2/L3 走 Playbook。
+  tags: shiro,rememberme,deserialization,fingerprint,java
+  reference:
+    - https://nvd.nist.gov/vuln/detail/CVE-2016-4437
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/login"
+      - "{{BaseURL}}/jeecg-boot/sys/login"
+      - "{{BaseURL}}/prod-api/login"
+
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "rememberMe=deleteMe"
+          - "rememberMe=deleteMe;"
+        condition: or
+        name: deleteMe
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+
+    headers:
+      Cookie: "rememberMe=1"
+
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "rememberMe=deleteMe"
+        name: deleteMe-after-junk

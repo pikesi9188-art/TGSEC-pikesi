@@ -1,0 +1,67 @@
+id: wordpress-plugin-unauth-20260815
+
+info:
+  name: WordPress Plugin Unauth Surface (2026-08-15 ATO / upload / fake-pay)
+  author: survey-engine
+  severity: critical
+  description: |
+    2026-08-15 窗 WordPress 插件暴露面指纹：User Session Synchronizer (CVE-2026-15341)、
+    6Storage Rentals (CVE-2026-15303)、RapiSafe CF7 (CVE-2026-14484)、
+    MaxUpload (CVE-2026-15965)、Booking calendar (CVE-2026-8840)、
+    Pinpoint Booking (CVE-2026-12128)、Object Sync Salesforce (CVE-2026-15162)。
+    只读 readme / 插件目录，不种 cookie、不删文件、不改订单。
+    禁止把 tuxedo-big-file-uploads / invisible-recaptcha 当本窗目标（同名不同插件）。
+  tags: cve,cve2026,wordpress,unauth,ato,fingerprint,fake-payment
+  reference:
+    - https://www.tenable.com/cve/newest
+    - https://nvd.nist.gov/vuln/detail/CVE-2026-15341
+    - https://nvd.nist.gov/vuln/detail/CVE-2026-15303
+    - https://nvd.nist.gov/vuln/detail/CVE-2026-14484
+    - https://nvd.nist.gov/vuln/detail/CVE-2026-15965
+    - https://nvd.nist.gov/vuln/detail/CVE-2026-8840
+  metadata:
+    max-request: 8
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/wp-content/plugins/user-session-synchronizer/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/6storage-rentals/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/rapisafe-multi-file-cf7/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/maxupload-upload-larger-files-easily/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/booking-calendar/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/booking-system/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/object-sync-for-salesforce/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/gdpr-compliant-recaptcha-for-all-forms/readme.txt"
+
+    stop-at-first-match: false
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "Stable tag:"
+        case-insensitive: true
+      - type: word
+        part: body
+        words:
+          - "User Session Synchronizer"
+          - "6Storage"
+          - "RapiSafe"
+          - "MaxUpload"
+          - "wpdevart"
+          - "Pinpoint Booking"
+          - "Object Sync for Salesforce"
+          - "Invisible Anti-Spam"
+        condition: or
+        case-insensitive: true
+
+    extractors:
+      - type: regex
+        part: body
+        name: stable-tag
+        regex:
+          - '(?i)Stable tag:\s*([0-9.]+)'

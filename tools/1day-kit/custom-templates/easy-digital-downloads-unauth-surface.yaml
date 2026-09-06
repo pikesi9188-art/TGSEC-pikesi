@@ -1,0 +1,45 @@
+id: easy-digital-downloads-unauth-surface
+
+info:
+  name: Easy Digital Downloads Unauth Surface (CVE-2026-39503/59524)
+  author: survey-engine
+  severity: high
+  description: |
+    Easy Digital Downloads 指纹。关联 CVE-2026-39503（未授权访问控制≤3.6.5）、
+    CVE-2026-59524（未授权鉴权破坏≤3.6.7）。本模板只做产品/API 暴露面，
+    不发送破坏性写订单 payload。
+  tags: cve,cve2026,wordpress,edd,unauth,fingerprint,faka
+  reference:
+    - https://cvebase.io/cve/CVE-2026-39503
+    - https://cvebase.io/cve/CVE-2026-59524
+    - https://nvd.nist.gov/vuln/detail/CVE-2026-39503
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/wp-content/plugins/easy-digital-downloads/readme.txt"
+      - "{{BaseURL}}/wp-content/plugins/easy-digital-downloads/"
+      - "{{BaseURL}}/edd-api/products/"
+      - "{{BaseURL}}/?edd_action=get_versions"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Easy Digital Downloads"
+          - "easy-digital-downloads"
+          - "edd_"
+          - '"downloads"'
+        condition: or
+        case-insensitive: true
+        name: edd-body
+
+    extractors:
+      - type: regex
+        part: body
+        name: edd-version
+        regex:
+          - '(?i)Stable tag:\s*([0-9.]+)'
+          - '(?i)Version:\s*([0-9.]+)'

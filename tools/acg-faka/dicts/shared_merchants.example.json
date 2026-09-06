@@ -1,0 +1,9 @@
+[
+  {
+    "name": "示例-果皮の商店",
+    "domain": "https://www.guopi.org",
+    "app_id": "1291",
+    "app_key": "REPLACE_ME",
+    "note": "从授权案卷 shared 表/历史对接复制；勿提交真实密钥到公开仓库"
+  }
+]

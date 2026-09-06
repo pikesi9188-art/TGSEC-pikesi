@@ -1,0 +1,1645 @@
+{
+  "count": 410,
+  "skills": [
+    {
+      "name": "一日针匣",
+      "was": "1day-nuclei-kit"
+    },
+    {
+      "name": "七十二层防",
+      "was": "72stack-sec"
+    },
+    {
+      "name": "万我",
+      "was": "object-matrix-authz"
+    },
+    {
+      "name": "万我·取件",
+      "was": "idor-session-download"
+    },
+    {
+      "name": "万我·横夺",
+      "was": "idor-bola-chain"
+    },
+    {
+      "name": "万我大手印",
+      "was": "idor-testing"
+    },
+    {
+      "name": "中门无门",
+      "was": "middleware-unauth"
+    },
+    {
+      "name": "乐土·人事",
+      "was": "social-engineering-framework"
+    },
+    {
+      "name": "乐土·人情",
+      "was": "autonomous-social-engagement"
+    },
+    {
+      "name": "九转",
+      "was": "nine-stage-router"
+    },
+    {
+      "name": "九转·再",
+      "was": "nine-stage-auto-router"
+    },
+    {
+      "name": "乱宗",
+      "was": "dependency-confusion"
+    },
+    {
+      "name": "云帷",
+      "was": "cdn-origin-tracing"
+    },
+    {
+      "name": "仓算无门",
+      "was": "doris-unauth"
+    },
+    {
+      "name": "伤使",
+      "was": "vuln-analysis-agent"
+    },
+    {
+      "name": "伤呈文",
+      "was": "vuln-report-reproduction"
+    },
+    {
+      "name": "伤门",
+      "was": "vulnerability-assessment"
+    },
+    {
+      "name": "伤门落地",
+      "was": "vulnerability-execution-and-delivery"
+    },
+    {
+      "name": "使探针",
+      "was": "agent-probe"
+    },
+    {
+      "name": "使桥",
+      "was": "mcp-toolkit-router"
+    },
+    {
+      "name": "使证闸",
+      "was": "agent-evidence-gate"
+    },
+    {
+      "name": "供链",
+      "was": "supply-chain-security"
+    },
+    {
+      "name": "信二专",
+      "was": "http2-specific-attacks"
+    },
+    {
+      "name": "信参污",
+      "was": "http-parameter-pollution"
+    },
+    {
+      "name": "信头·踪",
+      "was": "trusted-ip-header"
+    },
+    {
+      "name": "信宿主额",
+      "was": "http-host-header-attacks"
+    },
+    {
+      "name": "信巢",
+      "was": "zimbra-snmp-rce"
+    },
+    {
+      "name": "信网柜",
+      "was": "http-method-webdav"
+    },
+    {
+      "name": "信门使",
+      "was": "api-agent"
+    },
+    {
+      "name": "信门参寻",
+      "was": "api-param-name-discovery"
+    },
+    {
+      "name": "信门试",
+      "was": "api-security-testing"
+    },
+    {
+      "name": "借刀杀人",
+      "was": "csrf-testing"
+    },
+    {
+      "name": "借刀杀人·借窗",
+      "was": "cors-exploitation"
+    },
+    {
+      "name": "借刀杀人·祭",
+      "was": "csrf-exploitation"
+    },
+    {
+      "name": "偷生",
+      "was": "credential-harvest"
+    },
+    {
+      "name": "傀舰队",
+      "was": "authorized-botnet-lab"
+    },
+    {
+      "name": "光台无门",
+      "was": "ray-dashboard-unauth"
+    },
+    {
+      "name": "全力以赴",
+      "was": "ssti-exploit"
+    },
+    {
+      "name": "内地道",
+      "was": "internal-tunnel"
+    },
+    {
+      "name": "内城试",
+      "was": "intranet-penetration-testing"
+    },
+    {
+      "name": "内窗",
+      "was": "webview-deeplink-bridge"
+    },
+    {
+      "name": "凤九歌·探府",
+      "was": "pentest-methodology"
+    },
+    {
+      "name": "凤九歌·盘口",
+      "was": "gambling-family-router"
+    },
+    {
+      "name": "凤九歌·网面",
+      "was": "web-pentest"
+    },
+    {
+      "name": "凤九歌·认族",
+      "was": "attack-router"
+    },
+    {
+      "name": "出窍池",
+      "was": "egress-proxy-pool"
+    },
+    {
+      "name": "化形",
+      "was": "deserialization-testing"
+    },
+    {
+      "name": "化形蛊",
+      "was": "fastjson-exploitation"
+    },
+    {
+      "name": "单页·内府",
+      "was": "spa-backend-api-pentest"
+    },
+    {
+      "name": "单页·约",
+      "was": "spa-protocol-reverse"
+    },
+    {
+      "name": "单页·钱庄",
+      "was": "spa-crypto-auth-recon"
+    },
+    {
+      "name": "卡密·破禁",
+      "was": "net-license-crack"
+    },
+    {
+      "name": "印机面",
+      "was": "printer-pjl-surface"
+    },
+    {
+      "name": "卷册",
+      "was": "docs-generator"
+    },
+    {
+      "name": "厚器",
+      "was": "thick-client"
+    },
+    {
+      "name": "反客为主",
+      "was": "linux-privilege-escalation"
+    },
+    {
+      "name": "反客为主·窗府",
+      "was": "windows-lpe"
+    },
+    {
+      "name": "变页",
+      "was": "xslt-injection"
+    },
+    {
+      "name": "口袋库",
+      "was": "pocketbase-horizons-recovery"
+    },
+    {
+      "name": "名册",
+      "was": "ldap-injection-testing"
+    },
+    {
+      "name": "吞库针",
+      "was": "sqlmap-tamper-kit"
+    },
+    {
+      "name": "听声",
+      "was": "jndi-injection"
+    },
+    {
+      "name": "听声蛊",
+      "was": "log4shell-exploitation"
+    },
+    {
+      "name": "听波",
+      "was": "radio-sdr"
+    },
+    {
+      "name": "呈文",
+      "was": "security-report-templates"
+    },
+    {
+      "name": "呈文·在役",
+      "was": "pentest-working-report"
+    },
+    {
+      "name": "和稀泥·死契",
+      "was": "hardcoded-token-cfip-fund"
+    },
+    {
+      "name": "商事",
+      "was": "e-commerce-business-logic"
+    },
+    {
+      "name": "商事·血路",
+      "was": "business-logic-payment"
+    },
+    {
+      "name": "商事使",
+      "was": "business-agent"
+    },
+    {
+      "name": "商事试",
+      "was": "business-logic-testing"
+    },
+    {
+      "name": "商心慈·一指",
+      "was": "1z-gambling-family-pentest"
+    },
+    {
+      "name": "商心慈·六六",
+      "was": "666bet-tma-pentest"
+    },
+    {
+      "name": "商心慈·喀盘",
+      "was": "kk8-tma-platform-pentest"
+    },
+    {
+      "name": "商心慈·小蓝",
+      "was": "xiaolanben-equity"
+    },
+    {
+      "name": "商心慈·曼八",
+      "was": "mm8bet-gen-whitelabel-pentest"
+    },
+    {
+      "name": "商心慈·白标",
+      "was": "whitelabel-gambling-pentest"
+    },
+    {
+      "name": "商心慈·芋府",
+      "was": "yudao-appapi-pentest"
+    },
+    {
+      "name": "商心慈·鼎艺",
+      "was": "dingyi-whitelabel-gambling-pentest"
+    },
+    {
+      "name": "商燕飞·南域",
+      "was": "br-gambling-trpc-spa-pentest"
+    },
+    {
+      "name": "商燕飞·南盘",
+      "was": "daanrox-br-gambling-pentest"
+    },
+    {
+      "name": "商燕飞·商云",
+      "was": "cyberbiz-saas-pentest"
+    },
+    {
+      "name": "商燕飞·店线",
+      "was": "shopline-saas-pentest"
+    },
+    {
+      "name": "商燕飞·景商",
+      "was": "jingsoft-merchant-platform"
+    },
+    {
+      "name": "商燕飞·曼巴",
+      "was": "m8-manba-gambling-pentest"
+    },
+    {
+      "name": "商燕飞·果盘",
+      "was": "aks-gofun-gambling-pentest"
+    },
+    {
+      "name": "商燕飞·盒盘",
+      "was": "m9-hsbox-gambling-pentest"
+    },
+    {
+      "name": "商燕飞·盘脉",
+      "was": "lsm-mclsm-gambling-pentest"
+    },
+    {
+      "name": "商燕飞·租云",
+      "was": "gambling-saas-pentest-workflow"
+    },
+    {
+      "name": "商燕飞·诺盘",
+      "was": "nogle-mps-pentest"
+    },
+    {
+      "name": "商燕飞·软盘",
+      "was": "pg-soft-launcher-pentest"
+    },
+    {
+      "name": "商燕飞·软盘席",
+      "was": "pg-operator-session-chain"
+    },
+    {
+      "name": "器审",
+      "was": "hardware-security"
+    },
+    {
+      "name": "器核",
+      "was": "iokit-kernel-surface"
+    },
+    {
+      "name": "器胚·护",
+      "was": "binary-protection-bypass"
+    },
+    {
+      "name": "器胚·星札",
+      "was": "binary-recovery-json-transcoding"
+    },
+    {
+      "name": "器胚对照",
+      "was": "binary-diff"
+    },
+    {
+      "name": "器胚破核",
+      "was": "binary-pwn"
+    },
+    {
+      "name": "噬文",
+      "was": "xxe-exploitation"
+    },
+    {
+      "name": "噬文·试",
+      "was": "xxe-injection-testing"
+    },
+    {
+      "name": "固胚",
+      "was": "firmware-pentest"
+    },
+    {
+      "name": "图册",
+      "was": "diagram-generator"
+    },
+    {
+      "name": "地图府",
+      "was": "geoserver-jsonarraycontains-sqli"
+    },
+    {
+      "name": "坞·喷机",
+      "was": "jetengine-unauth-rce"
+    },
+    {
+      "name": "坞·插件",
+      "was": "wordpress-plugin-unauth-takeover"
+    },
+    {
+      "name": "坞·旧令",
+      "was": "wordpress-xmlrpc-surface"
+    },
+    {
+      "name": "坞·歇门",
+      "was": "wp-rest-cors-ato"
+    },
+    {
+      "name": "坞·认族",
+      "was": "wordpress-attack-router"
+    },
+    {
+      "name": "坞壳落子猎",
+      "was": "wp-shell-drop-hunt"
+    },
+    {
+      "name": "型乱型",
+      "was": "type-juggling"
+    },
+    {
+      "name": "墨瑶·折纸",
+      "was": "origami-tech-pentest"
+    },
+    {
+      "name": "大厅契",
+      "was": "cg-lobby-config-decrypt"
+    },
+    {
+      "name": "大灵",
+      "was": "llm-security"
+    },
+    {
+      "name": "太白云生·云台",
+      "was": "tg-cloud-panel"
+    },
+    {
+      "name": "太白云生·云府",
+      "was": "tg-cloud-control-pentest"
+    },
+    {
+      "name": "太白云生·傀池",
+      "was": "tg-bot-pool-panel-pentest"
+    },
+    {
+      "name": "太白云生·号册",
+      "was": "tg-account-library"
+    },
+    {
+      "name": "太白云生·号册主府",
+      "was": "tg-number-admin-pentest"
+    },
+    {
+      "name": "太白云生·寻傀",
+      "was": "telegram-bot-discovery"
+    },
+    {
+      "name": "太白云生·微域盘",
+      "was": "telegram-tma-gambling"
+    },
+    {
+      "name": "太白云生·接管",
+      "was": "tg-bot-nextauth-takeover"
+    },
+    {
+      "name": "太白云生·牌照",
+      "was": "tg-card-license-backend"
+    },
+    {
+      "name": "太白云生·瓦盘",
+      "was": "wali-tg-tma-pentest"
+    },
+    {
+      "name": "太白云生·芋府盘",
+      "was": "telegram-gambling-yudao-pentest"
+    },
+    {
+      "name": "太白云生·血路",
+      "was": "tg-payment-channel-pentest"
+    },
+    {
+      "name": "太白云生·钩",
+      "was": "tg-bot-webhook-hijack"
+    },
+    {
+      "name": "夺舍",
+      "was": "account-takeover-chain"
+    },
+    {
+      "name": "夺舍·票面",
+      "was": "reset-token-surface"
+    },
+    {
+      "name": "契柜无门",
+      "was": "etcd-unauth"
+    },
+    {
+      "name": "奴道驱使",
+      "was": "command-injection-testing"
+    },
+    {
+      "name": "守文",
+      "was": "secure-code-review"
+    },
+    {
+      "name": "官衙",
+      "was": "gov-wxmini-audit"
+    },
+    {
+      "name": "官路",
+      "was": "isp-traffic-hijacking"
+    },
+    {
+      "name": "定仙游",
+      "was": "ssrf-testing"
+    },
+    {
+      "name": "定仙游·内借",
+      "was": "ssrf-internal-pivoting"
+    },
+    {
+      "name": "宝塔台",
+      "was": "bt-panel-pentest"
+    },
+    {
+      "name": "宝黄天·器匣",
+      "was": "crypto-toolkit"
+    },
+    {
+      "name": "实战认族",
+      "was": "shizhan-pack-router"
+    },
+    {
+      "name": "客器",
+      "was": "client-state-skip"
+    },
+    {
+      "name": "客器破禁",
+      "was": "client-crack-cheat"
+    },
+    {
+      "name": "客池",
+      "was": "cognito-unauth-s3-chain"
+    },
+    {
+      "name": "宿主器桥",
+      "was": "host-tool-bridge"
+    },
+    {
+      "name": "宿主验",
+      "was": "host-ir-check"
+    },
+    {
+      "name": "寄生蛊",
+      "was": "file-upload-testing"
+    },
+    {
+      "name": "密卷",
+      "was": "fernet-session-decrypt"
+    },
+    {
+      "name": "巡伤",
+      "was": "security-scanning"
+    },
+    {
+      "name": "工卡",
+      "was": "skill-engineering"
+    },
+    {
+      "name": "工坊",
+      "was": "ci-cd-attack-testing"
+    },
+    {
+      "name": "工城",
+      "was": "teamcity-rce-supply-chain"
+    },
+    {
+      "name": "工控",
+      "was": "ot-ics"
+    },
+    {
+      "name": "巧契",
+      "was": "smart-contract-vulnerabilities"
+    },
+    {
+      "name": "巨阳·群使",
+      "was": "pentest-swarm"
+    },
+    {
+      "name": "差事府·后手",
+      "was": "xxljob-postex-infra-chain"
+    },
+    {
+      "name": "差事府·胶令",
+      "was": "xxljob-admin-glue-chain"
+    },
+    {
+      "name": "常山阴·狼栈",
+      "was": "wolfstack-hardcoded-secret"
+    },
+    {
+      "name": "幻三·分销",
+      "was": "tp3-fenxiao-api-pentest"
+    },
+    {
+      "name": "幻页·渗",
+      "was": "php-framework-debug-leak-pentest"
+    },
+    {
+      "name": "幻页·门廊",
+      "was": "php-cgi-cve-2024-4577"
+    },
+    {
+      "name": "幻页·露底",
+      "was": "php-debug-mode-exploitation"
+    },
+    {
+      "name": "库府",
+      "was": "database-security"
+    },
+    {
+      "name": "开卷",
+      "was": "lfi-rfi-exploit"
+    },
+    {
+      "name": "开天·十形",
+      "was": "rce-encyclopedia"
+    },
+    {
+      "name": "开棺·蓝鸟",
+      "was": "heapdump-lanniao-hunter"
+    },
+    {
+      "name": "弱天机",
+      "was": "weak-rng-wallet"
+    },
+    {
+      "name": "径询",
+      "was": "xpath-injection-testing"
+    },
+    {
+      "name": "微包",
+      "was": "wxapkg-mac-decrypt"
+    },
+    {
+      "name": "微域",
+      "was": "wxmini-static-audit"
+    },
+    {
+      "name": "微域·寻",
+      "was": "tma-web-asset-discovery"
+    },
+    {
+      "name": "快府·代付",
+      "was": "fastadmin-daifu-pentest"
+    },
+    {
+      "name": "快府·横夺",
+      "was": "fastadmin-shop-tenant-bola"
+    },
+    {
+      "name": "快读",
+      "was": "vite-fs-read"
+    },
+    {
+      "name": "悬丝",
+      "was": "dangling-markup-injection"
+    },
+    {
+      "name": "房睇长·分案",
+      "was": "cve-triage"
+    },
+    {
+      "name": "房睇长·彩盘",
+      "was": "pc28-odds-ws-intel"
+    },
+    {
+      "name": "房睇长·日更",
+      "was": "cve-daily-intel"
+    },
+    {
+      "name": "房睇长·赔率",
+      "was": "gambling-platform-odds-audit"
+    },
+    {
+      "name": "托印·口令",
+      "was": "oauth2-password-grant-login-testing"
+    },
+    {
+      "name": "折行",
+      "was": "crlf-injection"
+    },
+    {
+      "name": "报名·横夺",
+      "was": "register-bypass-idor"
+    },
+    {
+      "name": "拆器",
+      "was": "ghidra-reverse"
+    },
+    {
+      "name": "拆脉",
+      "was": "radare2"
+    },
+    {
+      "name": "拆骨",
+      "was": "ida-reverse"
+    },
+    {
+      "name": "探府器",
+      "was": "pentest-tools"
+    },
+    {
+      "name": "推演器",
+      "was": "symbolic-execution-tools"
+    },
+    {
+      "name": "搜魂蛊",
+      "was": "sensitive-dir-dump"
+    },
+    {
+      "name": "支脉接管",
+      "was": "subdomain-takeover"
+    },
+    {
+      "name": "支脉点名",
+      "was": "subdomain-enum"
+    },
+    {
+      "name": "整库蒸馏",
+      "was": "engine-distill"
+    },
+    {
+      "name": "文乱纹",
+      "was": "code-obfuscation-deobfuscation"
+    },
+    {
+      "name": "文仓",
+      "was": "gitea-diffpatch-rce"
+    },
+    {
+      "name": "文审",
+      "was": "deepaudit-code-audit"
+    },
+    {
+      "name": "文山",
+      "was": "gitlab-graphql-unauth"
+    },
+    {
+      "name": "新姿",
+      "was": "new-postures-2026-q3"
+    },
+    {
+      "name": "旁支认族",
+      "was": "extended-skill-router"
+    },
+    {
+      "name": "无回响",
+      "was": "oob-exfil-kit"
+    },
+    {
+      "name": "无底洞",
+      "was": "sql-injection-testing"
+    },
+    {
+      "name": "无底洞·手拆",
+      "was": "sqli-manual"
+    },
+    {
+      "name": "无底洞·网狐",
+      "was": "whgame-tp5-login-sqli"
+    },
+    {
+      "name": "无极·七曜",
+      "was": "777vvip-bfla-takeover"
+    },
+    {
+      "name": "无极·职分",
+      "was": "rbac-bypass-authz"
+    },
+    {
+      "name": "无线",
+      "was": "wifi-wireless"
+    },
+    {
+      "name": "无线审",
+      "was": "wireless-security"
+    },
+    {
+      "name": "无表",
+      "was": "nosql-injection"
+    },
+    {
+      "name": "无门·主府",
+      "was": "unauthenticated-admin-api"
+    },
+    {
+      "name": "时道抢先",
+      "was": "race-condition"
+    },
+    {
+      "name": "星丝",
+      "was": "js-reverse"
+    },
+    {
+      "name": "星名回绑",
+      "was": "dns-rebinding-attacks"
+    },
+    {
+      "name": "星名污",
+      "was": "dns-pollution-hijacking"
+    },
+    {
+      "name": "星宿·密文",
+      "was": "encrypted-api-spa"
+    },
+    {
+      "name": "星宿·杂忆",
+      "was": "trade-ideas-ai-rag-pentest"
+    },
+    {
+      "name": "星宿·灵机铺",
+      "was": "ai-account-shop-pentest"
+    },
+    {
+      "name": "星宿·盘口秘语",
+      "was": "gambling-api-crypto-reversal"
+    },
+    {
+      "name": "星念",
+      "was": "graphql-pentest"
+    },
+    {
+      "name": "春府·开棺",
+      "was": "spring-actuator-cloud-takeover"
+    },
+    {
+      "name": "春府·祭",
+      "was": "spring-exploitation"
+    },
+    {
+      "name": "春晓苦力",
+      "was": "strike-probe"
+    },
+    {
+      "name": "春秋蝉",
+      "was": "case-triage"
+    },
+    {
+      "name": "春秋蝉-账本",
+      "was": "hypothesis-ledger"
+    },
+    {
+      "name": "智慧蛊",
+      "was": "web-vuln-router"
+    },
+    {
+      "name": "暂飞书",
+      "was": "temp-email-verification-codes"
+    },
+    {
+      "name": "暗渡陈仓",
+      "was": "open-redirect-chain"
+    },
+    {
+      "name": "杂使",
+      "was": "misc-agent"
+    },
+    {
+      "name": "杂器试",
+      "was": "iot-security-testing"
+    },
+    {
+      "name": "李代桃僵",
+      "was": "jwt-bypass-pentest"
+    },
+    {
+      "name": "果核",
+      "was": "bpp-node-exploit-chain"
+    },
+    {
+      "name": "栈满溢",
+      "was": "stack-overflow-and-rop"
+    },
+    {
+      "name": "核祭杀",
+      "was": "kernel-exploitation"
+    },
+    {
+      "name": "格式串",
+      "was": "format-string-exploitation"
+    },
+    {
+      "name": "案复审",
+      "was": "case-review"
+    },
+    {
+      "name": "棋道纵横",
+      "was": "campaign-router"
+    },
+    {
+      "name": "横走",
+      "was": "smb-lateral-movement"
+    },
+    {
+      "name": "次骨",
+      "was": "nextjs-ssr-hunt"
+    },
+    {
+      "name": "武庸·印绶",
+      "was": "adcs-pentest"
+    },
+    {
+      "name": "武庸·宗门",
+      "was": "ad-windows-router"
+    },
+    {
+      "name": "武庸·窗府",
+      "was": "windows-ad-pentest"
+    },
+    {
+      "name": "死票还活",
+      "was": "jwt-stateless-persist"
+    },
+    {
+      "name": "残影",
+      "was": "ghost-bits-cast-attack"
+    },
+    {
+      "name": "残忆",
+      "was": "digital-forensics"
+    },
+    {
+      "name": "残网·拆骨",
+      "was": "dotnet-reverse"
+    },
+    {
+      "name": "残网·猎面",
+      "was": "aspnet-viewstate-hunt"
+    },
+    {
+      "name": "残页·钱门",
+      "was": "dotnet-ashx-fintech-idor"
+    },
+    {
+      "name": "毒道浸染",
+      "was": "xss-testing"
+    },
+    {
+      "name": "毒道浸染·深",
+      "was": "xss-exploit"
+    },
+    {
+      "name": "气绝·任意写",
+      "was": "arbitrary-write-to-rce"
+    },
+    {
+      "name": "沉声",
+      "was": "grpc-reflection-hunt"
+    },
+    {
+      "name": "河门·裂",
+      "was": "nginx-rift-cve-2026-42945"
+    },
+    {
+      "name": "河门·错契",
+      "was": "nginx-misconfig"
+    },
+    {
+      "name": "波场傀",
+      "was": "trx-energy-bot-reversing"
+    },
+    {
+      "name": "注门",
+      "was": "expression-language-injection"
+    },
+    {
+      "name": "注门·2",
+      "was": "ssi-esi-injection"
+    },
+    {
+      "name": "注门使",
+      "was": "injection-agent"
+    },
+    {
+      "name": "洞会",
+      "was": "hitcon-zeroday-intel"
+    },
+    {
+      "name": "流实验",
+      "was": "mlflow-ssrf-webhook"
+    },
+    {
+      "name": "流思",
+      "was": "flowise-internal-header-rce"
+    },
+    {
+      "name": "流语",
+      "was": "langflow-unauth-rce"
+    },
+    {
+      "name": "潮面探",
+      "was": "authorized-ddos-surface"
+    },
+    {
+      "name": "灯笼",
+      "was": "litellm-badhost"
+    },
+    {
+      "name": "灵机审",
+      "was": "ai-ml-security"
+    },
+    {
+      "name": "炼法骨架",
+      "was": "exploit-development-framework"
+    },
+    {
+      "name": "爬丝",
+      "was": "scrapling"
+    },
+    {
+      "name": "独角",
+      "was": "dujiao-next-1yuan-pay"
+    },
+    {
+      "name": "瓮试",
+      "was": "container-security-testing"
+    },
+    {
+      "name": "疫审",
+      "was": "malware-analysis"
+    },
+    {
+      "name": "白兔·人机",
+      "was": "recaptcha-bypass"
+    },
+    {
+      "name": "白兔·滑块",
+      "was": "geetest-captcha-bypass"
+    },
+    {
+      "name": "白兔·认纹",
+      "was": "captcha-ocr"
+    },
+    {
+      "name": "白凝冰·共幕",
+      "was": "macos-screen-sharing-attack"
+    },
+    {
+      "name": "白凝冰·冰码",
+      "was": "icecoder-unauth-rce"
+    },
+    {
+      "name": "白凝冰·后手",
+      "was": "macos-post-exploitation"
+    },
+    {
+      "name": "白凝冰·固胚",
+      "was": "ios-firmware-reverse"
+    },
+    {
+      "name": "白凝冰·幕府",
+      "was": "macos-screensharing-pentest"
+    },
+    {
+      "name": "白凝冰·拆骨",
+      "was": "macos-reverse"
+    },
+    {
+      "name": "白凝冰·探府",
+      "was": "ios-pentest"
+    },
+    {
+      "name": "白凝冰·收链",
+      "was": "ios-harvest-chain-recon"
+    },
+    {
+      "name": "白凝冰·真机",
+      "was": "ios-real-rce-payloads"
+    },
+    {
+      "name": "白凝冰·破核",
+      "was": "ios-kernel-exploitation"
+    },
+    {
+      "name": "白凝冰·破禁",
+      "was": "macos-security-bypass"
+    },
+    {
+      "name": "白凝冰·网核",
+      "was": "ios-webkit-hunt"
+    },
+    {
+      "name": "白凝冰·遥控",
+      "was": "macos-remote-control-pentest"
+    },
+    {
+      "name": "盗天·云骨",
+      "was": "cloud-metadata-harvesting"
+    },
+    {
+      "name": "盗天·夹带",
+      "was": "http-request-smuggling"
+    },
+    {
+      "name": "盗天·审",
+      "was": "cloud-security-audit"
+    },
+    {
+      "name": "盗天·文台",
+      "was": "cloud-ide-codex-rce"
+    },
+    {
+      "name": "破印隙",
+      "was": "authbypass-authentication-flaws"
+    },
+    {
+      "name": "破核链",
+      "was": "pwn-chain"
+    },
+    {
+      "name": "破露底术",
+      "was": "anti-debugging-techniques"
+    },
+    {
+      "name": "祖型污",
+      "was": "prototype-pollution"
+    },
+    {
+      "name": "祸应",
+      "was": "incident-response"
+    },
+    {
+      "name": "私云",
+      "was": "owncloud-webdav-presign-bypass"
+    },
+    {
+      "name": "秘语",
+      "was": "dsl-vm-reverse"
+    },
+    {
+      "name": "租云·契",
+      "was": "saas-multitenant-acl-testing"
+    },
+    {
+      "name": "租云·报名",
+      "was": "saas-signup-multitenant-testing"
+    },
+    {
+      "name": "秤·吞库",
+      "was": "metrics-to-admin-sql"
+    },
+    {
+      "name": "秦百胜·做市",
+      "was": "ggex-market-maker-api"
+    },
+    {
+      "name": "秦百胜·做市内府",
+      "was": "ggex-mm-backend-exploit"
+    },
+    {
+      "name": "秦百胜·匿名付",
+      "was": "jfhyl-anonypay-callback-exploit"
+    },
+    {
+      "name": "秦百胜·回响",
+      "was": "payment-callback-forgery"
+    },
+    {
+      "name": "秦百胜·夺舍",
+      "was": "gambling-password-reset-ato"
+    },
+    {
+      "name": "秦百胜·牌铺",
+      "was": "faka-card-shop-pentest"
+    },
+    {
+      "name": "秦百胜·白包",
+      "was": "free-package-claim-bypass"
+    },
+    {
+      "name": "秦百胜·芋府假面",
+      "was": "yudao-daifu-mock-file-rce"
+    },
+    {
+      "name": "秦百胜·货仓",
+      "was": "acg-faka"
+    },
+    {
+      "name": "秦百胜·钱庄",
+      "was": "crypto-exchange-mm-backend"
+    },
+    {
+      "name": "秦鼎菱·二重印",
+      "was": "2fa-bypass"
+    },
+    {
+      "name": "空间眼",
+      "was": "fofa-search"
+    },
+    {
+      "name": "窗·使桥",
+      "was": "browser-reverse-mcp"
+    },
+    {
+      "name": "窗府·无门",
+      "was": "sharepoint-unauth-rce"
+    },
+    {
+      "name": "窗府驻",
+      "was": "windows-persistence"
+    },
+    {
+      "name": "窗拆骨",
+      "was": "browser-extension-reverse"
+    },
+    {
+      "name": "窗核",
+      "was": "browser-exploitation-v8"
+    },
+    {
+      "name": "窗自走",
+      "was": "browser-automation"
+    },
+    {
+      "name": "红衣资",
+      "was": "desredteam-assets"
+    },
+    {
+      "name": "红衣隐事",
+      "was": "redteam-opsec"
+    },
+    {
+      "name": "约",
+      "was": "protocol-reverse"
+    },
+    {
+      "name": "纳言无门",
+      "was": "nacos-authscope-unauth"
+    },
+    {
+      "name": "网道地道",
+      "was": "network-tunneling"
+    },
+    {
+      "name": "网道约",
+      "was": "network-protocol-attacks"
+    },
+    {
+      "name": "网道试",
+      "was": "network-penetration-testing"
+    },
+    {
+      "name": "网面窖",
+      "was": "web-cache-poisoning"
+    },
+    {
+      "name": "罩·星丝",
+      "was": "waf-js-challenge-bypass"
+    },
+    {
+      "name": "罩破禁",
+      "was": "csp-bypass-advanced"
+    },
+    {
+      "name": "罩辨",
+      "was": "waf-detector"
+    },
+    {
+      "name": "羊驼无门",
+      "was": "ollama-unauth"
+    },
+    {
+      "name": "群瓮",
+      "was": "cloud-k8s"
+    },
+    {
+      "name": "群赋",
+      "was": "mass-assignment"
+    },
+    {
+      "name": "胎蛊审",
+      "was": "authorized-bootkit-audit"
+    },
+    {
+      "name": "自掘新伤",
+      "was": "autocve-cve-hunt"
+    },
+    {
+      "name": "自走",
+      "was": "security-automation"
+    },
+    {
+      "name": "花架",
+      "was": "laravel-pentest"
+    },
+    {
+      "name": "花架·印",
+      "was": "laravel-api-auth-probing"
+    },
+    {
+      "name": "花酒行者·盘口",
+      "was": "laravel-gambling-tma-pentest"
+    },
+    {
+      "name": "若府",
+      "was": "ruoyi-fork-admin-pentest"
+    },
+    {
+      "name": "薄青·伤匣",
+      "was": "core-web-vuln-kit"
+    },
+    {
+      "name": "藏纹术",
+      "was": "steganography-techniques"
+    },
+    {
+      "name": "虚壳",
+      "was": "vm-and-bytecode-reverse"
+    },
+    {
+      "name": "虚机府",
+      "was": "proxmox-auth-bypass"
+    },
+    {
+      "name": "蛇蜕",
+      "was": "python-pack-reverse"
+    },
+    {
+      "name": "血神子·锋",
+      "was": "fund-edge-ops"
+    },
+    {
+      "name": "行器",
+      "was": "go-rust-reverse"
+    },
+    {
+      "name": "行器·对照",
+      "was": "se-skill-alias"
+    },
+    {
+      "name": "行器·敲门",
+      "was": "c2-zero-trust-console"
+    },
+    {
+      "name": "行库",
+      "was": "supabase-rls-pentest"
+    },
+    {
+      "name": "补丁对照",
+      "was": "patch-diff-exploit"
+    },
+    {
+      "name": "表蛊",
+      "was": "csv-formula-injection"
+    },
+    {
+      "name": "认族",
+      "was": "keyword-router"
+    },
+    {
+      "name": "认纹",
+      "was": "hash-identify"
+    },
+    {
+      "name": "议室",
+      "was": "mrbs-ssrf"
+    },
+    {
+      "name": "记忆蛊",
+      "was": "shiro-exploitation"
+    },
+    {
+      "name": "识卡",
+      "was": "secknowledge-skill"
+    },
+    {
+      "name": "译毒",
+      "was": "web-ui-i18n-injection"
+    },
+    {
+      "name": "试炼·网面",
+      "was": "web-pentesting-ctf"
+    },
+    {
+      "name": "试炼札",
+      "was": "ctf-combat-notes"
+    },
+    {
+      "name": "试炼沙场",
+      "was": "ctf-sandbox"
+    },
+    {
+      "name": "话巢",
+      "was": "freepbx-unauth-rce"
+    },
+    {
+      "name": "话音面",
+      "was": "sip-surface"
+    },
+    {
+      "name": "资产册",
+      "was": "upsnap-unauth-rce"
+    },
+    {
+      "name": "赏金猎",
+      "was": "src-hunter"
+    },
+    {
+      "name": "踪·破禁",
+      "was": "imunify360-direct-ip-bypass"
+    },
+    {
+      "name": "车流",
+      "was": "traffic-analysis-pcap"
+    },
+    {
+      "name": "远令",
+      "was": "rpc-txpool-mev"
+    },
+    {
+      "name": "逆骨",
+      "was": "reverse-engineering"
+    },
+    {
+      "name": "逻辑府",
+      "was": "weblogic-proxy-cve-2026-21962"
+    },
+    {
+      "name": "酒虫·易付",
+      "was": "epay-admin-pentest"
+    },
+    {
+      "name": "酒虫·能量",
+      "was": "trx-vin-energy-bot"
+    },
+    {
+      "name": "醒教",
+      "was": "security-awareness-training"
+    },
+    {
+      "name": "野炼",
+      "was": "hack"
+    },
+    {
+      "name": "野炼·oauth",
+      "was": "oauth-oidc-flow"
+    },
+    {
+      "name": "钱袋",
+      "was": "wallet-core-reverse"
+    },
+    {
+      "name": "铁若男·拆骨",
+      "was": "mobile-reverse"
+    },
+    {
+      "name": "铁若男·掌器",
+      "was": "mobile-app-security-testing"
+    },
+    {
+      "name": "铁若男·死契",
+      "was": "mobile-hardcoded-key-decrypt"
+    },
+    {
+      "name": "铁血冷·临钥",
+      "was": "apk-jni-sign-oss-sts"
+    },
+    {
+      "name": "铁血冷·拆骨",
+      "was": "apk-reverse"
+    },
+    {
+      "name": "铁血冷·探路",
+      "was": "apk-recon"
+    },
+    {
+      "name": "铁血冷·远控",
+      "was": "android-rat-panel-pentest"
+    },
+    {
+      "name": "铜府·化形",
+      "was": "java-deserialization"
+    },
+    {
+      "name": "铜府·多户",
+      "was": "java-multitenant-agent-takeover"
+    },
+    {
+      "name": "链上",
+      "was": "defi-attack-patterns"
+    },
+    {
+      "name": "锁库演",
+      "was": "authorized-ransom-lab"
+    },
+    {
+      "name": "锦府·赏",
+      "was": "ginvue-admin-reward"
+    },
+    {
+      "name": "锦府·静默",
+      "was": "ginvue-admin-stealth-takeover"
+    },
+    {
+      "name": "长声",
+      "was": "websocket-pentest"
+    },
+    {
+      "name": "门前破印",
+      "was": "frontend-auth-bypass"
+    },
+    {
+      "name": "门帖",
+      "was": "kerberos-attack"
+    },
+    {
+      "name": "门帖转帖",
+      "was": "ntlm-relay-coercion"
+    },
+    {
+      "name": "防务名录",
+      "was": "cybersecurity-catalog"
+    },
+    {
+      "name": "阵道铺开",
+      "was": "attack-chain"
+    },
+    {
+      "name": "隐鳞",
+      "was": "evasion"
+    },
+    {
+      "name": "隐鳞·雾墙",
+      "was": "cf-rate-limit-evasion-bulk-dump"
+    },
+    {
+      "name": "障眼",
+      "was": "clickjacking"
+    },
+    {
+      "name": "雷击",
+      "was": "cyberstrike-eino-demo"
+    },
+    {
+      "name": "雾门",
+      "was": "sslvpn-perimeter-fingerprint"
+    },
+    {
+      "name": "震眼",
+      "was": "quake"
+    },
+    {
+      "name": "青丘",
+      "was": "linux-post-exploit"
+    },
+    {
+      "name": "面目联宗",
+      "was": "identity-federation"
+    },
+    {
+      "name": "页使",
+      "was": "file-agent"
+    },
+    {
+      "name": "页寄生",
+      "was": "file-upload-webshell"
+    },
+    {
+      "name": "风闻",
+      "was": "information-gathering"
+    },
+    {
+      "name": "风闻探路",
+      "was": "osint-recon"
+    },
+    {
+      "name": "飞书",
+      "was": "email-security"
+    },
+    {
+      "name": "飞书额",
+      "was": "email-header-injection"
+    },
+    {
+      "name": "马鸿运·充入",
+      "was": "gambling-deposit-chain-pentest"
+    },
+    {
+      "name": "马鸿运·国人",
+      "was": "guorenlianghua-quant-pentest"
+    },
+    {
+      "name": "马鸿运·影交易",
+      "was": "quant-copy-trading-platform-pentest"
+    },
+    {
+      "name": "马鸿运·稳币",
+      "was": "usdt-deposit-attribution-hijack"
+    },
+    {
+      "name": "验杀使",
+      "was": "poc-agent"
+    },
+    {
+      "name": "鬼不觉",
+      "was": "edr-bypass-re"
+    },
+    {
+      "name": "鬼不觉·回连",
+      "was": "host-c2-verify"
+    },
+    {
+      "name": "黑楼兰·拒门",
+      "was": "401-403-bypass-techniques"
+    },
+    {
+      "name": "黑楼兰·硬撼",
+      "was": "auth-brute"
+    }
+  ]
+}

